@@ -1,0 +1,7 @@
+export const services = [
+  { id: 1, title: 'Hospital', desc: 'Providing free, quality healthcare services 24/7 to all, regardless of religion, race or background.', image: '/src/assets/images/eh.jpg', icon: 'hospital', raised: 85000, goal: 100000 },
+  { id: 2, title: 'Children Services', desc: 'Supporting children in need with care, education, shelter and medical assistance for a better future.', image: '/src/assets/images/ecs.jpg', icon: 'child', raised: 80000, goal: 100000 },
+  { id: 3, title: 'Edhi Homes Orphanage', desc: 'Providing a safe, loving and nurturing environment for orphans and abandoned children.', image: '/src/assets/images/service-orphanage.png', icon: 'home', raised: 90000, goal: 100000 },
+  { id: 4, title: 'Educational Services', desc: 'Empowering minds through free education and skills training to build a brighter, self-reliant society.', image: '/src/assets/images/service-education.png', icon: 'book', raised: 75000, goal: 100000 },
+  { id: 5, title: 'Educational Services', desc: 'Empowering minds through free education and skills training to build a brighter, self-reliant society.', image: '/src/assets/images/service-education.png', icon: 'book', raised: 75000, goal: 100000 },
+]
