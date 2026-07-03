@@ -9,8 +9,8 @@ const FundraiserProgress = () => {
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="rounded-2xl overflow-hidden shadow-md grid grid-cols-1 md:grid-cols-2">
-          <div className="bg-white p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white p-8 shadow-lg rounded-2xl">
             <span className="inline-block text-xs font-semibold text-red-600 border border-red-200 bg-red-50 px-3 py-1 rounded-full mb-4">
               Ramadan Drive 2026
             </span>
@@ -31,7 +31,7 @@ const FundraiserProgress = () => {
             </div>
           </div>
 
-          <div className="bg-green-900 p-8 relative overflow-hidden text-white flex flex-col justify-center">
+          <div className="bg-green-900 p-8 relative overflow-hidden text-white flex flex-col justify-center rounded-2xl shadow-lg">
             <Moon className="absolute right-6 top-6 text-yellow-400/40" size={64} />
             <h3 className="text-2xl font-bold mb-2">
               Bless More, <span className="text-green-300">Worry Less.</span>

@@ -48,18 +48,18 @@ const Navbar = () => {
         </ul>
 
         {/* Buttons before the Hamburger menu - mobile/tablet only*/}
-        <div className="flex items-center gap-3">
-        <button className="bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition-colors">
+        <div className="flex lg:hidden items-center gap-3 text-sm ml-auto">
+        <button className="bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition-colors px-2 py-1">
           DONATE NOW
         </button>
-        <button className="bg-green-800 hover:bg-green-900 text-white font-semibold rounded-md transition-colors">
+        <button className="bg-green-800 hover:bg-green-900 text-white font-semibold rounded-md transition-colors px-2 py-1">
           INTERNATIONAL PARTNERS
         </button>
       </div>  
 
         {/* Hamburger button — mobile/tablet only */}
         <button
-          className="lg:hidden text-gray-800"
+          className="lg:hidden text-gray-800 mx-2 ml-auto"
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >

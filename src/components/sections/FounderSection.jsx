@@ -21,7 +21,7 @@ const FounderSection = () => {
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Hero: active member spotlight */}
         <div className="rounded-2xl overflow-hidden shadow-md grid grid-cols-1 md:grid-cols-2">
-          <div className="relative h-80 md:h-[420px] w-full">
+          <div className="relative h-80 md:h-[420px] w-full hidden md:block">
             <img
               src={activeMember.image}
               alt={activeMember.name}
@@ -71,19 +71,18 @@ const FounderSection = () => {
                 <button
                   key={member.id}
                   onClick={() => setActiveMember(member)}
-                  className={`snap-start shrink-0 w-1/3 flex items-center gap-3 px-4 py-2 rounded-lg text-left transition-colors ${
-                    isActive ? 'bg-gray-100' : 'hover:bg-gray-50'
-                  }`}
+                  className={`snap-start shrink-0 w-1/3 flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-left transition-colors ${isActive ? 'bg-gray-100' : 'hover:bg-gray-50'
+                    }`}
                 >
-                  <span className="text-xs text-gray-400 font-semibold">
+                  <span className="hidden md:inline text-xs text-gray-400 font-semibold">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="w-14 h-14 md:w-10 md:h-10 rounded-full object-cover"
                   />
-                  <div>
+                  <div className="hidden md:block">
                     <p className="font-semibold text-gray-900 text-sm">{member.name}</p>
                     <p className="text-red-600 text-xs">{member.title}</p>
                   </div>

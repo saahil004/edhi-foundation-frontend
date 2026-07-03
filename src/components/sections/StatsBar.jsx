@@ -10,7 +10,7 @@ const iconMap = {
 
 const StatsBar = () => {
   return (
-    <section className="w-full bg-red-900 opacity-200">
+    <section className="bg-red-900 opacity-200 m-9 mx-11 rounded-2xl">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {stats.map((stat) => {

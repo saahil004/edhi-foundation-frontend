@@ -11,9 +11,12 @@ const Footer = () => {
     <footer className="bg-black text-gray-300">
       {/* Newsletter bar */}
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-800">
-        <div className="flex items-center gap-3">
+        <div className='lg-hidden'>
           <Mail className="text-red-600" />
-          <div>
+        </div>
+        <div className="flex items-center gap-3">
+          <Mail className="hidden lg:text-red-600" />
+          <div className='text-center lg:text-left'>
             <h4 className="text-white font-semibold">Subscribe to our newsletter</h4>
             <p className="text-sm text-gray-400">Stay updated with our latest news, events and stories of compassion.</p>
           </div>
