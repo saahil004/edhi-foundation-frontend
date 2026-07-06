@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { navLinks } from '../../data/navLinks.jsx'
 import DropdownMenu from './DropdownMenu.jsx'
-import logo from '../../assets/images/logo.jpg'
+import logo from '../../assets/icons/ef_logo.png'
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null)
@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
-          <img src={logo} alt="Abdul Sattar Edhi Foundation" className="h-12" />
+          <img src={logo} alt="Abdul Sattar Edhi Foundation" className="h-14" />
         </Link>
 
         {/* Desktop nav links */}

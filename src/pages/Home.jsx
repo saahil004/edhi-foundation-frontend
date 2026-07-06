@@ -5,6 +5,7 @@ import ServicesCarousel from "../components/sections/ServicesCarousel.jsx";
 import StatsBar from "../components/sections/StatsBar.jsx";
 import FounderSection from "../components/sections/FounderSection.jsx";
 import DonationWidget from "../components/sections/DonationWidget.jsx";
+import FloatingDonateButton from "../components/ui/DonateNow.jsx";
 
 const Home = () => {
 
@@ -20,7 +21,7 @@ const Home = () => {
             </div>
             <FounderSection />
             <DonationWidget />
-
+            <FloatingDonateButton/>
         </>
     )
 }
