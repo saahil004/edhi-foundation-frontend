@@ -1,6 +1,7 @@
 import { Heart, ArrowRight, Moon } from 'lucide-react'
 import ProgressBar from '../ui/ProgressBar'
 import recentEvent from '../../data/recentEvent.js'
+import { Link } from 'react-router-dom'
 
 const FundraiserProgress = () => {
   const { badge, heading, highlight, description, image, raised, goal } = recentEvent
@@ -50,9 +51,9 @@ const FundraiserProgress = () => {
                 {description}
               </p>
               <div className="flex flex-wrap gap-3">
-                <button className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded transition-colors">
+                <Link to='/donation' className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded transition-colors">
                   Donate Now <Heart size={16} />
-                </button>
+                </Link>
                 <button className="flex items-center gap-2 border border-white/40 hover:border-white text-white font-semibold px-5 py-2.5 rounded transition-colors">
                   View Our Impact <ArrowRight size={16} />
                 </button>

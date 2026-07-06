@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { hero } from '../../data/heroData'
+import { Link } from 'react-router-dom'
 
 const HeartHandIcon = ({ className, style }) => (
   <svg
@@ -79,9 +80,9 @@ const Hero = () => {
 
           {/* Buttons pinned to bottom-right of the image, mobile/tablet only */}
           <div className="absolute bottom-6 right-6 flex flex-col sm:flex-row items-end sm:items-center gap-3 lg:hidden">
-            <button className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded transition-colors text-sm sm:text-base">
+            <Link to='/donation' className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded transition-colors text-sm sm:text-base">
               Donate Now <HeartHandIcon style={{ width: 16, height: 16 }} />
-            </button>
+            </Link>
             <button className="flex items-center justify-center gap-2 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 font-semibold px-5 py-2.5 rounded transition-colors text-sm sm:text-base">
               Our Impact <ArrowRight size={16} />
             </button>

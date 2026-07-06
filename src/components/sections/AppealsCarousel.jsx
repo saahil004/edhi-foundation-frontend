@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { appeals } from '../../data/appealsData'
 import ViewAllBanner from '../ui/ViewAllBanner'
+import { Link } from 'react-router-dom'
 
 const CARDS_PER_PAGE = 4
 
@@ -156,9 +157,9 @@ const AppealsCarousel = () => {
                   <div className="absolute inset-0 flex flex-col justify-center items-end text-right p-5 text-white">
                     <h3 className="font-bold text-lg mb-2 max-w-[65%]">{appeal.title}</h3>
                     <p className="text-sm text-gray-300 mb-4 line-clamp-3 max-w-[65%]">{appeal.desc}</p>
-                    <button className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-4 py-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <Link to='/donation' className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-4 py-2 rounded-full hover:bg-gray-100 transition-colors">
                       Donate Now <ArrowRight size={14} />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}

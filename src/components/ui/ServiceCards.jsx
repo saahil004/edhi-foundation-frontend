@@ -1,5 +1,6 @@
 import { Heart } from 'lucide-react'
 import ProgressBar from './ProgressBar'
+import { Link } from 'react-router-dom'
 
 const ServiceCard = ({ title, desc, image, raised, goal }) => {
   const percent = Math.round((raised / goal) * 100)
@@ -22,9 +23,9 @@ const ServiceCard = ({ title, desc, image, raised, goal }) => {
           <span>Raised: ${raised.toLocaleString()}</span>
         </div>
 
-        <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors">
+        <Link to='/donation' className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors">
           Donate Now <Heart size={16} />
-        </button>
+        </Link>
       </div>
     </div>
   )
