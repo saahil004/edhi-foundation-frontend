@@ -64,7 +64,7 @@ const FounderSection = () => {
         </div>
 
         {/* Team members row */}
-        <div className="flex items-center gap-4 mt-8">
+        <div className="flex items-center gap-4 mt-8 border border-gray-200 rounded-xl p-3">
           <button
             onClick={() => changeMember('left')}
             className="shrink-0 w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
@@ -75,7 +75,7 @@ const FounderSection = () => {
 
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide border border-gray-200 rounded-xl p-3 w-full"
+            className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide w-full"
           >
             {teamMembers.map((member, index) => {
               const isActive = activeMember.id === member.id
@@ -87,7 +87,7 @@ const FounderSection = () => {
                   className={`snap-start shrink-0 w-1/3 flex items-center justify-center md:justify-start gap-3 px-4 py-2 rounded-lg text-left transition-colors ${isActive ? 'bg-gray-100' : 'hover:bg-gray-50'
                     }`}
                 >
-                  <span className="hidden md:inline text-xs text-gray-400 font-semibold">
+                  <span className="hidden md:inline text-2xl text-gray-400/40 font-semibold">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <img
