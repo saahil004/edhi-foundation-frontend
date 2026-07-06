@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import servicedd from '../../assets/images/servicedd.png'
 
 const DropdownMenu = ({ columns, image }) => {
+  const dropdownImage = servicedd
+
   return (
     <div className="absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 z-40">
       <div className="max-w-7xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -16,9 +19,9 @@ const DropdownMenu = ({ columns, image }) => {
           </ul>
         ))}
 
-        {image && (
+        {dropdownImage && (
           <div className="flex flex-col items-center gap-2">
-            <img src={image} alt="" className="rounded-2xl w-full h-28 object-cover border" />
+            <img src={dropdownImage} alt="" className="rounded-2xl w-full h-40 object-cover border" />
             <button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-1.5 rounded-md transition-colors text-sm">
               See All Services
             </button>
