@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Check, ChevronRight } from 'lucide-react'
 import donationImg from '../../assets/images/donation.jpeg'
+import leftimg from '../../assets/images/dwleft.png'
+import rightimg from '../../assets/images/dwright.png'
 
 const STEPS = ['Choose Amount', 'Details', 'Payment']
 const AMOUNTS = [10, 25, 50, 100]
@@ -28,7 +30,7 @@ const DonationWidget = () => {
         {/* Left photo */}
         <div className="hidden md:block absolute inset-y-0 left-0 w-[30%] rounded-l-2xl overflow-hidden">
           <img
-            src="/src/assets/images/fdg.jpg"
+            src={leftimg}
             alt="Food donation box with groceries and warm clothing"
             className="w-full h-full object-cover"
           />
@@ -37,7 +39,7 @@ const DonationWidget = () => {
         {/* Right photo */}
         <div className="hidden md:block absolute inset-y-0 right-0 w-[30%] rounded-r-2xl overflow-hidden">
           <img
-            src="/src/assets/images/donation.jpeg"
+            src={rightimg}
             alt="Hand placing a heart into a donation box"
             className="w-full h-full object-cover"
           />
@@ -211,9 +213,9 @@ const DonationWidget = () => {
           </div>
         </div>
       </div>
-      <div className='lg:hidden flex justify-center'>
+      {/* <div className='lg:hidden flex justify-center'>
               <img src={donationImg} alt="donation picture" className='mx-16 w-full h-115 rounded-2xl' />
-      </div>
+      </div> */}
     </section>
   )
 }

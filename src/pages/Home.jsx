@@ -15,7 +15,7 @@ const Home = () => {
             <FundraiserProgress />
             <ServicesCarousel />
             <AppealsCarousel />
-            <div className="overflow-x-hidden w-full">
+            <div className="overflow-x-hidden w-full"> 
                 <StatsBar />
             </div>
             <FounderSection />
