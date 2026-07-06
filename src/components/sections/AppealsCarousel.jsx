@@ -186,7 +186,7 @@ const AppealsCarousel = () => {
         <ViewAllBanner
           text={
             <>
-              Every act of kindness creates a <span className="font-semibold text-gray-900">ripple of hope</span>. Be the reason someone smiles today.
+              Every act of kindness creates a <span className="font-semibold text-gray-900">ripple of hope</span>. <span className='hidden lg:block'>Be the reason someone smiles today.</span>
             </>
           }
           buttonLabel="View All Appeals"
