@@ -6,7 +6,7 @@ const ServiceCard = ({ title, desc, image, raised, goal }) => {
 
   return (
     <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white flex flex-col">
-      <img src={image} alt={title} className="w-full h-40 object-cover" />
+      <img src={image} alt={title} className="w-full h-56 object-cover" />
 
       <div className="p-5 flex flex-col flex-1">
         <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-3">
