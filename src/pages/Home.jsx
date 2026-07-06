@@ -10,13 +10,17 @@ const Home = () => {
 
     return (
         <>
-           <Hero/> 
-           <FundraiserProgress/>
-           <ServicesCarousel/>
-           <AppealsCarousel/>
-           <StatsBar/>
-           <FounderSection/>
-           <DonationWidget/>
+
+            <Hero />
+            <FundraiserProgress />
+            <ServicesCarousel />
+            <AppealsCarousel />
+            <div className="overflow-x-hidden w-full">
+                <StatsBar />
+            </div>
+            <FounderSection />
+            <DonationWidget />
+
         </>
     )
 }

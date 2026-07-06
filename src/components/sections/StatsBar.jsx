@@ -12,15 +12,17 @@ const iconMap = {
 const StatsBar = () => {
   return (
     <section
-      className="relative m-9 mx-11 rounded-2xl overflow-hidden"
+      className="relative overflow-x-hidden"
       style={{
         backgroundImage: `url(${statsBarBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        marginLeft: 'calc(-50vw + 50%)',
+        marginRight: 'calc(-50vw + 50%)',
+        maxWidth: '100vw',
       }}
     >
-      {/* Dark overlay so white text/icons stay readable over the image */}
-      <div className="absolute inset-0" />
+      <div className="absolute inset-0 bg-red-900/80" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
