@@ -128,7 +128,9 @@ const Navbar = () => {
             {/* CTA buttons inside mobile menu */}
             <li className="flex flex-col gap-3 pt-4">
               <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition-colors">
+                <Link to='/donation'>
                 DONATE NOW
+                </Link>
               </button>
               <button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors">
                 INTERNATIONAL PARTNERS
