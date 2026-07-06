@@ -8,7 +8,7 @@ function Layout() {
     <>
       <TopBar />
       <Navbar />
-      <main>
+      <main className="pt-18 md:pt-31">
         <Outlet />
       </main>
       <Footer />

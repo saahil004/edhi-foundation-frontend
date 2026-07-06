@@ -3,7 +3,7 @@ import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'r
 
 const TopBar = () => {
   return (
-    <div className="hidden md:flex items-center justify-between border-b border-gray-200 px-6 py-2 text-sm">
+    <div className="hidden lg:fixed lg:flex lg:top-0 lg:left-0 lg:w-full lg:z-50 bg-white text-sm items-center justify-between border-b border-gray-200 px-6 py-2">
       {/* Left: tagline */}
       <p className="text-gray-700">
         Serving Humanity <span className="text-red-600 font-semibold">Since 1951</span>

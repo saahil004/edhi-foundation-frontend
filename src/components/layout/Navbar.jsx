@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="relative border-b border-gray-100"
+      className="fixed top-0 lg:top-[52px] left-0 w-full z-40 bg-white border-b border-gray-100"
       onMouseLeave={() => setOpenDropdown(null)}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -67,9 +67,11 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Desktop dropdown */}
+      {/* Desktop dropdown — explicitly desktop-only now */}
       {activeLink?.dropdown && (
-        <DropdownMenu columns={activeLink.columns} image={activeLink.image} />
+        <div className="hidden lg:block">
+          <DropdownMenu columns={activeLink.columns} image={activeLink.image} />
+        </div>
       )}
 
       {/* Mobile slide-down menu */}

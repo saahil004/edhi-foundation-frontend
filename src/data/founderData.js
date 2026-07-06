@@ -29,12 +29,5 @@ export const teamMembers = [
     title: 'Chairman',
     image: '/src/assets/images/fe.jpg',
     bio: ['Leads the foundation today, continuing his parents\' legacy by overseeing operations, expanding emergency services and ensuring the mission reaches every corner of the country.'],
-  },
-  {
-    id: 4,
-    name: 'Kutubuddin Edhi',
-    title: 'Vice Chairman',
-    image: '/src/assets/images/team-4.png',
-    bio: ['Supports the foundation\'s leadership team, focusing on strengthening welfare centers and expanding community outreach programs nationwide.'],
-  },
+  }
 ]

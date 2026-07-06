@@ -50,10 +50,10 @@ const ServicesCarousel = () => {
         {/* Scrollable card row */}
         <div
           ref={scrollRef}
-          className="lg:flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+          className="lg:flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
         >
           {services.map((service) => (
-            <div key={service.id} className="min-w-[280px] snap-start my-5">
+            <div key={service.id} className="min-w-70 snap-start my-5">
               <ServiceCard {...service} />
             </div>
           ))}

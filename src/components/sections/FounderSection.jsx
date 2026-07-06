@@ -6,11 +6,24 @@ const FounderSection = () => {
   const scrollRef = useRef(null)
   const [activeMember, setActiveMember] = useState(teamMembers[0])
 
-  const scroll = (direction) => {
+  const changeMember = (direction) => {
+    const currentIndex = teamMembers.findIndex((m) => m.id === activeMember.id)
+    const lastIndex = teamMembers.length - 1
+    let nextIndex
+
+    if (direction === 'right') {
+      nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1
+    } else {
+      nextIndex = currentIndex === 0 ? lastIndex : currentIndex - 1
+    }
+
+    const nextMember = teamMembers[nextIndex]
+    setActiveMember(nextMember)
+
     if (scrollRef.current) {
-      const amount = scrollRef.current.clientWidth / 3
-      scrollRef.current.scrollBy({
-        left: direction === 'right' ? amount : -amount,
+      const itemWidth = scrollRef.current.scrollWidth / teamMembers.length
+      scrollRef.current.scrollTo({
+        left: nextIndex * itemWidth,
         behavior: 'smooth',
       })
     }
@@ -53,9 +66,9 @@ const FounderSection = () => {
         {/* Team members row */}
         <div className="flex items-center gap-4 mt-8">
           <button
-            onClick={() => scroll('left')}
+            onClick={() => changeMember('left')}
             className="shrink-0 w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
-            aria-label="Scroll team members left"
+            aria-label="Show previous team member"
           >
             <ChevronLeft size={18} />
           </button>
@@ -92,9 +105,9 @@ const FounderSection = () => {
           </div>
 
           <button
-            onClick={() => scroll('right')}
+            onClick={() => changeMember('right')}
             className="shrink-0 w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
-            aria-label="Scroll team members right"
+            aria-label="Show next team member"
           >
             <ChevronRight size={18} />
           </button>
