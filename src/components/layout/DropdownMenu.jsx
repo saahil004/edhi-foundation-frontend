@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import servicedd from '../../assets/images/servicedd.png'
 
 const DropdownMenu = ({ columns, image }) => {
-  const dropdownImage = servicedd
+  const dropdownImage = image
 
   return (
     <div className="absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 z-40">

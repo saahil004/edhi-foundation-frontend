@@ -212,7 +212,7 @@ const DonationWidget = () => {
         </div>
       </div>
       <div className='lg:hidden flex justify-center'>
-              <img src={donationImg} alt="donation picture" className='m-8 w-full h-115 rounded-2xl' />
+              <img src={donationImg} alt="donation picture" className='mx-16 w-full h-115 rounded-2xl' />
       </div>
     </section>
   )
