@@ -48,14 +48,14 @@ const Navbar = () => {
         </ul>
 
         {/* Buttons before the Hamburger menu - mobile/tablet only*/}
-        <div className="flex lg:hidden items-center gap-3 text-sm ml-auto">
+        {/* <div className="flex lg:hidden items-center gap-3 text-sm ml-auto">
         <button className="bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition-colors px-2 py-1">
           DONATE NOW
         </button>
         <button className="bg-green-800 hover:bg-green-900 text-white font-semibold rounded-md transition-colors px-2 py-1">
           INTERNATIONAL PARTNERS
         </button>
-      </div>  
+      </div>   */}
 
         {/* Hamburger button — mobile/tablet only */}
         <button
