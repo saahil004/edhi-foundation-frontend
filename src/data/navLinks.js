@@ -18,7 +18,9 @@ export const navLinks = [
     image: servicedd,
   },
   { label: 'Appeals', path: '/appeals', dropdown: true, columns: [['Sadaqah Program', 'Lillah Program', 'Emergency Services', 'Food Bank Program']] },
-  { label: 'Media', path: '/media', dropdown: true, columns: [['Gallery', 'Press', 'Videos']] },
+  { label: 'Media', path: '/media', dropdown: true, columns: [['Gallery', 'Press', 'Videos']],
+    image: servicedd,
+   },
   { label: 'Get Involved', path: '/get-involved', dropdown: true, columns: [['Volunteer', 'Careers', 'Partnerships']] },
   { label: 'Contact Us', path: '/contact' },
 ]
