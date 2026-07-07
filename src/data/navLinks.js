@@ -1,7 +1,13 @@
 import servicedd from '../assets/images/servicedd.png'
 
 export const navLinks = [
-  { label: 'Home', path: '/' },
+  {
+    label: 'Home', path: '/', dropdown: true,
+    columns: [
+      ['Our Story', 'Mission & Vision', 'Impact', 'Annual Reports'],
+    ],
+    image: servicedd
+  },
   { label: 'About Us', path: '/about' },
   {
     label: 'Our Services', path: '/services', dropdown: true,
