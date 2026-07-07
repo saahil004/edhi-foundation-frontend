@@ -11,7 +11,6 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileScreen, setMobileScreen] = useState('main') // 'main' or a link.label
   const location = useLocation()
-  const activeLink = navLinks.find((l) => l.label === openDropdown)
   const activeMobileLink = navLinks.find((l) => l.label === mobileScreen)
 
   const closeMobileMenu = () => {
@@ -38,6 +37,7 @@ const Navbar = () => {
             return (
               <li
                 key={link.label}
+                className="relative"
                 onMouseEnter={() => link.dropdown && setOpenDropdown(link.label)}
               >
                 <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.15 }}>
@@ -51,6 +51,14 @@ const Navbar = () => {
                     {link.dropdown && <ChevronDown size={16} />}
                   </Link>
                 </motion.div>
+
+                <AnimatePresence>
+                  {openDropdown === link.label && link.dropdown && (
+                    <div className="hidden lg:block">
+                      <DropdownMenu columns={link.columns} image={link.image} />
+                    </div>
+                  )}
+                </AnimatePresence>
               </li>
             )
           })}
@@ -66,15 +74,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Desktop dropdown — explicitly desktop-only, animated */}
-      <AnimatePresence>
-        {activeLink?.dropdown && (
-          <div className="hidden lg:block">
-            <DropdownMenu columns={activeLink.columns} image={activeLink.image} />
-          </div>
-        )}
-      </AnimatePresence>
-
       {/* Mobile full-screen drill-down menu */}
       <AnimatePresence>
         {mobileOpen && (
@@ -86,7 +85,6 @@ const Navbar = () => {
             className="lg:hidden fixed inset-0 bg-white z-50 overflow-y-auto"
           >
             {mobileScreen === 'main' ? (
-              // SCREEN 1: main drawer
               <div className="flex flex-col min-h-full">
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
                   <img src={logo} alt="Abdul Sattar Edhi Foundation" className="h-10" />
@@ -122,7 +120,6 @@ const Navbar = () => {
                     )
                   })}
 
-                  {/* CTA buttons */}
                   <li className="flex flex-col gap-3 pt-4">
                     <Link
                       to="/donation"
@@ -145,7 +142,6 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
-              // SCREEN 2/3: sub-category drill-down
               <div className="flex flex-col min-h-full">
                 <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-100">
                   <button onClick={() => setMobileScreen('main')} aria-label="Back to main menu">
