@@ -1,20 +1,15 @@
-import { useState } from 'react'
-
 const presetAmounts = [10, 25, 50, 100, 250, 500]
+const currencyOptions = ['USD $', 'PKR RS']
 
-const AmountSelector = () => {
-  const currencyOptions = ['USD $', 'PKR RS']  
-  const [amount, setAmount] = useState(10)
-  const [customAmount, setCustomAmount] = useState('')
-
+const AmountSelector = ({ amount, customAmount, onAmountChange, onCustomAmountChange }) => {
   const handlePresetClick = (value) => {
-    setAmount(value)
-    setCustomAmount('')
+    onAmountChange(value)
+    onCustomAmountChange('')
   }
 
   const handleCustomChange = (e) => {
-    setCustomAmount(e.target.value)
-    setAmount(null)
+    onCustomAmountChange(e.target.value)
+    onAmountChange(null)
   }
 
   return (
@@ -30,11 +25,9 @@ const AmountSelector = () => {
         </div>
 
         <select className="border border-gray-300 rounded-md px-3 py-2 text-sm font-medium text-gray-700 shrink-0">
-          {
-             currencyOptions.map((curr, index) => (
-                <option key={index}>{curr}</option>
-             )) 
-          }
+          {currencyOptions.map((curr, index) => (
+            <option key={index}>{curr}</option>
+          ))}
         </select>
       </div>
 

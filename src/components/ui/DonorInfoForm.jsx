@@ -1,19 +1,10 @@
-import { useState } from 'react'
 import { Heart } from 'lucide-react'
 
 const countryCodes = ['+92', '+1', '+44', '+91']
 
-const DonorInfoForm = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    countryCode: '+92',
-    phone: '',
-  })
-
+const DonorInfoForm = ({ formData, onChange }) => {
   const handleChange = (field) => (e) => {
-    setFormData((prev) => ({ ...prev, [field]: e.target.value }))
+    onChange((prev) => ({ ...prev, [field]: e.target.value }))
   }
 
   return (

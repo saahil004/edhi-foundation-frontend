@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { CalendarPlus, CalendarClock, CalendarDays, Check } from 'lucide-react'
 
 const frequencies = [
@@ -8,9 +7,7 @@ const frequencies = [
   { id: 'yearly', label: 'Yearly', icon: CalendarClock },
 ]
 
-const FrequencySelector = () => {
-  const [frequency, setFrequency] = useState('yearly')
-
+const FrequencySelector = ({ frequency, onSelect }) => {
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
       <h2 className="text-xl font-bold text-gray-900 mb-6">
@@ -25,7 +22,7 @@ const FrequencySelector = () => {
           return (
             <button
               key={option.id}
-              onClick={() => setFrequency(option.id)}
+              onClick={() => onSelect(option.id)}
               className={`relative flex flex-col items-center justify-center gap-3 p-6 rounded-xl border transition-colors ${
                 isSelected
                   ? 'bg-red-600 border-red-600 text-white'
