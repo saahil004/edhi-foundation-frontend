@@ -113,32 +113,32 @@ const ServicesCarousel = () => {
           ref={desktopScrollRef}
           className="hidden lg:flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
         >
-          {services.map((service) => (
+          {services.map((service, i) => (
             <div
               key={service.id}
               className="snap-start shrink-0 w-[calc(25%-18px)]"
             >
-              <ServiceCard {...service} />
+              <ServiceCard {...service} delay={(i % CARDS_PER_PAGE) * 0.08} />
             </div>
           ))}
         </div>
 
         {/* Mobile/tablet: horizontal pages, each page a vertical stack of 4 cards */}
-<div
-  ref={mobileScrollRef}
-  className="lg:hidden flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
->
-  {pages.map((pageServices, pageIndex) => (
-    <div
-      key={pageIndex}
-      className="snap-start shrink-0 w-full flex flex-col gap-4"
-    >
-      {pageServices.map((service) => (
-        <ServiceCard key={service.id} {...service} />
-      ))}
-    </div>
-  ))}
-</div>
+        <div
+          ref={mobileScrollRef}
+          className="lg:hidden flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+        >
+          {pages.map((pageServices, pageIndex) => (
+            <div
+              key={pageIndex}
+              className="snap-start shrink-0 w-full flex flex-col gap-4"
+            >
+              {pageServices.map((service, i) => (
+                <ServiceCard key={service.id} {...service} delay={i * 0.08} />
+              ))}
+            </div>
+          ))}
+        </div>
 
         {/* Dot pagination — mobile/tablet only */}
         {pages.length > 1 && (

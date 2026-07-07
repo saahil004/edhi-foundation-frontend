@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { appeals } from '../../data/appealsData'
 import ViewAllBanner from '../ui/ViewAllBanner'
@@ -114,25 +115,34 @@ const AppealsCarousel = () => {
           ref={desktopScrollRef}
           className="hidden lg:flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
         >
-          {appeals.map((appeal) => (
-            <div
+          {appeals.map((appeal, i) => (
+            <motion.div
               key={appeal.id}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.6, delay: (i % CARDS_PER_PAGE) * 0.08, ease: 'easeOut' }}
               className="relative snap-start shrink-0 h-90 w-[calc(25%-18px)] rounded-xl overflow-hidden group"
             >
               <img
                 src={appeal.image}
                 alt={appeal.title}
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-5 text-white">
                 <h3 className="font-bold text-lg mb-1">{appeal.title}</h3>
                 <p className="text-sm text-gray-200 mb-4 line-clamp-2">{appeal.desc}</p>
-                <button className="self-start flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-4 py-2 rounded-full hover:bg-gray-100 transition-colors">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="self-start flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-4 py-2 rounded-full hover:bg-gray-100 transition-colors"
+                >
                   Donate Now <ArrowRight size={14} />
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -143,14 +153,19 @@ const AppealsCarousel = () => {
         >
           {pages.map((pageAppeals, pageIndex) => (
             <div key={pageIndex} className="snap-start shrink-0 w-full flex flex-col gap-4">
-              {pageAppeals.map((appeal) => (
-                <div
+              {pageAppeals.map((appeal, i) => (
+                <motion.div
                   key={appeal.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.6, delay: i * 0.08, ease: 'easeOut' }}
                   className="relative shrink-0 h-56 w-full rounded-xl overflow-hidden group"
                 >
                   <img
                     src={appeal.image}
                     alt={appeal.title}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-linear-to-r from-transparent via-black/70 to-black" />
@@ -161,7 +176,7 @@ const AppealsCarousel = () => {
                       Donate Now <ArrowRight size={14} />
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           ))}

@@ -1,13 +1,28 @@
 import { Heart } from 'lucide-react'
+import { motion } from 'framer-motion'
 import ProgressBar from './ProgressBar'
 import { Link } from 'react-router-dom'
 
-const ServiceCard = ({ title, desc, image, raised, goal }) => {
+const ServiceCard = ({ title, desc, image, raised, goal, delay = 0 }) => {
   const percent = Math.round((raised / goal) * 100)
 
   return (
-    <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white flex flex-col">
-      <img src={image} alt={title} className="w-full h-56 object-cover" />
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
+      whileHover={{ y: -4 }}
+      className="rounded-xl overflow-hidden border border-gray-100 bg-white flex flex-col shadow-sm hover:shadow-md transition-shadow"
+    >
+      <img
+        src={image}
+        alt={title}
+        loading="lazy"
+        width={400}
+        height={224}
+        className="w-full h-56 object-cover"
+      />
 
       <div className="p-5 flex flex-col flex-1">
         <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-3">
@@ -23,11 +38,17 @@ const ServiceCard = ({ title, desc, image, raised, goal }) => {
           <span>Raised: ${raised.toLocaleString()}</span>
         </div>
 
-        <Link to='/donation' className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors">
-          Donate Now <Heart size={16} />
+        <Link to='/donation'>
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors"
+          >
+            Donate Now <Heart size={16} />
+          </motion.div>
         </Link>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
