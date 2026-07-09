@@ -1,4 +1,5 @@
 import { Heart, ArrowRight, Moon } from 'lucide-react'
+import { motion } from 'framer-motion'
 import ProgressBar from '../ui/ProgressBar'
 import recentEvent from '../../data/recentEvent.js'
 import { Link } from 'react-router-dom'
@@ -10,7 +11,13 @@ const FundraiserProgress = () => {
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           <div className="bg-white p-8 shadow-lg rounded-2xl">
             <span className="inline-block text-xs font-semibold text-red-600 border border-red-200 bg-red-50 px-3 py-1 rounded-full mb-4">
               {badge}
@@ -60,7 +67,7 @@ const FundraiserProgress = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
