@@ -1,4 +1,4 @@
-import aboutBannerImage from '../assets/images/about-banner.PNG' // adjust to your actual asset
+import aboutBannerImage from '../assets/images/about-banner.png' // adjust to your actual asset
 
 const AboutBanner = {
   image: aboutBannerImage,
