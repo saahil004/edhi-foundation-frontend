@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Check, ChevronRight } from 'lucide-react'
 import donationImg from '../../assets/images/donation.jpeg'
 import leftimg from '../../assets/images/dwleft.png'
@@ -9,7 +10,7 @@ const AMOUNTS = [10, 25, 50, 100]
 const FEE_RATE = 0.03
 
 const DonationWidget = () => {
-  const [frequency, setFrequency] = useState('one-time') // 'one-time' | 'monthly'
+  const [frequency, setFrequency] = useState('one-time')
   const [amount, setAmount] = useState(50)
   const [customAmount, setCustomAmount] = useState('')
   const [coverFee, setCoverFee] = useState(true)
@@ -27,7 +28,6 @@ const DonationWidget = () => {
   return (
     <section className="relative w-full bg-white overflow-hidden my-3">
       <div className="relative max-w-6xl mx-auto min-h-205 md:min-h-150 flex items-stretch">
-        {/* Left photo */}
         <div className="hidden md:block absolute inset-y-0 left-0 w-[30%] rounded-l-2xl overflow-hidden">
           <img
             src={leftimg}
@@ -36,7 +36,6 @@ const DonationWidget = () => {
           />
         </div>
 
-        {/* Right photo */}
         <div className="hidden md:block absolute inset-y-0 right-0 w-[30%] rounded-r-2xl overflow-hidden">
           <img
             src={rightimg}
@@ -45,9 +44,13 @@ const DonationWidget = () => {
           />
         </div>
 
-        {/* Floating card */}
-        <div className="relative z-10 mx-auto my-6 md:my-10 w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8">
-          {/* Steps */}
+        <motion.div
+          className="relative z-10 mx-auto my-6 md:my-10 w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           <div className="flex items-center gap-2 mb-6 flex-wrap">
             {STEPS.map((step, i) => (
               <div key={step} className="flex items-center gap-2">
@@ -69,7 +72,6 @@ const DonationWidget = () => {
 
           <h2 className="text-lg font-bold text-gray-900 mb-4">Choose Amount</h2>
 
-          {/* Frequency toggle */}
           <div className="grid grid-cols-2 rounded-lg border border-green-800 overflow-hidden mb-4">
             <button
               onClick={() => setFrequency('one-time')}
@@ -93,14 +95,16 @@ const DonationWidget = () => {
             </button>
           </div>
 
-          {/* Amount presets */}
           <div className="grid grid-cols-4 gap-2 mb-3">
             {AMOUNTS.map((value) => {
               const isActive = !customAmount && amount === value
               return (
-                <button
+                <motion.button
                   key={value}
                   onClick={() => handlePresetClick(value)}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                   className={`py-2.5 rounded-lg border text-sm font-semibold transition-colors ${
                     isActive
                       ? 'bg-green-800 text-white border-green-800'
@@ -108,12 +112,11 @@ const DonationWidget = () => {
                   }`}
                 >
                   ${value}
-                </button>
+                </motion.button>
               )
             })}
           </div>
 
-          {/* Custom amount */}
           <div className="mb-5">
             <label className="block text-center text-xs font-semibold text-gray-500 mb-1.5">
               Other
@@ -128,7 +131,6 @@ const DonationWidget = () => {
             />
           </div>
 
-          {/* Fund split notice */}
           <div className="bg-gray-100 rounded-lg p-3 mb-3 flex items-start justify-between gap-3">
             <p className="text-xs text-gray-700 leading-relaxed">
               Your donation will be split between{' '}
@@ -144,7 +146,12 @@ const DonationWidget = () => {
           </div>
 
           {showSplit && (
-            <div className="mb-3 text-xs text-gray-600 border border-gray-200 rounded-lg p-3 space-y-1">
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              transition={{ duration: 0.25 }}
+              className="mb-3 text-xs text-gray-600 border border-gray-200 rounded-lg p-3 space-y-1 overflow-hidden"
+            >
               <div className="flex justify-between">
                 <span>General Fund</span>
                 <span>{(selectedAmount / 2).toFixed(2)}</span>
@@ -153,10 +160,9 @@ const DonationWidget = () => {
                 <span>Community Welfare Fund</span>
                 <span>{(selectedAmount / 2).toFixed(2)}</span>
               </div>
-            </div>
+            </motion.div>
           )}
 
-          {/* Fee checkbox */}
           <label className="flex items-center gap-3 mb-4 cursor-pointer select-none">
             <span
               onClick={() => setCoverFee((c) => !c)}
@@ -173,7 +179,6 @@ const DonationWidget = () => {
             </span>
           </label>
 
-          {/* Amount summary */}
           <div className="flex items-center justify-between text-sm font-semibold text-gray-900 mb-6">
             <span>
               Amount: <span className="font-bold">${selectedAmount.toFixed(2)}</span>
@@ -183,7 +188,6 @@ const DonationWidget = () => {
             </span>
           </div>
 
-          {/* Checkout */}
           <h3 className="text-sm font-bold text-gray-900 mb-1">Checkout</h3>
           <p className="text-sm text-gray-600 mb-4">
             Have an account?{' '}
@@ -211,11 +215,8 @@ const DonationWidget = () => {
               PayPal
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
-      {/* <div className='lg:hidden flex justify-center'>
-              <img src={donationImg} alt="donation picture" className='mx-16 w-full h-115 rounded-2xl' />
-      </div> */}
     </section>
   )
 }

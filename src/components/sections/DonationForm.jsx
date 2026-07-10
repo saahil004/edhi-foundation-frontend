@@ -1,9 +1,22 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import DonationStepper from '../ui/DonationStep.jsx'
 import AmountSelector from '../ui/AmountSelectorCard.jsx'
 import FrequencySelector from '../ui/FrequencySelector.jsx'
 import DonorInfoForm from '../ui/DonorInfoForm.jsx'
 import GrandTotal from '../ui/GrandTotal.jsx'
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.15 },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+}
 
 const DonationForm = () => {
   const [currentStep, setCurrentStep] = useState(1)
@@ -30,57 +43,50 @@ const DonationForm = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-16 space-y-6">
-      <DonationStepper currentStep={currentStep} />
+    <motion.section
+      className="max-w-6xl mx-auto px-6 py-16 space-y-6"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
+      <motion.div variants={itemVariants}>
+        <DonationStepper currentStep={currentStep} />
+      </motion.div>
 
-      <AmountSelector
-        amount={amount}
-        customAmount={customAmount}
-        onAmountChange={setAmount}
-        onCustomAmountChange={setCustomAmount}
-      />
+      <motion.div variants={itemVariants}>
+        <AmountSelector
+          amount={amount}
+          customAmount={customAmount}
+          onAmountChange={setAmount}
+          onCustomAmountChange={setCustomAmount}
+        />
+      </motion.div>
 
-      <FrequencySelector
-        frequency={frequency}
-        onSelect={setFrequency}
-      />
+      <motion.div variants={itemVariants}>
+        <FrequencySelector
+          frequency={frequency}
+          onSelect={setFrequency}
+        />
+      </motion.div>
 
-      <DonorInfoForm
-        formData={formData}
-        onChange={setFormData}
-      />
+      <motion.div variants={itemVariants}>
+        <DonorInfoForm
+          formData={formData}
+          onChange={setFormData}
+        />
+      </motion.div>
 
-      <GrandTotal
-        amount={finalAmount}
-        frequency={frequency}
-        onBack={handleBack}
-        onCheckout={handleCheckout}
-      />
-    </section>
+      <motion.div variants={itemVariants}>
+        <GrandTotal
+          amount={finalAmount}
+          frequency={frequency}
+          onBack={handleBack}
+          onCheckout={handleCheckout}
+        />
+      </motion.div>
+    </motion.section>
   )
 }
 
 export default DonationForm
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

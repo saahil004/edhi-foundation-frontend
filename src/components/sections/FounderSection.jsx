@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { founder, teamMembers } from '../../data/founderData'
 
@@ -34,37 +35,71 @@ const FounderSection = () => {
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Hero: active member spotlight */}
         <div className="rounded-2xl overflow-hidden shadow-md grid grid-cols-1 md:grid-cols-2">
-          <div className="relative h-80 md:h-[420px] w-full hidden md:block">
-            <img
-              src={activeMember.image}
-              alt={activeMember.name}
-              className="w-full h-full object-cover"
-            />
-            {/* Fade into text panel on the right */}
+          <motion.div
+            className="relative h-80 md:h-[420px] w-full hidden md:block"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeMember.id}
+                src={activeMember.image}
+                alt={activeMember.name}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="w-full h-full object-cover"
+              />
+            </AnimatePresence>
             <div className="hidden md:block absolute inset-y-0 right-0 w-1/3 bg-gradient-to-r from-transparent to-white pointer-events-none" />
-          </div>
+          </motion.div>
 
-          <div className="p-8 flex flex-col justify-center">
-            <span className="text-red-600 text-sm font-semibold flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-red-600" /> {activeMember.title}
-            </span>
-            <h2 className="text-3xl font-bold text-gray-900 mb-1">{activeMember.name}</h2>
-            <p className="text-green-700 font-medium mb-4">{activeMember.title}</p>
+          <motion.div
+            className="p-8 flex flex-col justify-center"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeMember.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-red-600 text-sm font-semibold flex items-center gap-2 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-red-600" /> {activeMember.title}
+                </span>
+                <h2 className="text-3xl font-bold text-gray-900 mb-1">{activeMember.name}</h2>
+                <p className="text-green-700 font-medium mb-4">{activeMember.title}</p>
 
-            {activeMember.bio.map((para, i) => (
-              <p key={i} className="text-gray-500 text-sm mb-4 leading-relaxed">
-                {para}
-              </p>
-            ))}
+                {activeMember.bio.map((para, i) => (
+                  <p key={i} className="text-gray-500 text-sm mb-4 leading-relaxed">
+                    {para}
+                  </p>
+                ))}
 
-            <button className="w-fit flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-2.5 rounded transition-colors">
-              Read Full Story <ArrowRight size={16} />
-            </button>
-          </div>
+                <button className="w-fit flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-2.5 rounded transition-colors">
+                  Read Full Story <ArrowRight size={16} />
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
         </div>
 
         {/* Team members row */}
-        <div className="flex items-center gap-4 mt-8 border border-gray-200 rounded-xl p-3">
+        <motion.div
+          className="flex items-center gap-4 mt-8 border border-gray-200 rounded-xl p-3"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+        >
           <button
             onClick={() => changeMember('left')}
             className="shrink-0 w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
@@ -111,7 +146,7 @@ const FounderSection = () => {
           >
             <ChevronRight size={18} />
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

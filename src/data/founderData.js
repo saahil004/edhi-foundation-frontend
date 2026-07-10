@@ -8,6 +8,7 @@ export const founder = {
   name: 'Abdul Sattar Edhi',
   title: 'Founder',
   image: f1,
+  quote: 'Live simply, so that others may simply live.',
   bio: [
     'Born in 1928 in the village of Bantva near Junagadh, Gujarat (India), Abdul Sattar Edhi dedicated his life to serving humanity. From a young age, he showed immense compassion and turned it into a lifelong mission of selfless service.',
     'He dedicated his entire life to the welfare of humanity — running shelters, hospitals, orphanages and relief services for those in need. His life was a reflection of selfless service and an inspiration for generations to come.',
