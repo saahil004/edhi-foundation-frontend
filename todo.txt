@@ -1,4 +1,4 @@
-1) donation page -> service option
+1) donation page -> service option done
 2) media
 3) services main page
 4) service page

@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import DonationStepper from '../ui/DonationStep.jsx'
+import ServiceSelector from '../ui/ServiceSelector.jsx'
 import AmountSelector from '../ui/AmountSelectorCard.jsx'
 import FrequencySelector from '../ui/FrequencySelector.jsx'
 import DonorInfoForm from '../ui/DonorInfoForm.jsx'
 import GrandTotal from '../ui/GrandTotal.jsx'
+import { services } from '../../data/servicesData.js'
 
 const containerVariants = {
   hidden: {},
@@ -20,6 +22,7 @@ const itemVariants = {
 
 const DonationForm = () => {
   const [currentStep, setCurrentStep] = useState(1)
+  const [selectedService, setSelectedService] = useState(services?.[0]?.id ?? null)
   const [amount, setAmount] = useState(10)
   const [customAmount, setCustomAmount] = useState('')
   const [frequency, setFrequency] = useState('yearly')
@@ -39,7 +42,7 @@ const DonationForm = () => {
 
   const handleCheckout = () => {
     setCurrentStep((prev) => Math.min(prev + 1, 4))
-    // Later: send { amount: finalAmount, frequency, ...formData } to POST /api/donations
+    // Later: send { service: selectedService, amount: finalAmount, frequency, ...formData } to POST /api/donations
   }
 
   return (
@@ -52,6 +55,14 @@ const DonationForm = () => {
     >
       <motion.div variants={itemVariants}>
         <DonationStepper currentStep={currentStep} />
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <ServiceSelector
+          services={services}
+          selectedService={selectedService}
+          onSelect={setSelectedService}
+        />
       </motion.div>
 
       <motion.div variants={itemVariants}>
@@ -83,6 +94,7 @@ const DonationForm = () => {
           frequency={frequency}
           onBack={handleBack}
           onCheckout={handleCheckout}
+          serviceName={services.find((s) => s.id === selectedService)?.title}
         />
       </motion.div>
     </motion.section>
