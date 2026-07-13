@@ -30,7 +30,7 @@ const ContactInfo = () => {
             const cardContent = (
               <>
                 {/* Decorative dot */}
-                <span className="absolute top-4 left-4 w-2.5 h-2.5 rounded-full bg-green-400 z-20" />
+                <span className="absolute top-4 left-4 w-2.5 h-2.5 rounded-full bg-white z-20" />
 
                 {/* Hover fill layer */}
                 <div className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out -z-10"
@@ -38,8 +38,8 @@ const ContactInfo = () => {
                 />
 
                 {/* Icon circle — half above the card */}
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-green-400 flex items-center justify-center shadow-md z-10">
-                  <Icon className="text-green-900" size={26} />
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gray-400 flex items-center justify-center shadow-md z-10">
+                  <Icon className="text-white" size={26} />
                 </div>
 
                 <div className="pt-12">
