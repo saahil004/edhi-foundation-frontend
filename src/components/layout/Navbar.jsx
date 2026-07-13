@@ -9,7 +9,7 @@ import logo from '../../assets/icons/ef_logo.png'
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [mobileScreen, setMobileScreen] = useState('main') // 'main' or a link.label
+  const [mobileScreen, setMobileScreen] = useState('main')
   const location = useLocation()
   const activeMobileLink = navLinks.find((l) => l.label === mobileScreen)
 
@@ -24,12 +24,10 @@ const Navbar = () => {
       onMouseLeave={() => setOpenDropdown(null)}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-3" onClick={closeMobileMenu}>
           <img src={logo} alt="Abdul Sattar Edhi Foundation" className="h-14" />
         </Link>
 
-        {/* Desktop nav links */}
         <ul className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path
@@ -64,7 +62,6 @@ const Navbar = () => {
           })}
         </ul>
 
-        {/* Hamburger button — mobile/tablet only */}
         <button
           className="lg:hidden text-gray-800 mx-2 ml-auto"
           onClick={() => setMobileOpen((prev) => !prev)}
@@ -74,7 +71,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile full-screen drill-down menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -151,18 +147,34 @@ const Navbar = () => {
                 </div>
 
                 <ul className="px-6 py-4">
-                  {activeMobileLink.columns.flat().map((item) => (
-                    <li key={item} className="border-b border-gray-100">
-                      <a
-                        href="#"
-                        onClick={closeMobileMenu}
-                        className="flex items-center justify-between py-3 text-gray-700"
-                      >
-                        {item}
-                        <ChevronRight size={16} className="text-gray-400" />
-                      </a>
-                    </li>
-                  ))}
+                  {activeMobileLink.columns.flat().map((item) => {
+                    const label = typeof item === 'string' ? item : item.label
+                    const slug = typeof item === 'string' ? null : item.slug
+
+                    return (
+                      <li key={label} className="border-b border-gray-100">
+                        {slug ? (
+                          <Link
+                            to={`/services/${slug}`}
+                            onClick={closeMobileMenu}
+                            className="flex items-center justify-between py-3 text-gray-700"
+                          >
+                            {label}
+                            <ChevronRight size={16} className="text-gray-400" />
+                          </Link>
+                        ) : (
+                          <a
+                            href="#"
+                            onClick={closeMobileMenu}
+                            className="flex items-center justify-between py-3 text-gray-700"
+                          >
+                            {label}
+                            <ChevronRight size={16} className="text-gray-400" />
+                          </a>
+                        )}
+                      </li>
+                    )
+                  })}
                 </ul>
 
                 {activeMobileLink.image && (

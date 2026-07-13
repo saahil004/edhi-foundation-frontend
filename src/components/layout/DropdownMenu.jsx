@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const DropdownMenu = ({ columns, image }) => {
   const dropdownImage = image
@@ -12,7 +13,6 @@ const DropdownMenu = ({ columns, image }) => {
     const margin = 16
     const rect = ref.current.getBoundingClientRect()
 
-    // rect already reflects any previous offset, so undo it first to get the "natural" position
     const naturalLeft = rect.left - offset
     const naturalRight = rect.right - offset
 
@@ -41,22 +41,39 @@ const DropdownMenu = ({ columns, image }) => {
       >
         {columns.map((col, i) => (
           <ul key={i} className="space-y-1.5">
-            {col.map((item) => (
-              <li key={item} className="border-b border-gray-200 pb-1">
-                <a href="#" className="text-gray-700 hover:text-red-600 transition-colors text-sm">
-                  {item}
-                </a>
-              </li>
-            ))}
+            {col.map((item) => {
+              const label = typeof item === 'string' ? item : item.label
+              const slug = typeof item === 'string' ? null : item.slug
+
+              return (
+                <li key={label} className="border-b border-gray-200 pb-1">
+                  {slug ? (
+                    <Link
+                      to={`/services/${slug}`}
+                      className="text-gray-700 hover:text-red-600 transition-colors text-sm"
+                    >
+                      {label}
+                    </Link>
+                  ) : (
+                    <a href="#" className="text-gray-700 hover:text-red-600 transition-colors text-sm">
+                      {label}
+                    </a>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         ))}
 
         {dropdownImage && (
           <div className="flex flex-col items-center gap-2">
             <img src={dropdownImage} alt="" className="rounded-2xl w-full h-40 object-cover border" />
-            <button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-1.5 rounded-md transition-colors text-sm">
+            <Link
+              to="/services"
+              className="bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-1.5 rounded-md transition-colors text-sm text-center"
+            >
               See All Services
-            </button>
+            </Link>
           </div>
         )}
       </div>
