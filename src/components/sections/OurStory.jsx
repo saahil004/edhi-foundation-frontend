@@ -75,19 +75,10 @@ const OurStory = () => {
           </p>
 
           <div className="border-t border-gray-200 pt-6 flex items-center gap-6">
-  <motion.a
-    href="/contact"
-    whileHover="hover"
-    className="group flex items-center gap-2 bg-white border-2 border-green-800 hover:bg-green-800 text-green-800 hover:text-white font-semibold px-6 py-3 rounded-full transition-colors duration-300"
-  >
-    Contact Us
-    <motion.span
-      variants={{ hover: { x: 4 } }}
-      transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-    >
-      <ArrowUpRight size={18} />
-    </motion.span>
-  </motion.a>
+  <button className="mt-4 inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 font-medium text-white transition hover:bg-red-800">
+            Contact Us
+            <ArrowUpRight className="h-4 w-4" />
+          </button>
 </div>
         </motion.div>
       </div>
