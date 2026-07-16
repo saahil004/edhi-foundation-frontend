@@ -6,6 +6,7 @@ import StatsBar from "../components/sections/StatsBar.jsx";
 import FounderSection from "../components/sections/FounderSection.jsx";
 import DonationWidget from "../components/sections/DonationWidget.jsx";
 import FloatingDonateButton from "../components/ui/DonateNow.jsx";
+import Honours from "../components/sections/Honours.jsx";
 
 const Home = () => {
 
@@ -20,7 +21,8 @@ const Home = () => {
                 <StatsBar />
             </div>
             <FounderSection />
-            <DonationWidget />
+            {/* <DonationWidget /> */}
+            <Honours />
             <FloatingDonateButton/>
         </>
     )

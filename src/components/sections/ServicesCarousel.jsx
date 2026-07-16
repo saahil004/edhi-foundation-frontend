@@ -3,22 +3,15 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { services } from '../../data/servicesData.js'
 import ServiceCard from '../ui/ServiceCards.jsx'
 
-const CARDS_PER_PAGE = 4
-
-const chunk = (arr, size) => {
-  const result = []
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size))
-  }
-  return result
-}
+const CARDS_PER_VIEW_DESKTOP = 4
 
 const ServicesCarousel = () => {
   const desktopScrollRef = useRef(null)
   const mobileScrollRef = useRef(null)
-  const [activePage, setActivePage] = useState(0)
+  const [activeCard, setActiveCard] = useState(0)
+  const [activeDesktopPage, setActiveDesktopPage] = useState(0)
 
-  const pages = chunk(services, CARDS_PER_PAGE)
+  const desktopPageCount = Math.ceil(services.length / CARDS_PER_VIEW_DESKTOP)
 
   const scrollDesktop = (direction) => {
     if (!desktopScrollRef.current) return
@@ -29,35 +22,85 @@ const ServicesCarousel = () => {
     })
   }
 
+  const handleDesktopScroll = () => {
+    if (!desktopScrollRef.current) return
+    const { scrollLeft, scrollWidth, clientWidth } = desktopScrollRef.current
+    const maxScroll = scrollWidth - clientWidth
+    const maxPage = desktopPageCount - 1
+
+    if (scrollLeft >= maxScroll - 5) {
+      setActiveDesktopPage(maxPage)
+      return
+    }
+
+    const pageWidth = clientWidth
+    const page = Math.round(scrollLeft / pageWidth)
+    setActiveDesktopPage(Math.min(page, maxPage))
+  }
+
+  const goToDesktopPage = (page) => {
+    if (!desktopScrollRef.current) return
+    const { scrollWidth, clientWidth } = desktopScrollRef.current
+    const maxScroll = scrollWidth - clientWidth
+    const target = Math.min(page * clientWidth, maxScroll)
+    desktopScrollRef.current.scrollTo({
+      left: target,
+      behavior: 'smooth',
+    })
+  }
+
   const scrollMobile = (direction) => {
     if (!mobileScrollRef.current) return
-    const width = mobileScrollRef.current.clientWidth
+    const card = mobileScrollRef.current.children[0]
+    const cardWidth = card ? card.offsetWidth + 16 : 300
     mobileScrollRef.current.scrollBy({
-      left: direction === 'right' ? width : -width,
+      left: direction === 'right' ? cardWidth : -cardWidth,
       behavior: 'smooth',
     })
   }
 
   const handleMobileScroll = () => {
     if (!mobileScrollRef.current) return
-    const { scrollLeft, clientWidth } = mobileScrollRef.current
-    const page = Math.round(scrollLeft / clientWidth)
-    setActivePage(page)
+    const { scrollLeft, scrollWidth, clientWidth, children } = mobileScrollRef.current
+    const card = children[0]
+    if (!card) return
+    const cardWidth = card.offsetWidth + 16
+
+    const maxScroll = scrollWidth - clientWidth
+    const maxIndex = services.length - 1
+
+    if (scrollLeft >= maxScroll - 5) {
+      setActiveCard(maxIndex)
+      return
+    }
+
+    const index = Math.round(scrollLeft / cardWidth)
+    setActiveCard(Math.min(index, maxIndex))
   }
 
-  const goToPage = (page) => {
+  const goToCard = (index) => {
     if (!mobileScrollRef.current) return
+    const card = mobileScrollRef.current.children[0]
+    const cardWidth = card ? card.offsetWidth + 16 : 300
+    const { scrollWidth, clientWidth } = mobileScrollRef.current
+    const maxScroll = scrollWidth - clientWidth
+
+    const target = Math.min(index * cardWidth, maxScroll)
     mobileScrollRef.current.scrollTo({
-      left: page * mobileScrollRef.current.clientWidth,
+      left: target,
       behavior: 'smooth',
     })
   }
 
   useEffect(() => {
-    const el = mobileScrollRef.current
-    if (!el) return
-    el.addEventListener('scroll', handleMobileScroll)
-    return () => el.removeEventListener('scroll', handleMobileScroll)
+    const mobileEl = mobileScrollRef.current
+    const desktopEl = desktopScrollRef.current
+    if (mobileEl) mobileEl.addEventListener('scroll', handleMobileScroll)
+    if (desktopEl) desktopEl.addEventListener('scroll', handleDesktopScroll)
+    return () => {
+      if (mobileEl) mobileEl.removeEventListener('scroll', handleMobileScroll)
+      if (desktopEl) desktopEl.removeEventListener('scroll', handleDesktopScroll)
+    }
   }, [])
 
   return (
@@ -75,7 +118,6 @@ const ServicesCarousel = () => {
             </h2>
           </div>
 
-          {/* Desktop arrows */}
           <div className="hidden lg:flex gap-3">
             <button
               onClick={() => scrollDesktop('left')}
@@ -91,7 +133,6 @@ const ServicesCarousel = () => {
             </button>
           </div>
 
-          {/* Mobile/tablet arrows */}
           <div className="flex lg:hidden gap-3">
             <button
               onClick={() => scrollMobile('left')}
@@ -118,38 +159,52 @@ const ServicesCarousel = () => {
               key={service.id}
               className="snap-start shrink-0 w-[calc(25%-18px)]"
             >
-              <ServiceCard {...service} delay={(i % CARDS_PER_PAGE) * 0.08} />
+              <ServiceCard {...service} delay={(i % 4) * 0.08} />
             </div>
           ))}
         </div>
 
-        {/* Mobile/tablet: horizontal pages, each page a vertical stack of 4 cards */}
-        <div
-          ref={mobileScrollRef}
-          className="lg:hidden flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
-        >
-          {pages.map((pageServices, pageIndex) => (
-            <div
-              key={pageIndex}
-              className="snap-start shrink-0 w-full flex flex-col gap-4"
-            >
-              {pageServices.map((service, i) => (
-                <ServiceCard key={service.id} {...service} delay={i * 0.08} />
-              ))}
-            </div>
-          ))}
-        </div>
-
-        {/* Dot pagination — mobile/tablet only */}
-        {pages.length > 1 && (
-          <div className="flex lg:hidden items-center justify-center gap-2 mt-6">
-            {pages.map((_, i) => (
+        {/* Desktop dot pagination — one dot per group of 4 */}
+        {desktopPageCount > 1 && (
+          <div className="hidden lg:flex items-center justify-center gap-2 mt-8">
+            {Array.from({ length: desktopPageCount }).map((_, i) => (
               <button
                 key={i}
-                onClick={() => goToPage(i)}
-                aria-label={`Go to page ${i + 1}`}
+                onClick={() => goToDesktopPage(i)}
+                aria-label={`Go to services page ${i + 1}`}
                 className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  activePage === i ? 'bg-red-600' : 'bg-gray-300'
+                  activeDesktopPage === i ? 'bg-red-600' : 'bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Mobile/tablet: horizontal scroll, 2 cards visible at a time */}
+        <div
+          ref={mobileScrollRef}
+          className="lg:hidden flex items-stretch gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+        >
+          {services.map((service, i) => (
+            <div
+              key={service.id}
+              className="snap-start shrink-0 w-[calc(50%-8px)]"
+            >
+              <ServiceCard {...service} delay={(i % 4) * 0.08} />
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile dot pagination — one dot per service */}
+        {services.length > 1 && (
+          <div className="flex lg:hidden items-center justify-center gap-2 mt-6">
+            {services.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToCard(i)}
+                aria-label={`Go to service ${i + 1}`}
+                className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                  activeCard === i ? 'bg-red-600' : 'bg-gray-300'
                 }`}
               />
             ))}

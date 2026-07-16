@@ -12,13 +12,13 @@ const FundraiserProgress = () => {
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-6 py-6">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 rounded-2xl shadow-lg overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <div className="bg-white p-8 shadow-lg rounded-2xl">
+          <div className="bg-white p-8">
             <span className="inline-block text-xs font-semibold text-red-600 border border-red-200 bg-red-50 px-3 py-1 rounded-full mb-4">
               {badge}
             </span>
@@ -39,7 +39,7 @@ const FundraiserProgress = () => {
             </div>
           </div>
 
-          <div className="bg-green-900 p-8 relative overflow-hidden text-white flex flex-col justify-center rounded-2xl shadow-lg">
+          <div className="bg-green-900 p-8 relative overflow-hidden text-white flex flex-col justify-center">
             {image ? (
               <img
                 src={image}

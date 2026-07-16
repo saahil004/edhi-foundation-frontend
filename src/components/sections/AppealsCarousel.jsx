@@ -18,9 +18,7 @@ const chunk = (arr, size) => {
 const AppealsCarousel = () => {
   const mobileScrollRef = useRef(null)
   const desktopScrollRef = useRef(null)
-  const [activePage, setActivePage] = useState(0)
-
-  const pages = chunk(appeals, CARDS_PER_PAGE)
+  const [activeCard, setActiveCard] = useState(0)
 
   const scrollDesktop = (direction) => {
     if (!desktopScrollRef.current) return
@@ -33,24 +31,30 @@ const AppealsCarousel = () => {
 
   const scrollMobile = (direction) => {
     if (!mobileScrollRef.current) return
-    const width = mobileScrollRef.current.clientWidth
+    const card = mobileScrollRef.current.children[0]
+    const cardWidth = card ? card.offsetWidth + 16 : 300 // +16 accounts for the gap-4
     mobileScrollRef.current.scrollBy({
-      left: direction === 'next' ? width : -width,
+      left: direction === 'next' ? cardWidth : -cardWidth,
       behavior: 'smooth',
     })
   }
 
   const handleMobileScroll = () => {
     if (!mobileScrollRef.current) return
-    const { scrollLeft, clientWidth } = mobileScrollRef.current
-    const page = Math.round(scrollLeft / clientWidth)
-    setActivePage(page)
+    const { scrollLeft, children } = mobileScrollRef.current
+    const card = children[0]
+    if (!card) return
+    const cardWidth = card.offsetWidth + 16
+    const index = Math.round(scrollLeft / cardWidth)
+    setActiveCard(index)
   }
 
-  const goToPage = (page) => {
+  const goToCard = (index) => {
     if (!mobileScrollRef.current) return
+    const card = mobileScrollRef.current.children[0]
+    const cardWidth = card ? card.offsetWidth + 16 : 300
     mobileScrollRef.current.scrollTo({
-      left: page * mobileScrollRef.current.clientWidth,
+      left: index * cardWidth,
       behavior: 'smooth',
     })
   }
@@ -61,6 +65,7 @@ const AppealsCarousel = () => {
     el.addEventListener('scroll', handleMobileScroll)
     return () => el.removeEventListener('scroll', handleMobileScroll)
   }, [])
+
 
   return (
     <section className="w-full bg-gray-50">
@@ -130,7 +135,7 @@ const AppealsCarousel = () => {
                 loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/20 to-transparent" />
               <div className="absolute inset-0 flex flex-col justify-end p-5 text-white">
                 <h3 className="font-bold text-lg mb-1">{appeal.title}</h3>
                 <p className="text-sm text-gray-200 mb-4 line-clamp-2">{appeal.desc}</p>
@@ -146,57 +151,56 @@ const AppealsCarousel = () => {
           ))}
         </div>
 
-        {/* Mobile/tablet: horizontal pages, each page a vertical stack of 4 cards */}
-        <div
-          ref={mobileScrollRef}
-          className="lg:hidden flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+        {/* Mobile/tablet: horizontal scroll, ~1.5 cards visible at a time */}
+<div
+  ref={mobileScrollRef}
+  className="lg:hidden flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+>
+  {appeals.map((appeal, i) => (
+    <motion.div
+      key={appeal.id}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.6, delay: (i % 4) * 0.08, ease: 'easeOut' }}
+      className="relative snap-start shrink-0 w-[75%] sm:w-[60%] h-72 rounded-xl overflow-hidden group"
+    >
+      <img
+        src={appeal.image}
+        alt={appeal.title}
+        loading="lazy"
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="absolute inset-0 flex flex-col justify-end p-5 text-white">
+        <h3 className="font-bold text-lg mb-1">{appeal.title}</h3>
+        <p className="text-sm text-gray-200 mb-4 line-clamp-2">{appeal.desc}</p>
+        <Link
+          to="/donation"
+          className="self-start flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-4 py-2 rounded-full hover:bg-gray-100 transition-colors"
         >
-          {pages.map((pageAppeals, pageIndex) => (
-            <div key={pageIndex} className="snap-start shrink-0 w-full flex flex-col gap-4">
-              {pageAppeals.map((appeal, i) => (
-                <motion.div
-                  key={appeal.id}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: 'easeOut' }}
-                  className="relative shrink-0 h-56 w-full rounded-xl overflow-hidden group"
-                >
-                  <img
-                    src={appeal.image}
-                    alt={appeal.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-black/70 to-black" />
-                  <div className="absolute inset-0 flex flex-col justify-center items-end text-right p-5 text-white">
-                    <h3 className="font-bold text-lg mb-2 max-w-[65%]">{appeal.title}</h3>
-                    <p className="text-sm text-gray-300 mb-4 line-clamp-3 max-w-[65%]">{appeal.desc}</p>
-                    <Link to='/donation' className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-4 py-2 rounded-full hover:bg-gray-100 transition-colors">
-                      Donate Now <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          More Info <ArrowRight size={14} />
+        </Link>
+      </div>
+    </motion.div>
+  ))}
+</div>
+
+         {/* Dot pagination — now one dot per appeal, not per page of 4 */}
+      {appeals.length > 1 && (
+        <div className="flex lg:hidden items-center justify-center gap-2 mt-6">
+          {appeals.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToCard(i)}
+              aria-label={`Go to appeal ${i + 1}`}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                activeCard === i ? 'bg-red-600' : 'bg-gray-300'
+              }`}
+            />
           ))}
         </div>
-
-        {/* Dot pagination — mobile/tablet only, controls horizontal page scroll */}
-        {pages.length > 1 && (
-          <div className="flex lg:hidden items-center justify-center gap-2 mt-6">
-            {pages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goToPage(i)}
-                aria-label={`Go to page ${i + 1}`}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  activePage === i ? 'bg-red-600' : 'bg-gray-300'
-                }`}
-              />
-            ))}
-          </div>
-        )}
+      )}
 
         {/* View all banner */}
         <ViewAllBanner
