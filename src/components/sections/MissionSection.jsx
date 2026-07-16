@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { missionData } from '../../data/missionData'
-import MissionCard from '../ui/MissionCard'
+import { missionData } from '../../data/missionData.js'
+import MissionCard from '../ui/MissionCard.jsx'
 
 const containerVariants = {
   hidden: {},
@@ -53,15 +53,16 @@ const MissionSection = () => {
         className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
       >
         {missionData.map((item) => (
-          <MissionCard
-            key={item.id}
-            icon={item.icon}
-            title={item.title}
-            description={item.description}
-            point={item.point}
-            image={item.image}
-          />
-        ))}
+  <MissionCard
+    key={item.id}
+    id={item.id}
+    icon={item.icon}
+    title={item.title}
+    description={item.description}
+    point={item.point}
+    image={item.image}
+  />
+))}
       </motion.div>
     </section>
   )

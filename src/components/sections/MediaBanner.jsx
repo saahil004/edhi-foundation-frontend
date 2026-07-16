@@ -1,7 +1,7 @@
 // src/components/sections/MediaBanner.jsx
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { mediaBannerData } from "../../data/mediaData";
+import { mediaBannerData } from "../../data/mediaData.js";
 
 export default function MediaBanner() {
   const bannerRef = useRef(null);

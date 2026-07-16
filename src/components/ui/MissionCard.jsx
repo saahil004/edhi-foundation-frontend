@@ -1,74 +1,85 @@
-import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
-import { missionData } from '../../data/missionData.js'
-import MissionCard from '../ui/MissionCard.jsx'
+import { motion, AnimatePresence } from 'framer-motion'
+import { CheckCircle2 } from 'lucide-react'
+import { useState } from 'react'
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-}
-
-const headerVariants = {
-  hidden: { opacity: 0, y: 20 },
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 }
 
-const MissionSection = () => {
+const MissionCard = ({ icon: Icon, title, description, point, image, id }) => {
+  const [isHovered, setIsHovered] = useState(false)
+  const isEven = id % 2 === 0
+
   return (
-    <section className="px-6 py-16 md:px-12 lg:px-20">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={headerVariants}
-        className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between"
-      >
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-1.5 text-sm text-gray-600">
-            <span className="h-1.5 w-1.5 rounded-full bg-green-800" />
-            Our Approach
-          </span>
-          <h2 className="mt-4 text-4xl font-bold leading-tight text-green-950 md:text-5xl">
-            From Understanding <br /> to Meaningful Action
-          </h2>
-        </div>
+    <motion.div
+      variants={cardVariants}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="relative overflow-hidden rounded-2xl bg-gray-50 p-6"
+    >
+      {/* hover background image */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="absolute inset-0 z-0"
+          >
+            <img src={image} alt="" className="h-full w-full object-cover" />
+            <div className={`absolute inset-0 ${isEven ? 'bg-red-950/70' : 'bg-green-950/70'}`} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        <div className="max-w-sm mt-6">
-          <p className="text-gray-600">
-            Through careful planning, collaboration, and transparent execution,
-            we turn insights into practical initiatives that create lasting,
-            positive impact where it matters most.
-          </p>
-          <button className="mt-4 inline-flex items-center gap-2 rounded-lg bg-green-800 px-5 py-2.5 font-medium text-white transition hover:bg-green-900">
-            Contact Us
-            <ArrowUpRight className="h-4 w-4" />
-          </button>
-        </div>
-      </motion.div>
+      {/* decorative blob - fades out on hover */}
+      <div
+        className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-gray-200/60 transition-opacity duration-300"
+        style={{ opacity: isHovered ? 0 : 1 }}
+      />
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-        className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+      <div
+        className={`relative z-10 flex h-11 w-11 items-center justify-center rounded-full ${
+          isEven ? 'bg-red-800' : 'bg-green-800'
+        }`}
       >
-        {missionData.map((item) => (
-          <MissionCard
-            key={item.id}
-            id={item.id}
-            icon={item.icon}
-            title={item.title}
-            description={item.description}
-            point={item.point}
-            image={item.image}
-          />
-        ))}
-      </motion.div>
-    </section>
+        <Icon className="h-5 w-5 text-white" />
+      </div>
+
+      <h3
+        className={`relative z-10 mt-4 text-lg font-semibold transition-colors duration-300 ${
+          isHovered ? 'text-white' : 'text-gray-900'
+        }`}
+      >
+        {title}
+      </h3>
+
+      <p
+        className={`relative z-10 mt-3 text-sm leading-relaxed transition-colors duration-300 ${
+          isHovered ? 'text-gray-100' : 'text-gray-600'
+        }`}
+      >
+        {description}
+      </p>
+
+      <div
+        className={`relative z-10 mt-4 border-t pt-4 flex items-start gap-2 transition-colors duration-300 ${
+          isHovered ? 'border-white/30' : 'border-gray-200'
+        }`}
+      >
+        <CheckCircle2
+          className={`h-4 w-4 mt-0.5 shrink-0 ${
+            isHovered ? 'text-white' : isEven ? 'text-red-800' : 'text-green-800'
+          }`}
+        />
+        <p className={`text-sm transition-colors duration-300 ${isHovered ? 'text-gray-100' : 'text-gray-600'}`}>
+          {point}
+        </p>
+      </div>
+    </motion.div>
   )
 }
 
-export default MissionSection
+export default MissionCard

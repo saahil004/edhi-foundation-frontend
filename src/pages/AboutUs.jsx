@@ -17,7 +17,7 @@ const AboutUs = () => {
         <main className="overflow-hidden">
           <AboutBanner />
           <InfiniteMarquee />
-          <OurStory />
+           <OurStory />
           <MissionSection />
         </main>
         </>
