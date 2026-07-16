@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { DollarSign, Check, ArrowUpRight, Play } from 'lucide-react'
 import ourStory from '../../data/ourStoryData.js'
+import { Link } from 'react-router-dom'
 
 const OurStory = () => {
   const {
@@ -76,7 +77,7 @@ const OurStory = () => {
 
           <div className="border-t border-gray-200 pt-6 flex items-center gap-6">
   <button className="mt-4 inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 font-medium text-white transition hover:bg-red-800">
-            Contact Us
+            <Link to='/contact'>Contact Us</Link>
             <ArrowUpRight className="h-4 w-4" />
           </button>
 </div>

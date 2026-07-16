@@ -6,6 +6,7 @@ import FounderSection from "../components/sections/FounderSection.jsx";
 import StatsBar from "../components/sections/StatsBar.jsx";
 import InfiniteMarquee from "../components/ui/InfiniteMarquee.jsx";
 import MissionSection from "../components/sections/MissionSection.jsx";
+import WhatWeDoSection from "../components/sections/WhatWeDo.jsx";
 
 const AboutUs = () => {
 
@@ -19,6 +20,7 @@ const AboutUs = () => {
           <InfiniteMarquee />
            <OurStory />
           <MissionSection />
+          <WhatWeDoSection/>
         </main>
         </>
     )
