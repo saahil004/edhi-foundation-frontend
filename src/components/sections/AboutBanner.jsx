@@ -5,11 +5,13 @@ const AboutBanner = () => {
   const { image, heading, subtext } = aboutBanner
 
   return (
-   <section className="relative w-full h-[26rem] md:h-[30rem] lg:h-screen overflow-hidden">
-    <motion.img
-        src={image}
-        alt="Edhi Foundation volunteers at work"
-        className="absolute inset-0 w-full h-full object-cover"
+    <section className="relative w-full h-60 md:h-[30rem] lg:h-screen overflow-hidden">
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundAttachment: 'fixed',
+        }}
         initial={{ scale: 1.15, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}

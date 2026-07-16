@@ -5,7 +5,7 @@ import FounderProfile from "../components/sections/FounderProfile";
 import MissionValues from "../components/sections/MissionValues";
 import FounderSection from "../components/sections/FounderSection";
 import StatsBar from "../components/sections/StatsBar";
-
+import InfiniteMarquee from "../components/ui/InfiniteMarquee";
 
 const AboutUs = () => {
 
@@ -13,21 +13,13 @@ const AboutUs = () => {
     return (
         <>
         {/* <main className=""> */}
-          <div className="overflow-hidden">
-
+          {/* <div className="overflow-hidden"> */}
+        <main className="overflow-hidden">
           <AboutBanner />
-          <div className="my-5">
-          <OurStory />
-          </div>
-          <FounderProfile />
-          <MissionValues />
-          <div className="overflow-hidden">
-          <FounderSection />
-          <StatsBar />
-          </div>
-          </div>
+          <InfiniteMarquee />
           
-{/* </main>           */}
+          <OurStory />
+        </main>
         </>
     )
 }

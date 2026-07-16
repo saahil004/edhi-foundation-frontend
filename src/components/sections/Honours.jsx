@@ -26,7 +26,7 @@ const Honours = () => {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <h1 className="text-3xl lg:text-5xl font-bold mb-4">
-          Honours for Our <span className="text-green-600">Humanitarian Efforts</span>
+          Honours for Our <span className="text-green-800">Humanitarian Efforts</span>
         </h1>
         <p className="text-gray-500">
           A testament to our unwavering commitment to serving humanity, these awards recognize the
@@ -83,7 +83,7 @@ const Honours = () => {
           to="/about"
           className="inline-flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-6 py-3 rounded-full transition-colors"
         >
-          Learn More About Us <ArrowRightIcon size={18} />
+          About Us <ArrowRightIcon size={18} />
         </Link>
       </div>
     </section>

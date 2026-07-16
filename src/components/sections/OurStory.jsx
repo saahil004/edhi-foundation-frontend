@@ -1,53 +1,95 @@
 import { motion } from 'framer-motion'
+import { DollarSign, Check, ArrowUpRight, Play } from 'lucide-react'
 import ourStory from '../../data/ourStoryData.js'
 
 const OurStory = () => {
-  const { image, heading, paragraphs } = ourStory
+  const {
+    eyebrow, heading, headingHighlight, description,
+    yearsExperience, mainImage, secondaryImage,
+    calloutTitle, calloutText, calloutImage,
+  } = ourStory
 
   return (
-    <section className="w-full bg-white relative">
-      <div className="relative w-full h-[28rem] sm:h-[32rem] md:h-[36rem] lg:h-[42rem] overflow-hidden">
+    <section className="w-full bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-        {/* Background image, full bleed */}
-        <motion.img
-          src={image}
-          alt="Early days of Edhi Foundation"
-          className="absolute inset-0 w-full h-full object-cover"
-          initial={{ scale: 1.1, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
+        {/* Left: layered circular images */}
+        <motion.div
+          className="relative h-[420px] md:h-[520px]"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
-        />
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <span className="absolute -top-2 left-0 w-3 h-3 rounded-full bg-green-800" />
 
-        {/* Gradient overlay: dark on the left where text sits, fading out to the right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent md:from-black/80 md:via-black/30 md:to-transparent" />
+          <div className="absolute top-8 left-0 w-[70%] h-[70%] rounded-full overflow-hidden shadow-lg">
+            <img src={mainImage} alt="Edhi Foundation history" className="w-full h-full object-cover" />
+          </div>
 
-        {/* Extra bottom gradient for mobile readability when text sits lower */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
+          <div className="absolute bottom-0 right-0 w-[62%] h-[62%] rounded-full overflow-hidden shadow-lg border-4 border-gray-50">
+            <img src={secondaryImage} alt="Edhi Foundation service" className="w-full h-full object-cover" />
+          </div>
 
-        {/* Text content, positioned over the image */}
-        <div className="relative z-10 h-full max-w-7xl mx-auto px-6 md:px-12 flex items-end md:items-center">
           <motion.div
-            className="max-w-xl pb-10 md:pb-0"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
-          >
-            <span className="text-red-500 text-sm font-semibold flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-red-500" /> OUR HISTORY
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-              {heading}
-            </h2>
+  initial={{ opacity: 0, scale: 0.8 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 0.5, delay: 0.5, type: 'spring', stiffness: 200 }}
+  className="absolute bottom-6 left-[20%] bg-green-800 rounded-2xl px-7 py-5 text-center shadow-xl border-4 border-white"
+>
+  <p className="text-3xl font-extrabold text-yellow-400 leading-none mb-1">
+    {yearsExperience}
+  </p>
+  <p className="text-xs font-semibold text-white uppercase tracking-wide leading-tight">
+    Years Of<br />Service
+  </p>
+</motion.div>
+        </motion.div>
 
-            {paragraphs.map((para, i) => (
-              <p key={i} className="text-gray-200 mb-4 leading-relaxed text-sm sm:text-base">
-                {para}
-              </p>
-            ))}
-          </motion.div>
-        </div>
+        {/* Right: text content */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
+        >
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-green-900 bg-white border border-gray-200 rounded-full px-4 py-1.5 mb-4">
+            <span className="w-2 h-2 rounded-full bg-green-800" /> OUR HISTORY
+          </span>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-green-950 leading-tight mb-4">
+            Our Story
+          </h2>
+
+          <p className="text-gray-600 mb-4 leading-relaxed">
+            The Abdul Sattar Edhi Foundation was founded in 1951 with a single ambulance and an unwavering belief that no human being should suffer without help. What began as a small dispensary in Karachi has grown into one of the largest volunteer-run welfare organizations in the world.
+          </p>
+
+          <p className="text-gray-600 mb-4 leading-relaxed">
+            For over seven decades, the Foundation has provided emergency medical care, shelter for the homeless and orphaned, rehabilitation for the mentally ill, and dignity in death for the unclaimed — regardless of religion, race, or background.
+          </p>
+
+          <p className="text-gray-600 mb-8 leading-relaxed">
+            Today, that mission continues under the same principle Abdul Sattar Edhi lived by: service to humanity is service to God.
+          </p>
+
+          <div className="border-t border-gray-200 pt-6 flex items-center gap-6">
+  <motion.a
+    href="/contact"
+    whileHover="hover"
+    className="group flex items-center gap-2 bg-white border-2 border-green-800 hover:bg-green-800 text-green-800 hover:text-white font-semibold px-6 py-3 rounded-full transition-colors duration-300"
+  >
+    Contact Us
+    <motion.span
+      variants={{ hover: { x: 4 } }}
+      transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+    >
+      <ArrowUpRight size={18} />
+    </motion.span>
+  </motion.a>
+</div>
+        </motion.div>
       </div>
     </section>
   )
