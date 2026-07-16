@@ -1,11 +1,11 @@
 import React from "react";
-import AboutBanner from "../components/sections/AboutBanner";
-import OurStory from "../components/sections/OurStory";
-import FounderProfile from "../components/sections/FounderProfile";
-import FounderSection from "../components/sections/FounderSection";
-import StatsBar from "../components/sections/StatsBar";
-import InfiniteMarquee from "../components/ui/InfiniteMarquee";
-import MissionSection from "../components/sections/MissionSection";
+import AboutBanner from "../components/sections/AboutBanner.jsx";
+import OurStory from "../components/sections/OurStory.jsx";
+import FounderProfile from "../components/sections/FounderProfile.jsx";
+import FounderSection from "../components/sections/FounderSection.jsx";
+import StatsBar from "../components/sections/StatsBar.jsx";
+import InfiniteMarquee from "../components/ui/InfiniteMarquee.jsx";
+import MissionSection from "../components/sections/MissionSection.jsx";
 
 const AboutUs = () => {
 
@@ -17,8 +17,8 @@ const AboutUs = () => {
         <main className="overflow-hidden">
           <AboutBanner />
           <InfiniteMarquee />
-          <OurStory />
-          <MissionSection />
+          {/* <OurStory />
+          <MissionSection /> */}
         </main>
         </>
     )
