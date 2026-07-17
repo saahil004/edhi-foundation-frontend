@@ -5,14 +5,16 @@ import reliefWorkerImg from '../assets/images/edhi-relief-worker.png'
 
 export const whatWeDoStats = {
   volunteers: {
-    count: '3,500+',
+    value: 3500,
+    suffix: '+',
     label: 'Active Volunteers',
     avatars: [
-      // add avatar image paths later, or pull from a team/testimonials data file
+      // add avatar image paths later
     ],
   },
   projects: {
-    count: '250+',
+    value: 250,
+    suffix: '+',
     label: 'Projects Completed',
   },
 }
