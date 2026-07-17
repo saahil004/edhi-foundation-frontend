@@ -1,5 +1,8 @@
 import React from "react";
 import { services } from "../data/servicesData.js"
+import ServiceBanner from "../components/sections/ServicePageBanner.jsx";
+import InfiniteMarquee from '../components/ui/InfiniteMarquee.jsx'
+import ServicesGrid from "../components/sections/ServicesGrid.jsx";
 
 const Services = () => {
 
@@ -7,13 +10,11 @@ const Services = () => {
 
     return (
         <>
-          {
-            servicedata.map((service, index) => (
-                <div key={index}>
-                    <h1>{service.title}</h1>
-                </div>
-            ))
-          }
+          <ServiceBanner />
+          <div className="overflow-hidden">
+          <InfiniteMarquee/>
+          </div>
+          <ServicesGrid />
         </>
     )
 }
