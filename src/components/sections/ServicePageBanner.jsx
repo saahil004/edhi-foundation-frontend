@@ -5,7 +5,7 @@ const ServiceBanner = () => {
   const { image, heading, subtext } = aboutBanner
 
   return (
-    <section className="relative w-full h-60 md:h-[30rem] lg:h-screen overflow-hidden">
+    <section className="relative w-full h-60 h-110 lg:h-screen overflow-hidden">
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
