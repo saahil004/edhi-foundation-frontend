@@ -150,12 +150,14 @@ const Navbar = () => {
                   {activeMobileLink.columns.flat().map((item) => {
                     const label = typeof item === 'string' ? item : item.label
                     const slug = typeof item === 'string' ? null : item.slug
+                    const path = typeof item === 'string' ? null : item.path
+                    const linkTo = slug ? `/services/${slug}` : path
 
                     return (
                       <li key={label} className="border-b border-gray-100">
-                        {slug ? (
+                        {linkTo ? (
                           <Link
-                            to={`/services/${slug}`}
+                            to={linkTo}
                             onClick={closeMobileMenu}
                             className="flex items-center justify-between py-3 text-gray-700"
                           >

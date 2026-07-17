@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { services } from '../../data/servicesData.js'
-import ServiceInfoCard from '../ui/ServiceInfoCard.jsx'
+import MobileServiceInfoCard from '../ui/MobileServiceInfoCard.jsx'
 
 const CARDS_PER_ROW = 3
 
@@ -24,11 +24,11 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 }
 
-const ServicesGrid = () => {
+const MobileServicesGrid = () => {
   const rows = chunk(services, CARDS_PER_ROW)
 
   return (
-    <section className="hidden px-6 py-20 md:px-12 lg:px-20 space-y-10 lg:block">
+    <section className="px-6 py-20 md:px-12 lg:px-20 space-y-10 lg:hidden">
       {rows.map((row, rowIndex) => (
         <motion.div
   key={rowIndex}
@@ -40,7 +40,7 @@ const ServicesGrid = () => {
 >
           {row.map((service) => (
             <motion.div key={service.id} variants={cardVariants}>
-              <ServiceInfoCard
+              <MobileServiceInfoCard
                 slug={service.slug}
                 title={service.title}
                 desc={service.desc}
@@ -55,4 +55,4 @@ const ServicesGrid = () => {
   )
 }
 
-export default ServicesGrid
+export default MobileServicesGrid

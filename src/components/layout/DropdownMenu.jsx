@@ -44,12 +44,14 @@ const DropdownMenu = ({ columns, image }) => {
             {col.map((item) => {
               const label = typeof item === 'string' ? item : item.label
               const slug = typeof item === 'string' ? null : item.slug
+              const path = typeof item === 'string' ? null : item.path
+              const linkTo = slug ? `/services/${slug}` : path
 
               return (
                 <li key={label} className="border-b border-gray-200 pb-1">
-                  {slug ? (
+                  {linkTo ? (
                     <Link
-                      to={`/services/${slug}`}
+                      to={linkTo}
                       className="text-gray-700 hover:text-red-600 transition-colors text-sm"
                     >
                       {label}

@@ -22,6 +22,56 @@ import service21 from '../assets/images/service21.jpeg'
 import service22 from '../assets/images/service22.jpeg'
 
 
+import {
+  Building2,
+  Baby,
+  Home,
+  BookOpen,
+  Ambulance,
+  Cross,
+  Wrench,
+  Search,
+  Wheat,
+  CookingPot,
+  Croissant,
+  UtensilsCrossed,
+  Users,
+  Tent,
+  Syringe,
+  HeartHandshake,
+  Gem,
+  Building,
+  Landmark,
+  Stethoscope,
+  Car,
+  PawPrint,
+} from 'lucide-react'
+
+export const iconMap = {
+  hospital: Building2,
+  child: Baby,
+  home: Home,
+  book: BookOpen,
+  ambulance: Ambulance,
+  grave: Cross,
+  wrench: Wrench,
+  search: Search,
+  bread: Wheat,
+  kitchen: CookingPot,
+  bakery: Croissant,
+  food: UtensilsCrossed,
+  qurbani: Users,
+  refugee: Tent,
+  virus: Syringe,
+  volunteer: HeartHandshake,
+  ring: Gem,
+  morgue: Building,
+  center: Landmark,
+  rehab: Stethoscope,
+  rickshaw: Car,
+  paw: PawPrint,
+}
+
 export const services = [
   {
     id: 1,

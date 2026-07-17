@@ -1,9 +1,9 @@
 import { Heart } from 'lucide-react'
 import { motion } from 'framer-motion'
-import ProgressBar from './ProgressBar'
+import ProgressBar from './ProgressBar.jsx'
 import { Link } from 'react-router-dom'
 
-const ServiceCard = ({ title, desc, image, raised, goal, delay = 0 }) => {
+const ServiceCard = ({ title, desc, image, raised, goal, delay = 0, slug }) => {
   const percent = Math.round((raised / goal) * 100)
 
   return (
@@ -34,15 +34,15 @@ const ServiceCard = ({ title, desc, image, raised, goal, delay = 0 }) => {
           <span>Raised: ${raised.toLocaleString()}</span>
         </div>
 
-        <Link to='/donation'>
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors"
-          >
-            More Info
-          </motion.div>
-        </Link>
+        <Link to={`/services/${slug}`}>
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.97 }}
+    className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 transition-colors"
+  >
+    More Info
+  </motion.div>
+</Link>
       </div>
     </motion.div>
   )

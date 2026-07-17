@@ -2,9 +2,29 @@ import { Link } from 'react-router-dom'
 import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import { Mail } from 'lucide-react'
 
-const quickLinks = ['Home', 'About Us', 'Services', 'Blog', 'Contact Us']
-const ourServices = ['Education Support Programs', 'Community Healthcare Services', 'Food & Nutrition Assistance', 'Shelter & Housing Support', 'Emergency & Disaster Relief']
-const support = ['Help Center', 'Terms & Conditions', 'Privacy Policy', 'Donation Policy', 'Disclaimer']
+const quickLinks = [
+  { label: 'Home', path: '/' },
+  { label: 'About Us', path: '/about' },
+  { label: 'Services', path: '/services' },
+  { label: 'Blog', path: '/blog' },
+  { label: 'Contact Us', path: '/contact' },
+]
+
+const ourServices = [
+  { label: 'Educational Services', path: '/services/educational-services' },
+  { label: 'Hospital', path: '/services/hospital' },
+  { label: 'Rooti Plant', path: '/services/rooti-plant' },
+  { label: 'Edhi Homes Orphanage', path: '/services/edhi-homes-orphanage' },
+  { label: 'Ambulance', path: '/services/ambulance' },
+]
+
+const support = [
+  { label: 'Help Center', path: '/help-center' },
+  { label: 'Terms & Conditions', path: '/terms' },
+  { label: 'Privacy Policy', path: '/privacy' },
+  { label: 'Donation Policy', path: '/donation-policy' },
+  { label: 'Disclaimer', path: '/disclaimer' },
+]
 
 const Footer = () => {
   return (
@@ -64,8 +84,10 @@ const FooterColumn = ({ title, items }) => (
     <h4 className="text-white font-semibold mb-4">{title}</h4>
     <ul className="space-y-2 text-sm">
       {items.map((item) => (
-        <li key={item}>
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">{item}</a>
+        <li key={item.label}>
+          <Link to={item.path} className="text-gray-400 hover:text-white transition-colors">
+            {item.label}
+          </Link>
         </li>
       ))}
     </ul>
