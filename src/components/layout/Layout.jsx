@@ -7,6 +7,7 @@ import ScrollToHash from '../utils/ScrollToHash.jsx'
 function Layout() {
   return (
     <>
+    <main className='overflow-hidden'>
       <ScrollToHash />
       <TopBar />
       <Navbar />
@@ -14,6 +15,7 @@ function Layout() {
         <Outlet />
       </main>
       <Footer />
+      </main>
     </>
   )
 }
