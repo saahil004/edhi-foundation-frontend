@@ -1,12 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
-import { motion, useInView, animate } from 'framer-motion'
-import { ArrowUpRight, LayoutDashboard, CheckCircle2, Users } from 'lucide-react'
-import {
-  whatWeDoStats,
-  whatWeDoImages,
-} from '../../data/whatWeDoData'
+import { ArrowUpRight, CheckCircle2, Users } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { whatWeDoStats, whatWeDoImages } from '../../data/whatWeDoData'
 import { stats } from '../../data/statsData.js'
 import { Link } from 'react-router-dom'
+import StatBadge, { CountUpNumber } from '../ui/StatBadge'
 
 const imageVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -15,34 +12,12 @@ const imageVariants = {
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
+  visible: { transition: { staggerChildren: 0.15 } },
 }
 
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
-
-const CountUpNumber = ({ value }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.5 })
-  const [display, setDisplay] = useState(0)
-
-  useEffect(() => {
-    if (!isInView) return
-
-    const controls = animate(0, value, {
-      duration: 1.6,
-      ease: 'easeOut',
-      onUpdate: (v) => setDisplay(Math.round(v)),
-    })
-
-    return () => controls.stop()
-  }, [isInView, value])
-
-  return <span ref={ref}>{display.toLocaleString()}</span>
 }
 
 const WhatWeDoSection = () => {
@@ -51,135 +26,91 @@ const WhatWeDoSection = () => {
   return (
     <section className="relative bg-green-950 px-6 py-20 md:px-12 lg:px-20">
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
-        {/* left: image collage - centered within its column */}
-        <div className="relative mx-auto flex w-full max-w-2xl items-center justify-center">
-          <div className="relative grid w-full grid-cols-[3fr_2fr] gap-4">
-            {/* left column */}
-            <div className="relative flex flex-col gap-4 w-full">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={imageVariants}
-                className="relative"
-              >
-                <div className="group relative h-80 w-full overflow-hidden rounded-2xl">
-                  <motion.img
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={imageVariants}
-                    src={whatWeDoImages.volunteers}
-                    alt="Edhi volunteers"
-                    className="h-full w-full object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
-                </div>
 
-                {/* volunteers card - square, overlaid top-left */}
-                <motion.div
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="group/card absolute left-0 top-0 flex h-35 w-35 flex-col items-center justify-center gap-2 rounded-2xl border-4 border-green-950 bg-white p-4 text-center shadow-lg hover:shadow-2xl"
-                >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-green-800 transition-colors duration-300 group-hover/card:bg-red-700">
-                    <Users className="h-5 w-5 text-white" />
-                  </div>
-                  <p className="text-xl font-bold text-green-950">
-                    <CountUpNumber value={whatWeDoStats.volunteers.value} />
-                    {whatWeDoStats.volunteers.suffix}
-                  </p>
-                  <p className="text-xs font-medium text-gray-600">
-                    {whatWeDoStats.volunteers.label}
-                  </p>
-                  <div className="flex -space-x-2">
-                    {whatWeDoStats.volunteers.avatars.map((avatar, i) => (
-                      <img
-                        key={i}
-                        src={avatar}
-                        alt=""
-                        className="h-6 w-6 rounded-full border-2 border-white object-cover transition-transform duration-200 hover:z-10 hover:scale-110"
-                      />
-                    ))}
-                  </div>
-                </motion.div>
+        {/* LEFT: image area */}
+        <div className="relative mx-auto w-full max-w-2xl">
 
-                {/* projects card - original spot, mobile/tablet only, hidden at lg */}
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  variants={imageVariants}
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  className="group/card absolute -bottom-32 left-2 z-20 flex items-center gap-3 rounded-2xl bg-white px-5 py-8 shadow-xl hover:shadow-2xl lg:hidden"
-                >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-green-800 transition-colors duration-300 group-hover/card:bg-red-700">
-                    <CheckCircle2 className="h-5 w-5 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-xl font-bold text-green-950">
-                      <CountUpNumber value={whatWeDoStats.projects.value} />
-                      {whatWeDoStats.projects.suffix}
-                    </p>
-                    <p className="text-xs font-medium text-gray-600">
-                      {whatWeDoStats.projects.label}
-                    </p>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
+          {/* Mobile/tablet: simple stacked layout, no absolute collage */}
+          <div className="lg:hidden space-y-4">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={imageVariants}
+              className="relative h-64 sm:h-80 w-full overflow-hidden rounded-2xl"
+            >
+              <img src={whatWeDoImages.volunteers} alt="Edhi volunteers" className="h-full w-full object-cover" />
+            </motion.div>
 
-            {/* right: march image, overlapping left column - always visible */}
-            <div className="group absolute right-15 top-45 z-10 h-[280px] w-[280px] overflow-hidden rounded-2xl border-9 border-green-950 shadow-xl">
-              <motion.img
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={imageVariants}
-                src={whatWeDoImages.march}
-                alt="Edhi rally"
-                className="h-full w-full object-cover"
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={imageVariants}
+              className="relative h-48 sm:h-64 w-full overflow-hidden rounded-2xl"
+            >
+              <img src={whatWeDoImages.march} alt="Edhi rally" className="h-full w-full object-cover" />
+            </motion.div>
+
+            <div className="flex gap-4 justify-center pt-2">
+              <StatBadge
+                icon={Users}
+                value={whatWeDoStats.volunteers.value}
+                suffix={whatWeDoStats.volunteers.suffix}
+                label={whatWeDoStats.volunteers.label}
+                avatars={whatWeDoStats.volunteers.avatars}
               />
-              <div className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
-
-              {/* projects card - lg only, bottom-right of march image */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={imageVariants}
-                whileHover={{ y: -4, scale: 1.03 }}
-                className="group/card absolute -bottom-0 -right-0 z-20 hidden h-35 w-35 flex-col items-center justify-center gap-2 rounded-2xl border-4 border-green-950 bg-white p-3 text-center shadow-xl hover:shadow-2xl lg:flex"
-              >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-green-800 transition-colors duration-300 group-hover/card:bg-red-700">
-                  <CheckCircle2 className="h-5 w-5 text-white" />
-                </div>
-                <p className="text-xl font-bold text-green-950">
-                  <CountUpNumber value={whatWeDoStats.projects.value} />
-                  {whatWeDoStats.projects.suffix}
-                </p>
-                <p className="text-xs font-medium text-gray-600">
-                  {whatWeDoStats.projects.label}
-                </p>
-              </motion.div>
+              <StatBadge
+                icon={CheckCircle2}
+                value={whatWeDoStats.projects.value}
+                suffix={whatWeDoStats.projects.suffix}
+                label={whatWeDoStats.projects.label}
+              />
             </div>
+          </div>
+
+          {/* Desktop: two overlapping images + two corner badges */}
+          <div className="hidden lg:block relative w-full max-w-xl mx-auto" style={{ height: '560px' }}>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={imageVariants}
+              className="group absolute top-24 left-0 w-[75%] h-[420px] overflow-hidden rounded-2xl z-10"
+            >
+              <img src={whatWeDoImages.volunteers} alt="Edhi volunteers" className="h-full w-full object-cover" />
+              <div className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={imageVariants}
+              className="group absolute bottom-0 right-0 w-[55%] h-[300px] overflow-hidden rounded-2xl border-8 border-green-950 shadow-xl z-20"
+            >
+              <img src={whatWeDoImages.march} alt="Edhi rally" className="h-full w-full object-cover" />
+              <div className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+            </motion.div>
+
+            
           </div>
         </div>
 
-        {/* right: Our Impact content */}
+        {/* RIGHT: Our Impact content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="my-20 lg:my-5"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-1.5 text-sm text-gray-200">
             <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
             Our Impact
           </span>
 
-          <h2 className="mt-4 text-4xl font-bold leading-tight text-white md:text-5xl">
+          <h2 className="mt-4 text-3xl sm:text-4xl font-bold leading-tight text-white md:text-5xl">
             Creating Change That Truly Matters
           </h2>
 
@@ -197,18 +128,12 @@ const WhatWeDoSection = () => {
             viewport={{ once: true, amount: 0.2 }}
           >
             {visibleStats.map((stat) => (
-              <motion.div
-                key={stat.id}
-                variants={itemVariants}
-                className="rounded-2xl bg-white/10 p-6"
-              >
-                <h3 className="text-4xl font-extrabold tracking-tight text-white tabular-nums">
+              <motion.div key={stat.id} variants={itemVariants} className="rounded-2xl bg-white/10 p-6">
+                <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white tabular-nums">
                   <CountUpNumber value={stat.value} />
                   <span className="text-green-400">{stat.suffix}</span>
                 </h3>
-
                 <h4 className="mt-4 font-semibold text-white">{stat.label}</h4>
-
                 <div className="mt-4 border-t border-white/10 pt-4">
                   <p className="text-sm text-gray-300">{stat.description}</p>
                 </div>
