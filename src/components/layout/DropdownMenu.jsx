@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
-const DropdownMenu = ({ columns, image }) => {
+const DropdownMenu = ({ columns, image, label, path }) => {
   const dropdownImage = image
   const totalTracks = columns.length + (dropdownImage ? 1 : 0)
   const ref = useRef(null)
@@ -42,23 +42,23 @@ const DropdownMenu = ({ columns, image }) => {
         {columns.map((col, i) => (
           <ul key={i} className="space-y-1.5">
             {col.map((item) => {
-              const label = typeof item === 'string' ? item : item.label
+              const itemLabel = typeof item === 'string' ? item : item.label
               const slug = typeof item === 'string' ? null : item.slug
-              const path = typeof item === 'string' ? null : item.path
-              const linkTo = slug ? `/services/${slug}` : path
+              const itemPath = typeof item === 'string' ? null : item.path
+              const linkTo = slug ? `/services/${slug}` : itemPath
 
               return (
-                <li key={label} className="border-b border-gray-200 pb-1">
+                <li key={itemLabel} className="border-b border-gray-200 pb-1">
                   {linkTo ? (
                     <Link
                       to={linkTo}
                       className="text-gray-700 hover:text-red-600 transition-colors text-sm"
                     >
-                      {label}
+                      {itemLabel}
                     </Link>
                   ) : (
                     <a href="#" className="text-gray-700 hover:text-red-600 transition-colors text-sm">
-                      {label}
+                      {itemLabel}
                     </a>
                   )}
                 </li>
@@ -71,10 +71,10 @@ const DropdownMenu = ({ columns, image }) => {
           <div className="flex flex-col items-center gap-2">
             <img src={dropdownImage} alt="" className="rounded-2xl w-full h-40 object-cover border" />
             <Link
-              to="/services"
+              to={path}
               className="bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-1.5 rounded-md transition-colors text-sm text-center"
             >
-              See All Services
+              See All {label}
             </Link>
           </div>
         )}

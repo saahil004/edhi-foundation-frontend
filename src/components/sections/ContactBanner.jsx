@@ -6,33 +6,30 @@ const ContactBanner = () => {
   const { image, heading, subtext } = contactBanner
 
   return (
-    <section className="relative w-full h-[26rem] md:h-[30rem] overflow-hidden">
-      <motion.img
-        src={image}
-        alt="Edhi Foundation contact"
-        className="absolute inset-0 w-full h-full object-cover"
-        initial={{ scale: 1.15, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-      />
-
+    <section
+  className="relative h-[24rem] w-full overflow-hidden bg-fixed bg-cover bg-center md:h-[28rem]"
+  style={{ backgroundImage: `url(${image})` }}
+>
+      {/* gradient overlay instead of flat black - keeps some photo detail visible */}
       <div className="absolute inset-0 bg-black/50" />
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:items-start md:text-left md:w-1/2 md:px-16">
+      <div className="relative flex h-full flex-col items-center justify-center px-6 text-center md:w-3/5 md:items-start md:px-16 md:text-left lg:px-20">
+       
+
         <motion.h1
-          className="text-4xl md:text-5xl font-bold text-white mb-3"
+          className="mt-4 text-4xl font-bold leading-tight text-white md:text-5xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
+          transition={{ duration: 0.7, delay: 0.35, ease: 'easeOut' }}
         >
           {heading}
         </motion.h1>
 
         <motion.p
-          className="text-gray-200 max-w-xl mb-6"
+          className="mt-5 max-w-lg text-gray-300"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
+          transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
         >
           {subtext}
         </motion.p>
@@ -40,7 +37,8 @@ const ContactBanner = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.75, ease: 'easeOut' }}
+          transition={{ duration: 0.7, delay: 0.65, ease: 'easeOut' }}
+          className="mt-7"
         >
           <DonateButton />
         </motion.div>

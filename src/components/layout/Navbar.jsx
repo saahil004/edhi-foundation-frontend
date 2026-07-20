@@ -53,8 +53,8 @@ const Navbar = () => {
                 <AnimatePresence>
                   {openDropdown === link.label && link.dropdown && (
                     <div className="hidden lg:block">
-                      <DropdownMenu columns={link.columns} image={link.image} />
-                    </div>
+  <DropdownMenu columns={link.columns} image={link.image} label={link.label} path={link.path} />
+</div>
                   )}
                 </AnimatePresence>
               </li>

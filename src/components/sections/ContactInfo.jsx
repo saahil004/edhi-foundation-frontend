@@ -15,10 +15,13 @@ const itemVariants = {
 
 const ContactInfo = () => {
   return (
-    <section className="w-full bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+    <section className="relative w-full bg-gray-50">
+      {/* single decorative dot, top-left of section */}
+      <span className="absolute left-6 top-6 h-2.5 w-2.5 rounded-full bg-yellow-400 md:left-12 lg:left-20" />
+
+      <div className="mx-auto max-w-7xl px-6 py-20">
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-16"
+          className="grid grid-cols-1 gap-x-6 gap-y-16 sm:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -29,29 +32,21 @@ const ContactInfo = () => {
 
             const cardContent = (
               <>
-                {/* Decorative dot */}
-                <span className="absolute top-4 left-4 w-2.5 h-2.5 rounded-full bg-green-400 z-20" />
-
-                {/* Hover fill layer */}
-                <div className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out -z-10"
-                  style={{ backgroundImage: 'linear-gradient(90deg, #d1d5db, #e5e7eb)' }}
-                />
-
                 {/* Icon circle — half above the card */}
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-green-400 flex items-center justify-center shadow-md z-10">
-                  <Icon className="text-green-900" size={26} />
+                <div className="absolute -top-8 left-1/2 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full bg-red-600 shadow-md transition-transform duration-300 group-hover:scale-110">
+                  <Icon className="text-white" size={26} />
                 </div>
 
-                <div className="pt-12">
-                  <h3 className="font-bold text-gray-900 group-hover:text-gray-900 mb-2 transition-colors duration-300 text-2xl">
+                <div className="pt-10 text-center">
+                  <h3 className="text-2xl font-bold text-green-950">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-500 group-hover:text-gray-700 leading-relaxed mb-6 transition-colors duration-300">
+                  <p className="mt-3 text-sm leading-relaxed text-gray-500">
                     We work closely with communities to identify real needs.
                   </p>
 
-                  <div className="border-t border-gray-100 group-hover:border-gray-300 pt-4 transition-colors duration-300">
-                    <p className="font-bold text-gray-900 group-hover:text-gray-900 text-sm transition-colors duration-300">
+                  <div className="mt-6 border-t border-gray-100 pt-4">
+                    <p className="text-sm font-bold text-green-950">
                       {item.value}
                     </p>
                   </div>
@@ -59,7 +54,8 @@ const ContactInfo = () => {
               </>
             )
 
-            const cardClasses = "group relative flex flex-col items-center text-center p-8 rounded-2xl shadow-sm overflow-visible bg-white hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300"
+            const cardClasses =
+              'group relative flex flex-col items-center rounded-2xl bg-white p-8 pt-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl'
 
             if (item.id === 1) {
               return (
@@ -88,11 +84,7 @@ const ContactInfo = () => {
             }
 
             return (
-              <motion.div
-                key={item.id}
-                variants={itemVariants}
-                className={cardClasses}
-              >
+              <motion.div key={item.id} variants={itemVariants} className={cardClasses}>
                 {cardContent}
               </motion.div>
             )
