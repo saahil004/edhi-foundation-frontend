@@ -15,7 +15,7 @@ export const navLinks = [
   },
   { label: 'About Us', path: '/about' },
   {
-    label: 'Our Services', path: '/services', dropdown: true,
+    label: 'Our Services', path: '/services', dropdown: true, basePath: '/services',
     columns: [
       [
         { label: 'Hospital', slug: 'hospital' },
@@ -46,7 +46,21 @@ export const navLinks = [
     ],
     image: servicedd,
   },
-  { label: 'Appeals', path: '/appeals', dropdown: true, columns: [['Sadaqah Program', 'Lillah Program', 'Emergency Services', 'Food Bank Program']] },
+  {
+    label: 'Appeals', path: '/appeals', dropdown: true, basePath: '/appeals',
+    columns: [
+      [
+        { label: 'Bilqees Edhi Hospital', slug: 'bilqees-edhi-hospital' },
+        { label: 'Sadaqah Program', slug: 'sadaqah' },
+        { label: 'Zakat Program', slug: 'zakat' },
+        { label: 'Aqeeqa Program', slug: 'aqeeqa' },
+        { label: 'Food Bank Program', slug: 'food-bank' },
+        { label: 'Lillah Program', slug: 'lillah' },
+        { label: 'Emergency Services Program', slug: 'emergency-services' },
+      ],
+    ],
+    image: servicedd,
+  },
   {
     label: 'Media', path: '/media', dropdown: true, columns: [['Gallery', 'Press', 'Videos']],
     image: servicedd,

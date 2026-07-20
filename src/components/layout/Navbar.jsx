@@ -53,8 +53,14 @@ const Navbar = () => {
                 <AnimatePresence>
                   {openDropdown === link.label && link.dropdown && (
                     <div className="hidden lg:block">
-  <DropdownMenu columns={link.columns} image={link.image} label={link.label} path={link.path} />
-</div>
+                      <DropdownMenu
+                        columns={link.columns}
+                        image={link.image}
+                        label={link.label}
+                        path={link.path}
+                        basePath={link.basePath}
+                      />
+                    </div>
                   )}
                 </AnimatePresence>
               </li>
@@ -151,7 +157,7 @@ const Navbar = () => {
                     const label = typeof item === 'string' ? item : item.label
                     const slug = typeof item === 'string' ? null : item.slug
                     const path = typeof item === 'string' ? null : item.path
-                    const linkTo = slug ? `/services/${slug}` : path
+                    const linkTo = slug ? `${activeMobileLink.basePath || '/services'}/${slug}` : path
 
                     return (
                       <li key={label} className="border-b border-gray-100">

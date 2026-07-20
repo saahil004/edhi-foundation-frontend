@@ -7,6 +7,8 @@ import ContactUs from '../pages/ContactUs'
 import Donation from '../pages/Donation.jsx'
 import Media from '../pages/Media.jsx'
 import ServiceDetail from '../pages/ServiceDetail.jsx'
+import Appeals from '../pages/Appeals.jsx'
+import AppealDetail from '../pages/AppealDetail.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,8 @@ const router = createBrowserRouter([
       { path: 'donation', element: <Donation /> },
       { path: 'media', element: <Media /> },
       { path: 'services/:slug', element: <ServiceDetail /> },
+      { path: 'appeals', element: <Appeals /> },
+      { path: 'appeals/:slug', element: <AppealDetail /> },
     ],
   },
 ])

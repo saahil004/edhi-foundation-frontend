@@ -14,7 +14,7 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 }
 
-const RelatedServices = ({ services }) => {
+const RelatedServices = ({ services, basePath = '/services', title = 'Other Ways We Help' }) => {
   if (services.length === 0) return null
 
   return (
@@ -24,7 +24,7 @@ const RelatedServices = ({ services }) => {
           <span className="h-1.5 w-1.5 rounded-full bg-green-800" />
           Explore More
         </span>
-        <h3 className="mt-4 text-3xl font-bold text-green-950">Other Ways We Help</h3>
+        <h3 className="mt-4 text-3xl font-bold text-green-950">{title}</h3>
       </div>
 
       <motion.div
@@ -37,7 +37,7 @@ const RelatedServices = ({ services }) => {
         {services.map((s) => (
           <motion.div key={s.id} variants={cardVariants}>
             <Link
-              to={`/services/${s.slug}`}
+              to={`${basePath}/${s.slug}`}
               className="group block overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl"
             >
               <div className="relative h-48 overflow-hidden">

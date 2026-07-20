@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
-const DropdownMenu = ({ columns, image, label, path }) => {
+const DropdownMenu = ({ columns, image, label, path, basePath = '/services' }) => {
   const dropdownImage = image
   const totalTracks = columns.length + (dropdownImage ? 1 : 0)
   const ref = useRef(null)
@@ -45,7 +45,7 @@ const DropdownMenu = ({ columns, image, label, path }) => {
               const itemLabel = typeof item === 'string' ? item : item.label
               const slug = typeof item === 'string' ? null : item.slug
               const itemPath = typeof item === 'string' ? null : item.path
-              const linkTo = slug ? `/services/${slug}` : itemPath
+              const linkTo = slug ? `${basePath}/${slug}` : itemPath
 
               return (
                 <li key={itemLabel} className="border-b border-gray-200 pb-1">
