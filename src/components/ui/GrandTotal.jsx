@@ -7,7 +7,7 @@ const frequencyLabels = {
   yearly: 'every year',
 }
 
-const GrandTotal = ({ amount, frequency, serviceName, onBack, onCheckout }) => {
+const GrandTotal = ({ amount, frequency, serviceName, onBack, onCheckout, disabled = false }) => {
   const isRecurring = frequency !== 'single'
 
   return (
@@ -54,7 +54,7 @@ const GrandTotal = ({ amount, frequency, serviceName, onBack, onCheckout }) => {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 my-5">
+      <div className="flex flex-col sm:flex-row gap-3 mt-5">
         <button
           onClick={onBack}
           className="w-full border border-green-800 text-green-800 font-bold py-4 rounded-lg hover:bg-green-50 transition-colors"
@@ -64,11 +64,20 @@ const GrandTotal = ({ amount, frequency, serviceName, onBack, onCheckout }) => {
 
         <button
           onClick={onCheckout}
-          className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg transition-colors shadow-sm hover:shadow-md"
+          disabled={disabled}
+          className={`w-full flex items-center justify-center gap-2 font-bold py-4 rounded-lg transition-colors shadow-sm ${
+            disabled
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-red-600 hover:bg-red-700 text-white hover:shadow-md'
+          }`}
         >
           Checkout <ArrowRight size={18} />
         </button>
       </div>
+
+      <p className={`text-sm text-gray-500 text-center mt-3 mb-5 ${disabled ? '' : 'invisible'}`}>
+        Please fill in your details above and give consent to proceed.
+      </p>
     </>
   )
 }

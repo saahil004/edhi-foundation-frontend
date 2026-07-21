@@ -72,7 +72,7 @@ export const iconMap = {
   paw: PawPrint,
 }
 
-export const services = [
+const rawServices = [
   {
     id: 1,
     slug: 'hospital',
@@ -294,3 +294,20 @@ export const services = [
     goal: 100000,
   },
 ]
+
+// Mirrors the backend: each service has one or more programs, and a program
+// either offers fixed price options or a free-form amount (or both). Today
+// every service only has a single default program with no fixed tiers yet —
+// this shape just makes the donation flow ready for real per-service
+// programs/tiers whenever they're defined, without changing behavior now.
+export const services = rawServices.map((service) => ({
+  ...service,
+  programs: [
+    {
+      id: service.id,
+      name: `${service.title} Fund`,
+      allowOptionalPrice: true,
+      priceOptions: [],
+    },
+  ],
+}))
