@@ -13,9 +13,9 @@ const DonationBanner = () => {
         src={image}
         alt="Hands holding a heart"
         className="absolute inset-0 w-full h-full object-cover"
-        initial={{ scale: 1.15, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
       />
 
       {/* Fade overlay: mobile darkens bottom for text legibility, desktop fades left-to-right */}

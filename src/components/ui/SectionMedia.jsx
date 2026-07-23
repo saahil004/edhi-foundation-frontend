@@ -63,7 +63,7 @@ const SectionMedia = ({ item }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="relative mx-auto max-w-4xl text-center font-serif text-4xl font-bold leading-[1.1] tracking-tight text-gray-900 sm:text-5xl lg:text-6xl xl:text-7xl"
+                className="relative mx-auto max-w-4xl text-center font-serif text-4xl font-bold leading-[1.1] tracking-tight text-gray-900 sm:text-5xl lg:text-4xl xl:text-5xl"
                 style={{ letterSpacing: '-0.03em' }}
             >
                 {item.title}

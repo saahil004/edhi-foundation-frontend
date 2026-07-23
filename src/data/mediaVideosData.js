@@ -1,15 +1,65 @@
-import video1 from '../assets/videos/testimonial1.mp4'
-import video2 from '../assets/videos/testimonial2.mp4'
-import video3 from '../assets/videos/testimonial3.mp4'
-import video4 from '../assets/videos/testimonial4.mp4'
-import thumb1 from '../assets/images/video-thumb1.jpg'
-import thumb2 from '../assets/images/video-thumb2.jpg'
-import thumb3 from '../assets/images/video-thumb3.jpg'
-import thumb4 from '../assets/images/video-thumb4.jpg'
-
+// Real, publicly embeddable YouTube videos about the Edhi Foundation
+// (verified via YouTube's oEmbed endpoint). Thumbnails are pulled directly
+// from YouTube by video ID — no local poster images to keep in sync.
 export const mediaVideos = [
-  { id: 1, name: 'Ahmed Raza', role: 'Volunteer', src: video1, poster: thumb1 },
-  { id: 2, name: 'Sana Malik', role: 'Donor', src: video2, poster: thumb2 },
-  { id: 3, name: 'Bilal Hussain', role: 'Field Officer', src: video3, poster: thumb3 },
-  { id: 4, name: 'Ayesha Khan', role: 'Beneficiary', src: video4, poster: thumb4 },
+  {
+    id: 1,
+    youtubeId: 'QxpZgAYdnmc',
+    title: 'Inside View of Edhi Foundation',
+    source: 'Hamariweb.com',
+  },
+  {
+    id: 2,
+    youtubeId: 'X4Y4Kleg4z8',
+    title: "Providing Homes for Pakistan's Orphans",
+    source: 'Voice of America',
+  },
+  {
+    id: 3,
+    youtubeId: 'bj5txp6AUoc',
+    title: 'A Life Dedicated to Helping Others',
+    source: 'BBC News Urdu',
+  },
+  {
+    id: 4,
+    youtubeId: 'ikKGVzKho9E',
+    title: 'The Small Beginning of Abdul Sattar Edhi',
+    source: 'TEDx — Amal Academy',
+  },
+  {
+    id: 5,
+    youtubeId: 'tI7Ax8n2Y0o',
+    title: "Saira Khan's Pakistan — Edhi Ambulance",
+    source: 'BBC Studios',
+  },
+  {
+    id: 6,
+    youtubeId: 'bbqqol3jKfU',
+    title: "World's Largest Ambulance Service",
+    source: 'Discover Pakistan',
+  },
+  {
+    id: 7,
+    youtubeId: 'l3Mduhplivs',
+    title: "Pakistan's Largest Ambulance Network",
+    source: 'Indus Point',
+  },
+  {
+    id: 8,
+    youtubeId: '0ZyFYfT3esg',
+    title: 'Abdul Sattar Edhi — Heroes of Pakistan',
+    source: 'Indus News',
+  },
+  {
+    id: 9,
+    youtubeId: '57KRQNDcd74',
+    title: 'The Story of an Edhi Ambulance Driver',
+    source: 'Raftar',
+  },
+  {
+    id: 10,
+    youtubeId: '828izoVfZ7k',
+    title: "The World's Largest Ambulance Service",
+    source: 'TIG Media',
+  },
 ]

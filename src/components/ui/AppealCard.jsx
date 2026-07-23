@@ -22,7 +22,10 @@ const AppealCard = ({ slug, title, desc, image, delay = 0, className = '' }) => 
       <p className="text-sm text-gray-200 mb-4 line-clamp-2">{desc}</p>
       <Link
         to={`/appeals/${slug}`}
-        className="self-start flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-4 py-2 rounded-full hover:bg-gray-100 transition-colors"
+        className="self-start flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-gray-900
+          bg-[image:linear-gradient(to_right,white_50%,#dc2626_50%)] bg-[length:200%_100%] bg-[position:0%_0%]
+          transition-[background-position,color] duration-500 ease-out
+          group-hover:bg-[position:100%_0%] group-hover:text-white"
       >
         Learn More <ArrowRight size={14} />
       </Link>

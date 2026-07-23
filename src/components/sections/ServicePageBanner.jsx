@@ -13,9 +13,9 @@ const ServiceBanner = () => {
           backgroundImage: `url(${image})`,
           backgroundAttachment: 'fixed',
         }}
-        initial={{ scale: 1.15, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
       />
 
       <div className="absolute inset-0 bg-black/50" />

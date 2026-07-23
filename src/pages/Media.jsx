@@ -5,6 +5,7 @@ import InfiniteMarquee from '../components/ui/InfiniteMarquee.jsx'
 import EventGallery from '../components/sections/EventGallery.jsx'
 import MobileEventCarousel from '../components/sections/MobileEventGallery.jsx'
 import MobileEventGallery from '../components/sections/MobileEventGallery.jsx'
+import VideoFeedback from '../components/sections/VideoFeedback.jsx'
 
 const Media = () => {
 
@@ -25,6 +26,7 @@ const Media = () => {
       <div className="overflow-hidden">
         <InfiniteMarquee />
       </div>
+      <VideoFeedback />
       <MediaHighlights />
       {/* <MobileEventGallery/>
       <EventGallery /> */}

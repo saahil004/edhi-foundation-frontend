@@ -29,11 +29,19 @@ const VideoModal = ({ video, onClose }) => {
               <X className="h-5 w-5" />
             </button>
 
-            <video src={video.src} controls autoPlay className="w-full rounded-2xl" />
+            <div className="aspect-video w-full overflow-hidden rounded-2xl bg-black">
+              <iframe
+                src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1`}
+                title={video.title}
+                className="h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
 
             <div className="mt-4 text-center text-white">
-              <h3 className="text-lg font-bold">{video.name}</h3>
-              <p className="text-sm text-gray-300">{video.role}</p>
+              <h3 className="text-lg font-bold">{video.title}</h3>
+              <p className="text-sm text-gray-300">{video.source}</p>
             </div>
           </motion.div>
         </motion.div>
