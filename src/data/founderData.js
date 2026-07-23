@@ -24,16 +24,17 @@ export const teamMembers = [
   },
   {
     id: 2,
+    name: 'Faisal Edhi',
+    title: 'Chairman',
+    image: f3,
+    bio: ['Leads the foundation today, continuing his parents\' legacy by overseeing operations, expanding emergency services and ensuring the mission reaches every corner of the country.'],
+  },
+  {
+    id: 3,
     name: 'Bilquis Edhi',
     title: 'Co-Founder',
     image: f2,
     bio: ['Joined the mission as a nurse and went on to co-found the foundation, expanding its reach into maternal care, orphan welfare and countless rescue efforts across the country.'],
   },
-  {
-    id: 3,
-    name: 'Faisal Edhi',
-    title: 'Chairman',
-    image: f3,
-    bio: ['Leads the foundation today, continuing his parents\' legacy by overseeing operations, expanding emergency services and ensuring the mission reaches every corner of the country.'],
-  }
+  
 ]

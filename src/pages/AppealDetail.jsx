@@ -1,12 +1,17 @@
 import { useParams, Navigate } from 'react-router-dom'
-import { appeals } from '../data/appealsData.js'
+import { useAppeals } from '../hooks/useAppeals.js'
 import ServiceHero from '../components/sections/ServiceHero.jsx'
 import ServiceAbout from '../components/sections/ServiceAbout.jsx'
 import DonateCard from '../components/ui/DonateCard.jsx'
 import RelatedServices from '../components/sections/RelatedServices.jsx'
+import { sampleRandom } from '../utils/random.js'
 
 const AppealDetail = () => {
   const { slug } = useParams()
+  const { appeals, loading } = useAppeals()
+
+  if (loading) return null
+
   const appeal = appeals.find((a) => a.slug === slug)
 
   if (!appeal) {
@@ -15,9 +20,7 @@ const AppealDetail = () => {
 
   const { title, desc, image } = appeal
 
-  const relatedAppeals = appeals
-    .filter((a) => a.slug !== slug)
-    .slice(0, 3)
+  const relatedAppeals = sampleRandom(appeals.filter((a) => a.slug !== slug), 3)
 
   return (
     <>
@@ -29,7 +32,7 @@ const AppealDetail = () => {
           <DonateCard title={title} />
         </div>
 
-        <RelatedServices services={relatedAppeals} />
+        <RelatedServices services={relatedAppeals} basePath="/appeals" title="Other Appeals You Can Support" />
       </section>
     </>
   )

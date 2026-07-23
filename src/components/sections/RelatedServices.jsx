@@ -31,8 +31,7 @@ const RelatedServices = ({ services, basePath = '/services', title = 'Other Ways
         className="grid grid-cols-1 gap-6 sm:grid-cols-3"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        animate="visible"
       >
         {services.map((s) => (
           <motion.div key={s.id} variants={cardVariants}>

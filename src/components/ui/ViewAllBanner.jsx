@@ -9,7 +9,7 @@ const ViewAllBanner = ({ text, buttonLabel, linkTo = '#' }) => {
       </p>
       <a 
         href={linkTo}
-        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full whitespace-nowrap transition-colors"
+        className="flex items-center gap-2 bg-green-800 hover:bg-green-950 text-white font-semibold px-5 py-2.5 rounded-full whitespace-nowrap transition-colors"
       >
         {buttonLabel} <ArrowRight size={16} />
       </a>

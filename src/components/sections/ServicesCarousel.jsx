@@ -1,11 +1,15 @@
 import { useRef, useState, useEffect } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { services } from '../../data/servicesData.js'
+import { useServices } from '../../hooks/useServices.js'
 import ServiceCard from '../ui/ServiceCards.jsx'
+import ViewAllBanner from '../ui/ViewAllBanner.jsx'
 
 const CARDS_PER_VIEW_DESKTOP = 4
+const HOME_SERVICES_LIMIT = 8
 
 const ServicesCarousel = () => {
+  const { services: allServices, loading } = useServices()
+  const services = allServices.slice(0, HOME_SERVICES_LIMIT)
   const desktopScrollRef = useRef(null)
   const mobileScrollRef = useRef(null)
   const [activeCard, setActiveCard] = useState(0)
@@ -101,7 +105,9 @@ const ServicesCarousel = () => {
       if (mobileEl) mobileEl.removeEventListener('scroll', handleMobileScroll)
       if (desktopEl) desktopEl.removeEventListener('scroll', handleDesktopScroll)
     }
-  }, [])
+  }, [loading])
+
+  if (loading) return null
 
   return (
     <section className="w-full bg-white">
@@ -210,6 +216,16 @@ const ServicesCarousel = () => {
             ))}
           </div>
         )}
+
+        <ViewAllBanner
+          text={
+            <>
+              Explore every way we serve — from emergency care to <span className="font-semibold text-gray-900">everyday essentials</span>.
+            </>
+          }
+          buttonLabel="View All Services"
+          linkTo="/services"
+        />
       </div>
     </section>
   )

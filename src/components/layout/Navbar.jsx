@@ -3,15 +3,40 @@ import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
 import { navLinks } from '../../data/navLinks.js'
+import { useServices } from '../../hooks/useServices.js'
+import { useAppeals } from '../../hooks/useAppeals.js'
 import DropdownMenu from './DropdownMenu.jsx'
 import logo from '../../assets/icons/ef_logo.png'
+
+const NAV_SERVICES_LIMIT = 20
+const NAV_APPEALS_LIMIT = 4
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileScreen, setMobileScreen] = useState('main')
   const location = useLocation()
-  const activeMobileLink = navLinks.find((l) => l.label === mobileScreen)
+
+  const { services } = useServices()
+  const { appeals } = useAppeals()
+
+  const topServices = services.slice(0, NAV_SERVICES_LIMIT).map((s) => ({ label: s.title, slug: s.slug }))
+  const serviceColumns = [topServices.slice(0, 10), topServices.slice(10, 20)].filter((col) => col.length > 0)
+  const appealColumns = [appeals.slice(0, NAV_APPEALS_LIMIT).map((a) => ({ label: a.title, slug: a.slug }))]
+
+  // navLinks.js stays static for everything except Services/Appeals, whose
+  // dropdown + mobile menu columns come from the live catalog (top 20 / top 4).
+  const liveNavLinks = navLinks.map((link) => {
+    if (link.label === 'Our Services' && serviceColumns.length > 0) {
+      return { ...link, columns: serviceColumns }
+    }
+    if (link.label === 'Appeals' && appealColumns[0].length > 0) {
+      return { ...link, columns: appealColumns }
+    }
+    return link
+  })
+
+  const activeMobileLink = liveNavLinks.find((l) => l.label === mobileScreen)
 
   const closeMobileMenu = () => {
     setMobileOpen(false)
@@ -29,7 +54,7 @@ const Navbar = () => {
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => {
+          {liveNavLinks.map((link) => {
             const isActive = location.pathname === link.path
 
             return (
@@ -96,7 +121,7 @@ const Navbar = () => {
                 </div>
 
                 <ul className="flex flex-col px-6 py-4">
-                  {navLinks.map((link) => {
+                  {liveNavLinks.map((link) => {
                     const isActive = location.pathname === link.path
 
                     return (

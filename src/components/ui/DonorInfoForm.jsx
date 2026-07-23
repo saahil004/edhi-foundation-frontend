@@ -1,11 +1,14 @@
 import { Heart } from 'lucide-react'
+import { isValidPhoneNumber } from '../../utils/phone.js'
 
-const countryCodes = ['+92', '+1', '+44', '+91']
+const countryCodes = ['+1', '+92', '+44', '+91']
 
 const DonorInfoForm = ({ formData, onChange }) => {
   const handleChange = (field) => (e) => {
     onChange((prev) => ({ ...prev, [field]: e.target.value }))
   }
+
+  const phoneInvalid = formData.phone.trim() !== '' && !isValidPhoneNumber(formData.phone)
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
@@ -65,9 +68,14 @@ const DonorInfoForm = ({ formData, onChange }) => {
             type="tel"
             value={formData.phone}
             onChange={handleChange('phone')}
-            className="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-gray-400"
+            className={`flex-1 border rounded-lg px-4 py-3 text-gray-900 focus:outline-none ${
+              phoneInvalid ? 'border-red-400 focus:border-red-500' : 'border-gray-300 focus:border-gray-400'
+            }`}
           />
         </div>
+        {phoneInvalid && (
+          <p className="text-sm text-red-600 mt-2">Enter a valid phone number.</p>
+        )}
       </div>
 
       <div className="flex items-center gap-3">

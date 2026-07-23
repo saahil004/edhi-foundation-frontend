@@ -1,38 +1,39 @@
-// src/components/sections/MediaBanner.jsx
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { mediaBannerData } from "../../data/mediaData.js";
+import { motion } from 'framer-motion'
+import mediaBanner from '../../data/mediaBannerData.js'
 
-export default function MediaBanner() {
-  const bannerRef = useRef(null);
-
-  useEffect(() => {
-    gsap.fromTo(
-      bannerRef.current.querySelectorAll(".banner-anim"),
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }
-    );
-  }, []);
+const MediaBanner = () => {
+  const { image, heading, subtext } = mediaBanner
 
   return (
-    <section
-      ref={bannerRef}
-      className="relative h-[70vh] md:h-[85vh] flex items-center justify-center text-center overflow-hidden"
-    >
-      <img
-        src={mediaBannerData.image}
-        alt={mediaBannerData.title}
-        className="absolute inset-0 w-full h-full object-cover"
+    <section className="relative w-full h-[24rem] md:h-[28rem] overflow-hidden">
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${image})`, backgroundAttachment: 'fixed' }}
+        initial={{ scale: 1.15, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
       />
       <div className="absolute inset-0 bg-black/50" />
-      <div className="relative z-10 px-6">
-        <h1 className="banner-anim text-white text-4xl md:text-6xl font-bold mb-4">
-          {mediaBannerData.title}
-        </h1>
-        <p className="banner-anim text-white/90 text-lg md:text-xl max-w-2xl mx-auto">
-          {mediaBannerData.subtitle}
-        </p>
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        <motion.h1
+          className="mb-3 text-4xl font-bold text-green-50 md:text-5xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
+        >
+          {heading}
+        </motion.h1>
+        <motion.p
+          className="max-w-xl text-gray-200"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
+        >
+          {subtext}
+        </motion.p>
       </div>
     </section>
-  );
+  )
 }
+
+export default MediaBanner

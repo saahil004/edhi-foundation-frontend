@@ -112,9 +112,9 @@ const Hero = () => {
             <Link to='/donation' className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded transition-colors text-sm sm:text-base">
               Donate Now <HeartHandIcon style={{ width: 16, height: 16 }} />
             </Link>
-            <button className="flex items-center justify-center gap-2 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 font-semibold px-5 py-2.5 rounded transition-colors text-sm sm:text-base">
+            <Link to="/about#impact-stats" className="flex items-center justify-center gap-2 bg-white border border-gray-300 hover:border-gray-400 text-gray-800 font-semibold px-5 py-2.5 rounded transition-colors text-sm sm:text-base">
               Our Impact <ArrowRight size={16} />
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
 
@@ -144,12 +144,12 @@ const Hero = () => {
           </motion.p>
 
           <motion.div variants={item} className="flex flex-wrap items-center gap-4 mt-8">
-            <button className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded transition-colors">
+            <Link to="/donation" className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded transition-colors">
               Donate Now <HeartHandIcon style={{ width: 18, height: 18 }} />
-            </button>
-            <button className="flex items-center gap-2 border border-gray-300 hover:border-gray-400 text-gray-800 font-semibold px-6 py-3 rounded transition-colors">
+            </Link>
+            <Link to="/about#impact-stats" className="flex items-center gap-2 border border-gray-300 hover:border-gray-400 text-gray-800 font-semibold px-6 py-3 rounded transition-colors">
               Our Impact <ArrowRight size={18} />
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

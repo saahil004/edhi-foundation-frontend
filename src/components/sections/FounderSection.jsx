@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { founder, teamMembers } from '../../data/founderData'
 
 const FounderSection = () => {
@@ -84,9 +85,9 @@ const FounderSection = () => {
                   </p>
                 ))}
 
-                <button className="w-fit flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-2.5 rounded transition-colors">
+                <Link to="/about#our-story" className="w-fit flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-2.5 rounded transition-colors">
                   Read Full Story <ArrowRight size={16} />
-                </button>
+                </Link>
               </motion.div>
             </AnimatePresence>
           </motion.div>

@@ -33,11 +33,9 @@ const TopBar = () => {
 
       {/* Right: buttons */}
       <div className="flex items-center gap-3">
-        <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition-colors">
-          <Link to='/donation'>
+        <Link to="/donation" className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition-colors">
           DONATE NOW
-          </Link>
-        </button>
+        </Link>
         <button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors">
           INTERNATIONAL PARTNERS
         </button>

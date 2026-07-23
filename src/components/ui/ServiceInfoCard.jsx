@@ -83,7 +83,7 @@ const ServiceInfoCard = ({ slug, title, desc, image, icon }) => {
       {/* Icon circle — half above the card */}
       <motion.div
         animate={{
-          backgroundColor: isHovered ? '#dc2626' : '#f3f4f6',
+          backgroundColor: isHovered ? '#ffffff' : '#dc2626',
           scale: isHovered ? 1.08 : 1,
         }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
@@ -91,7 +91,7 @@ const ServiceInfoCard = ({ slug, title, desc, image, icon }) => {
       >
         <Icon
           className={`h-6 w-6 transition-colors duration-300 ${
-            isHovered ? 'text-white' : 'text-green-800'
+            isHovered ? 'text-red-600' : 'text-white'
           }`}
         />
       </motion.div>
@@ -114,8 +114,8 @@ const ServiceInfoCard = ({ slug, title, desc, image, icon }) => {
 
       <Link
         to={`/services/${slug}`}
-        className={`relative z-10 mt-6 inline-flex w-fit mx-auto items-center gap-2 border-t pt-4 text-sm font-semibold transition-colors duration-300 ${
-          isHovered ? 'border-white/30 text-white' : 'border-gray-100 text-green-950'
+        className={`relative z-10 mt-6 inline-flex w-fit mx-auto items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
+          isHovered ? 'bg-white text-green-950' : 'bg-green-800 text-white'
         }`}
       >
         Read More

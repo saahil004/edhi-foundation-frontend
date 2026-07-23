@@ -2,7 +2,9 @@ import servicedd from '../assets/images/servicedd.png'
 
 export const navLinks = [
   {
-    label: 'Home', path: '/', dropdown: true,
+    label: 'Home', path: '/', dropdown: false
+  },
+  { label: 'About Us', path: '/about', dropdown: true,
     columns: [
       [
         { label: 'Our Story', path: '/about#our-story' },
@@ -11,9 +13,8 @@ export const navLinks = [
         { label: 'Annual Reports', path: '/about#annual-reports' },
       ],
     ],
-    image: servicedd
-  },
-  { label: 'About Us', path: '/about' },
+    image: servicedd,
+   },
   {
     label: 'Our Services', path: '/services', dropdown: true, basePath: '/services',
     columns: [
@@ -62,9 +63,8 @@ export const navLinks = [
     image: servicedd,
   },
   {
-    label: 'Media', path: '/media', dropdown: true, columns: [['Gallery', 'Press', 'Videos']],
-    image: servicedd,
+    label: 'Media', path: '/media'
   },
-  { label: 'Get Involved', path: '/get-involved', dropdown: true, columns: [['Volunteer', 'Careers', 'Partnerships']] },
+  { label: 'Get Involved', path: '/get-involved'},
   { label: 'Contact Us', path: '/contact' },
 ]

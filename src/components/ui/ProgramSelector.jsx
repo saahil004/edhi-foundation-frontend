@@ -1,5 +1,5 @@
 const ProgramSelector = ({ programs = [], selectedProgram, onSelect }) => {
-  if (programs.length <= 1) {
+  if (programs.length === 0) {
     return null
   }
 

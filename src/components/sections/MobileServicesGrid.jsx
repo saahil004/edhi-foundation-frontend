@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { services } from '../../data/servicesData.js'
+import { useServices } from '../../hooks/useServices.js'
 import MobileServiceInfoCard from '../ui/MobileServiceInfoCard.jsx'
 
 const CARDS_PER_ROW = 3
@@ -25,7 +25,10 @@ const cardVariants = {
 }
 
 const MobileServicesGrid = () => {
+  const { services, loading } = useServices()
   const rows = chunk(services, CARDS_PER_ROW)
+
+  if (loading) return null
 
   return (
     <section className="px-6 py-20 md:px-12 lg:px-20 space-y-10 lg:hidden">

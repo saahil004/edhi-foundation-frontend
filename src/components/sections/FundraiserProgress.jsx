@@ -61,9 +61,9 @@ const FundraiserProgress = () => {
                 <Link to='/donation' className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded transition-colors">
                   Donate Now <Heart size={16} />
                 </Link>
-                <button className="flex items-center gap-2 border border-white/40 hover:border-white text-white font-semibold px-5 py-2.5 rounded transition-colors">
+                <Link to="/about#impact-stats" className="flex items-center gap-2 border border-white/40 hover:border-white text-white font-semibold px-5 py-2.5 rounded transition-colors">
                   View Our Impact <ArrowRight size={16} />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

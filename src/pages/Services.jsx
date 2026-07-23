@@ -1,5 +1,4 @@
 import React from "react";
-import { services } from "../data/servicesData.js"
 import ServiceBanner from "../components/sections/ServicePageBanner.jsx";
 import InfiniteMarquee from '../components/ui/InfiniteMarquee.jsx'
 import ServicesGrid from "../components/sections/ServicesGrid.jsx";
@@ -10,7 +9,6 @@ import ServicesFAQ from "../components/sections/ServicesFAQ.jsx";
 
 const Services = () => {
 
-    const servicedata = services
     const maruqueeItems = [
   'Hospital',
   'Children Services',

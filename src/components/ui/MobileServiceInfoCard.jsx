@@ -39,7 +39,7 @@ const MobileServiceInfoCard = ({ slug, title, desc, image, icon }) => {
           </div>
           <Link
             to={`/services/${slug}`}
-            className="inline-flex items-center gap-2 text-white font-semibold text-sm hover:gap-3 transition-all"
+            className="inline-flex items-center gap-2 bg-green-800 text-white font-semibold text-sm rounded-full px-4 py-2 hover:gap-3 transition-all"
           >
             Read More <ArrowUpRight size={16} />
           </Link>

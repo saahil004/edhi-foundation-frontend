@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import { Mail } from 'lucide-react'
@@ -27,6 +28,18 @@ const support = [
 ]
 
 const Footer = () => {
+  const [email, setEmail] = useState('')
+  const [subscribed, setSubscribed] = useState(false)
+
+  // TODO: no newsletter API exists yet — this just prevents the native
+  // form submit (which would full-page-reload this SPA) until a real
+  // subscribe endpoint is built.
+  const handleSubscribe = (e) => {
+    e.preventDefault()
+    setSubscribed(true)
+    setEmail('')
+  }
+
   return (
     <footer className="bg-black text-gray-300">
       {/* Newsletter bar */}
@@ -39,14 +52,17 @@ const Footer = () => {
             <p className="text-sm text-gray-400">Stay updated with our latest news, events and stories of compassion.</p>
           </div>
         </div>
-        <form className="flex w-full md:w-auto">
+        <form onSubmit={handleSubscribe} className="flex w-full md:w-auto">
           <input
             type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter Email Address"
             className="px-4 py-2 rounded-l-md text-black w-full md:w-72 focus:outline-none bg-white"
           />
           <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-r-md text-white font-semibold transition-colors">
-            Subscribe
+            {subscribed ? 'Subscribed!' : 'Subscribe'}
           </button>
         </form>
       </div>

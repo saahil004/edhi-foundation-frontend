@@ -1,36 +1,25 @@
-import { motion } from 'framer-motion'
-import { appeals } from '../../data/appealsData'
-import MobileAppealInfoCard from '../ui/MobileAppealInfoCard'
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-}
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
+import { useAppeals } from '../../hooks/useAppeals.js'
+import AppealCard from '../ui/AppealCard.jsx'
 
 const MobileAppealsGrid = () => {
+  const { appeals, loading } = useAppeals()
+
+  if (loading) return null
+
   return (
-    <motion.section
-      className="grid grid-cols-1 gap-6 px-6 py-20 md:px-12 lg:hidden"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
-    >
-      {appeals.map((appeal) => (
-        <motion.div key={appeal.id} variants={cardVariants}>
-          <MobileAppealInfoCard
-            slug={appeal.slug}
-            title={appeal.title}
-            desc={appeal.desc}
-            image={appeal.image}
-          />
-        </motion.div>
+    <section className="grid grid-cols-1 gap-6 px-6 py-20 md:px-12 lg:hidden">
+      {appeals.map((appeal, i) => (
+        <AppealCard
+          key={appeal.id}
+          slug={appeal.slug}
+          title={appeal.title}
+          desc={appeal.desc}
+          image={appeal.image}
+          delay={(i % 3) * 0.1}
+          className="h-72"
+        />
       ))}
-    </motion.section>
+    </section>
   )
 }
 

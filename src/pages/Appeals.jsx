@@ -1,4 +1,3 @@
-import { appeals } from "../data/appealsData.js"
 import AppealBanner from "../components/sections/AppealBanner.jsx"
 import InfiniteMarquee from '../components/ui/InfiniteMarquee.jsx'
 // import { appealsMarqueeItems } from "../data/appealsMarqueeData.js"

@@ -1,12 +1,18 @@
 import { useParams, Navigate } from 'react-router-dom'
-import { services, iconMap } from '../data/servicesData.js'
+import { iconMap } from '../data/servicesData.js'
+import { useServices } from '../hooks/useServices.js'
 import ServiceHero from '../components/sections/ServiceHero.jsx'
 import ServiceAbout from '../components/sections/ServiceAbout.jsx'
 import DonationProgressCard from '../components/ui/DonationProgressCard.jsx'
 import RelatedServices from '../components/sections/RelatedServices.jsx'
+import { sampleRandom } from '../utils/random.js'
 
 const ServiceDetail = () => {
   const { slug } = useParams()
+  const { services, loading } = useServices()
+
+  if (loading) return null
+
   const service = services.find((s) => s.slug === slug)
 
   if (!service) {
@@ -16,9 +22,7 @@ const ServiceDetail = () => {
   const { title, desc, image, icon, raised, goal } = service
   const Icon = iconMap[icon]
 
-  const relatedServices = services
-    .filter((s) => s.slug !== slug)
-    .slice(0, 3)
+  const relatedServices = sampleRandom(services.filter((s) => s.slug !== slug), 3)
 
   return (
     <>

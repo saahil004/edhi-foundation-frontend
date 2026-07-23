@@ -5,8 +5,9 @@ import InfiniteMarquee from "../components/ui/InfiniteMarquee.jsx";
 import MissionSection from "../components/sections/MissionSection.jsx";
 import WhatWeDoSection from "../components/sections/WhatWeDo.jsx";
 import OurCauses from "../components/sections/OurCauses.jsx";
-import TeamSection from "../components/sections/TeamSection.jsx";
+// import TeamSection from "../components/sections/TeamSection.jsx";
 import FAQ from "../components/sections/FAQ.jsx";
+import FounderSection from "../components/sections/FounderSection.jsx";
 
 const AboutUs = () => {
   return (
@@ -26,12 +27,13 @@ const AboutUs = () => {
       <WhatWeDoSection />
       </div>
       <OurCauses />
-      <TeamSection />
+      
+      <FounderSection />
       <FAQ />
 
-      {/* No section currently exists for "Impact" (id="impact-stats")
-          or "Annual Reports" (id="annual-reports") — add StatsBar or
-          a dedicated section here once built, wrapped with the matching id */}
+      {/* No section exists yet for "Annual Reports" (id="annual-reports"),
+          linked from the Home nav dropdown — add one here once there's
+          real annual report content to show. */}
     </main>
   )
 }
