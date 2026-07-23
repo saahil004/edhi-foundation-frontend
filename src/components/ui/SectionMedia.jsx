@@ -5,13 +5,14 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 const VISIBLE_COUNT = 3
 const SWIPE_THRESHOLD = 50
 
-const SectionMedia = ({ item, index }) => {
+const SectionMedia = ({ item }) => {
     const ref = useRef(null)
     const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
     const y = useTransform(scrollYProgress, [0, 1], [-30, 30])
 
     const gallery = item.gallery ?? []
     const [lightboxImage, setLightboxImage] = useState(null)
+    const [expanded, setExpanded] = useState(false)
 
     // desktop scroll gallery
     const scrollRef = useRef(null)
@@ -58,23 +59,23 @@ const SectionMedia = ({ item, index }) => {
         <div ref={ref} className="space-y-8">
             {/* section heading */}
             <motion.h2
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.5 }}
-    transition={{ duration: 0.6, ease: 'easeOut' }}
-    className="relative mx-auto max-w-4xl text-center font-serif text-4xl font-bold leading-[1.1] tracking-tight text-gray-900 sm:text-5xl lg:text-6xl xl:text-7xl"
-    style={{ letterSpacing: '-0.03em' }}
->
-    {item.title}
-    <motion.span
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
-        className="mx-auto mt-5 block h-[3px] w-20 origin-center rounded-full sm:w-24"
-        style={{ backgroundColor: item.accent }}
-    />
-</motion.h2>
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                className="relative mx-auto max-w-4xl text-center font-serif text-4xl font-bold leading-[1.1] tracking-tight text-gray-900 sm:text-5xl lg:text-6xl xl:text-7xl"
+                style={{ letterSpacing: '-0.03em' }}
+            >
+                {item.title}
+                <motion.span
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
+                    className="mx-auto mt-5 block h-[3px] w-20 origin-center rounded-full sm:w-24"
+                    style={{ backgroundColor: item.accent }}
+                />
+            </motion.h2>
 
             {/* content row */}
             <div
@@ -106,9 +107,6 @@ const SectionMedia = ({ item, index }) => {
                         item.reverse ? 'lg:-mr-10' : 'lg:-ml-10'
                     } mx-4 lg:mx-0`}
                 >
-                    <span className="mb-2 block text-6xl font-black opacity-10" style={{ color: item.accent }}>
-                        {String(index + 1).padStart(2, '0')}
-                    </span>
                     <span
                         className="mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-semibold"
                         style={{ color: item.accent, borderColor: item.accent }}
@@ -116,7 +114,18 @@ const SectionMedia = ({ item, index }) => {
                         <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.accent }} />
                         {item.title}
                     </span>
-                    <p className="leading-relaxed text-gray-600">{item.description}</p>
+
+                    <p className={`leading-relaxed text-gray-600 ${expanded ? '' : 'line-clamp-5'}`}>
+                        {item.description}
+                    </p>
+
+                    <button
+                        onClick={() => setExpanded((v) => !v)}
+                        className="mt-3 text-sm font-semibold transition-opacity hover:opacity-70"
+                        style={{ color: item.accent }}
+                    >
+                        {expanded ? 'Show less' : 'Read more'}
+                    </button>
                 </motion.div>
             </div>
 
