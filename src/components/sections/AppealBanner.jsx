@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import appealBanner from '../../data/appealBannerData.js'
+import BannerHeading from '../ui/BannerHeading.jsx'
 
 const AppealBanner = () => {
   const { image, heading, subtext } = appealBanner
@@ -15,16 +16,9 @@ const AppealBanner = () => {
       />
       <div className="absolute inset-0 bg-black/50" />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <motion.h1
-          className="mb-3 text-4xl font-bold text-green-50 md:text-5xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
-        >
-          {heading}
-        </motion.h1>
+        <BannerHeading>{heading}</BannerHeading>
         <motion.p
-          className="max-w-xl text-gray-200"
+          className="max-w-xl text-gray-200 mt-5"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}

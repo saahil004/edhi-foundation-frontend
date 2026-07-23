@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
-import aboutBanner from '../../data/serviceBannerData.js'
+import serviceBanner from '../../data/serviceBannerData.js'
+import BannerHeading from '../ui/BannerHeading.jsx'
 
 const ServiceBanner = () => {
-  const { image, heading, subtext } = aboutBanner
+  const { image, heading, subtext } = serviceBanner
 
   return (
     <section className="relative w-full h-[24rem] md:h-[28rem] overflow-hidden">
@@ -20,18 +21,11 @@ const ServiceBanner = () => {
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-        <motion.h1
-          className="text-4xl md:text-5xl font-bold text-green-50 mb-3 opacity-40"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 0.4, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
-        >
-          {heading}
-        </motion.h1>
+        <BannerHeading>{heading}</BannerHeading>
         <motion.p
-          className="text-gray-200 max-w-xl opacity-45"
+          className="text-gray-200 max-w-xl mt-5"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 0.45, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
         >
           {subtext}

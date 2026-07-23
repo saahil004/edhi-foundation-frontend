@@ -7,8 +7,8 @@ import marriageImage from '../assets/images/collage2.jpg'
 import hospitalImage from '../assets/images/hospital-donation.png'
 
 export const mediaBannerData = {
-  title: 'Our Media Gallery',
-  subtitle:
+  heading: 'Our Media Gallery',
+  subtext:
     'A visual record of the drives, relief efforts, and moments that define our work across the year.',
   image: bannerImage,
 }

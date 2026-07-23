@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import donationBanner from '../../data/donationBannerData.js'
 import DonationIcon from '../../assets/icons/DonationIcon.jsx'
+import BannerHeading from '../ui/BannerHeading.jsx'
 
 const DonationBanner = () => {
   const { image, heading, subtext } = donationBanner
@@ -29,24 +30,9 @@ const DonationBanner = () => {
         >
           <DonationIcon />
         </motion.div>
-        <motion.h1
-          className="text-3xl font-bold text-white mb-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45, ease: 'easeOut' }}
-        >
-          {heading}
-        </motion.h1>
-        <motion.svg
-          width="80" height="6" viewBox="0 0 80 6" className="mb-3"
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6, ease: 'easeOut' }}
-        >
-          <line x1="0" y1="3" x2="80" y2="3" stroke="#ef4444" strokeWidth="4" strokeLinecap="round" />
-        </motion.svg>
+        <BannerHeading delay={0.45}>{heading}</BannerHeading>
         <motion.p
-          className="text-gray-200 text-sm"
+          className="text-gray-200 text-sm mt-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.7, ease: 'easeOut' }}
@@ -64,24 +50,9 @@ const DonationBanner = () => {
         >
           <DonationIcon />
         </motion.div>
-        <motion.h1
-          className="text-5xl font-bold text-gray-900 mb-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45, ease: 'easeOut' }}
-        >
-          {heading}
-        </motion.h1>
-        <motion.svg
-          width="80" height="6" viewBox="0 0 80 6" className="mb-4"
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6, ease: 'easeOut' }}
-        >
-          <line x1="0" y1="3" x2="80" y2="3" stroke="#ef4444" strokeWidth="4" strokeLinecap="round" />
-        </motion.svg>
+        <BannerHeading dark delay={0.45}>{heading}</BannerHeading>
         <motion.p
-          className="text-gray-500 text-2xl"
+          className="text-gray-500 text-2xl mt-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.7, ease: 'easeOut' }}
