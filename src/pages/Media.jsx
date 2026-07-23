@@ -26,8 +26,8 @@ const Media = () => {
         <InfiniteMarquee />
       </div>
       <MediaHighlights />
-      <MobileEventGallery/>
-      <EventGallery />
+      {/* <MobileEventGallery/>
+      <EventGallery /> */}
     </main>
   )
 }

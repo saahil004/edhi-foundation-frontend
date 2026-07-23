@@ -13,61 +13,80 @@ export const mediaBannerData = {
   image: bannerImage,
 }
 
+export const ramadanSection = {
+  id: 'ramadan',
+  title: 'Ramadan Drive',
+  description:
+    'Every Ramadan, we deliver food packages and iftar meals to thousands of families across the country, ensuring no household goes without during the holy month.',
+  image: ramadanImage,
+  accent: '#0f766e',
+  reverse: false,
+  gallery: [ramadanImage, eidImage, winterImage, hospitalImage, muharramImage, marriageImage], // TODO: replace with real Ramadan-specific photos
+}
+
+export const eidSection = {
+  id: 'eid',
+  title: 'Eid Celebrations',
+  description:
+    'From new clothes to shared meals, our Eid drive brings joy to orphanages, shelters, and low-income families during the celebration.',
+  image: eidImage,
+  accent: '#b45309',
+  reverse: true,
+  gallery: [eidImage, marriageImage, ramadanImage, winterImage, hospitalImage], // TODO: replace with real Eid-specific photos
+}
+
+export const muharramSection = {
+  id: 'muharram',
+  title: 'Muharram Relief',
+  description:
+    'During Muharram, our teams organize sabeels, medical camps, and security support at majalis and processions across major cities.',
+  image: muharramImage,
+  accent: '#374151',
+  reverse: false,
+  gallery: [muharramImage, hospitalImage, winterImage, ramadanImage, eidImage], // TODO: replace with real Muharram-specific photos
+}
+
+export const winterSection = {
+  id: 'winter',
+  title: 'Winter Drive',
+  description:
+    'Blankets, warm clothing, and heaters are distributed to vulnerable communities in the coldest regions of the country each winter.',
+  image: winterImage,
+  accent: '#1d4ed8',
+  reverse: true,
+  gallery: [winterImage, muharramImage, ramadanImage, marriageImage, hospitalImage, eidImage], // TODO: replace with real Winter-specific photos
+}
+
+export const marriageSection = {
+  id: 'marriage',
+  title: 'Mass Marriage Program',
+  description:
+    'We facilitate dignified mass wedding ceremonies for couples who cannot otherwise afford one, easing a significant financial burden for families.',
+  image: marriageImage,
+  accent: '#be185d',
+  reverse: false,
+  gallery: [marriageImage, eidImage, hospitalImage, ramadanImage, winterImage], // TODO: replace with real Marriage-specific photos
+}
+
+export const hospitalSection = {
+  id: 'hospital',
+  title: 'Edhi Hospitals',
+  description:
+    'Our network of hospitals and free dispensaries provides emergency care, maternity services, and free medicine to underserved communities.',
+  image: hospitalImage,
+  accent: '#047857',
+  reverse: true,
+  gallery: [hospitalImage, muharramImage, eidImage, marriageImage, ramadanImage, winterImage], // TODO: replace with real Hospital-specific photos
+}
+
+// kept for backward compatibility if anything else still imports the array form
 export const mediaSections = [
-  {
-    id: 'ramadan',
-    title: 'Ramadan Drive',
-    description:
-      'Every Ramadan, we deliver food packages and iftar meals to thousands of families across the country, ensuring no household goes without during the holy month.',
-    image: ramadanImage,
-    accent: '#0f766e',
-    reverse: false,
-  },
-  {
-    id: 'eid',
-    title: 'Eid Celebrations',
-    description:
-      'From new clothes to shared meals, our Eid drive brings joy to orphanages, shelters, and low-income families during the celebration.',
-    image: eidImage,
-    accent: '#b45309',
-    reverse: true,
-  },
-  {
-    id: 'muharram',
-    title: 'Muharram Relief',
-    description:
-      'During Muharram, our teams organize sabeels, medical camps, and security support at majalis and processions across major cities.',
-    image: muharramImage,
-    accent: '#374151',
-    reverse: false,
-  },
-  {
-    id: 'winter',
-    title: 'Winter Drive',
-    description:
-      'Blankets, warm clothing, and heaters are distributed to vulnerable communities in the coldest regions of the country each winter.',
-    image: winterImage,
-    accent: '#1d4ed8',
-    reverse: true,
-  },
-  {
-    id: 'marriage',
-    title: 'Mass Marriage Program',
-    description:
-      'We facilitate dignified mass wedding ceremonies for couples who cannot otherwise afford one, easing a significant financial burden for families.',
-    image: marriageImage,
-    accent: '#be185d',
-    reverse: false,
-  },
-  {
-    id: 'hospital',
-    title: 'Edhi Hospitals',
-    description:
-      'Our network of hospitals and free dispensaries provides emergency care, maternity services, and free medicine to underserved communities.',
-    image: hospitalImage,
-    accent: '#047857',
-    reverse: true,
-  },
+  ramadanSection,
+  eidSection,
+  muharramSection,
+  winterSection,
+  marriageSection,
+  hospitalSection,
 ]
 
 export const galleryImages = [
