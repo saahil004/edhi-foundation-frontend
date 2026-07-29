@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Menu, X, User, LogOut } from 'lucide-react'
 import { navLinks } from '../../data/navLinks.js'
 import { useServices } from '../../hooks/useServices.js'
 import { useAppeals } from '../../hooks/useAppeals.js'
+import { useAuth } from '../../context/AuthContext.jsx'
 import DropdownMenu from './DropdownMenu.jsx'
+import ConfirmDialog from '../ui/ConfirmDialog.jsx'
 import logo from '../../assets/icons/ef_logo.png'
 
 const NAV_SERVICES_LIMIT = 20
@@ -15,7 +17,9 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileScreen, setMobileScreen] = useState('main')
+  const [confirmingLogout, setConfirmingLogout] = useState(false)
   const location = useLocation()
+  const { user, logout } = useAuth()
 
   const { services } = useServices()
   const { appeals } = useAppeals()
@@ -36,6 +40,11 @@ const Navbar = () => {
     return link
   })
 
+  // A plain, always-visible nav item rather than a special conditional
+  // button — logged-out visitors land on /login instead of bouncing off
+  // PaymentHistory's own redirect.
+  const navLinksWithAccount = [...liveNavLinks, { label: 'My Donations', path: user ? '/payment-history' : '/login' }]
+
   const activeMobileLink = liveNavLinks.find((l) => l.label === mobileScreen)
 
   const closeMobileMenu = () => {
@@ -54,7 +63,7 @@ const Navbar = () => {
         </Link>
 
         <ul className="hidden lg:flex items-center gap-8">
-          {liveNavLinks.map((link) => {
+          {navLinksWithAccount.map((link) => {
             const isActive = location.pathname === link.path
 
             return (
@@ -121,7 +130,7 @@ const Navbar = () => {
                 </div>
 
                 <ul className="flex flex-col px-6 py-4">
-                  {liveNavLinks.map((link) => {
+                  {navLinksWithAccount.map((link) => {
                     const isActive = location.pathname === link.path
 
                     return (
@@ -155,9 +164,24 @@ const Navbar = () => {
                     >
                       DONATE NOW
                     </Link>
-                    <button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors">
-                      INTERNATIONAL PARTNERS
-                    </button>
+                    {user ? (
+                      <button
+                        onClick={() => setConfirmingLogout(true)}
+                        className="flex items-center justify-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors"
+                      >
+                        <LogOut size={16} />
+                        Log out ({user.name.split(' ')[0]})
+                      </button>
+                    ) : (
+                      <Link
+                        to="/login"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors"
+                      >
+                        <User size={16} />
+                        Login
+                      </Link>
+                    )}
                   </li>
                 </ul>
 
@@ -231,6 +255,19 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <ConfirmDialog
+        open={confirmingLogout}
+        title="Log out?"
+        message="Are you sure you want to log out of your account?"
+        confirmLabel="Log out"
+        onConfirm={() => {
+          setConfirmingLogout(false)
+          logout()
+          closeMobileMenu()
+        }}
+        onCancel={() => setConfirmingLogout(false)}
+      />
     </nav>
   )
 }

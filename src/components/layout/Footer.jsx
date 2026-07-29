@@ -41,7 +41,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-black text-gray-300">
+    <footer className="relative z-0 bg-black text-gray-300">
       {/* Newsletter bar */}
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-gray-800">
         <Mail className="md:hidden flex text-red-600 shrink-0" size={24} />

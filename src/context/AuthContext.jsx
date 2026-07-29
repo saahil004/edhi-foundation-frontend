@@ -18,7 +18,13 @@ export function AuthProvider({ children }) {
     // login/register manually wrap their own response, so they don't.
     apiFetch('/me')
       .then((res) => setUser(res.data))
-      .catch(() => saveToken(null))
+      .catch((err) => {
+        // Only a genuine "this token is invalid" response should log the
+        // donor/admin out — a transient network error or rate limit isn't
+        // proof the session is bad, and clearing the token here would force
+        // a real re-login for no reason.
+        if (err.status === 401) saveToken(null)
+      })
       .finally(() => setLoading(false))
   }, [])
 

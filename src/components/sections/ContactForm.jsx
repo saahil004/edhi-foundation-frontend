@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Send } from 'lucide-react'
 import contactImg from '../../assets/images/contact-form.png'
+import { apiFetch } from '../../lib/api.js'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -21,23 +22,22 @@ const ContactForm = () => {
     e.preventDefault()
     setStatus('submitting')
 
-    // Later: POST to your Laravel endpoint, e.g.:
-    // try {
-    //   const res = await fetch('http://127.0.0.1:8000/api/questions', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(formData),
-    //   })
-    //   if (!res.ok) throw new Error('Failed to submit')
-    //   setStatus('success')
-    //   setFormData({ firstName: '', lastName: '', phone: '', email: '', message: '' })
-    // } catch {
-    //   setStatus('error')
-    // }
-
-    // Placeholder until backend is ready:
-    setTimeout(() => setStatus('success'), 800)
-    setFormData({ firstName: '', lastName: '', phone: '', email: '', message: '' })
+    try {
+      await apiFetch('/contact-messages', {
+        method: 'POST',
+        body: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        },
+      })
+      setStatus('success')
+      setFormData({ firstName: '', lastName: '', phone: '', email: '', message: '' })
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (

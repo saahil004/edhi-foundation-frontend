@@ -1,8 +1,14 @@
-import { Mail, Phone } from 'lucide-react'
+import { useState } from 'react'
+import { Mail, Phone, User, LogOut } from 'lucide-react'
 import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext.jsx'
+import ConfirmDialog from '../ui/ConfirmDialog.jsx'
 
 const TopBar = () => {
+  const { user, logout } = useAuth()
+  const [confirmingLogout, setConfirmingLogout] = useState(false)
+
   return (
     <div className="hidden lg:fixed lg:flex lg:top-0 lg:left-0 lg:w-full lg:z-50 bg-white text-sm items-center justify-between border-b border-gray-200 px-6 py-2">
       {/* Left: tagline */}
@@ -36,10 +42,36 @@ const TopBar = () => {
         <Link to="/donation" className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition-colors">
           DONATE NOW
         </Link>
-        <button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors">
-          INTERNATIONAL PARTNERS
-        </button>
+        {user ? (
+          <button
+            onClick={() => setConfirmingLogout(true)}
+            className="flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors"
+          >
+            <LogOut size={14} />
+            Log out ({user.name.split(' ')[0]})
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            className="flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2 rounded-md transition-colors"
+          >
+            <User size={14} />
+            Login
+          </Link>
+        )}
       </div>
+
+      <ConfirmDialog
+        open={confirmingLogout}
+        title="Log out?"
+        message="Are you sure you want to log out of your account?"
+        confirmLabel="Log out"
+        onConfirm={() => {
+          setConfirmingLogout(false)
+          logout()
+        }}
+        onCancel={() => setConfirmingLogout(false)}
+      />
     </div>
   )
 }

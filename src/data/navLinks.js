@@ -65,6 +65,6 @@ export const navLinks = [
   {
     label: 'Media', path: '/media'
   },
-  { label: 'Get Involved', path: '/get-involved'},
+  { label: 'Edhi Network', path: '/edhi-network'},
   { label: 'Contact Us', path: '/contact' },
 ]

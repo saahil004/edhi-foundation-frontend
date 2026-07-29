@@ -103,16 +103,17 @@ const AdminAppeals = () => {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold text-gray-900">Appeals</h1>
-
       {error && (
         <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl p-6 space-y-4">
-        <h2 className="font-bold text-gray-900">{editingId ? 'Edit Appeal' : 'Add Appeal'}</h2>
+      <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 space-y-4">
+        <h2 className="flex items-center gap-2 font-bold text-gray-900">
+          <span className="h-2 w-2 rounded-full bg-red-600" />
+          {editingId ? 'Edit Appeal' : 'Add Appeal'}
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -189,7 +190,7 @@ const AdminAppeals = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-bold px-6 py-2.5 rounded-lg"
+            className="bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-bold px-6 py-2.5 rounded-lg transition-colors"
           >
             {submitting ? 'Saving...' : editingId ? 'Update Appeal' : 'Add Appeal'}
           </button>
@@ -197,7 +198,7 @@ const AdminAppeals = () => {
             <button
               type="button"
               onClick={resetForm}
-              className="border border-gray-300 text-gray-700 font-bold px-6 py-2.5 rounded-lg"
+              className="border border-gray-300 text-gray-700 font-bold px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>
@@ -205,12 +206,12 @@ const AdminAppeals = () => {
         </div>
       </form>
 
-      <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
         {loading ? (
           <p className="p-6 text-gray-500">Loading...</p>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-gray-500">
+            <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
               <tr>
                 <th className="px-4 py-3">Image</th>
                 <th className="px-4 py-3">Title</th>
@@ -220,25 +221,29 @@ const AdminAppeals = () => {
             </thead>
             <tbody>
               {appeals.map((appeal) => (
-                <tr key={appeal.id} className="border-t border-gray-100">
+                <tr key={appeal.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3">
                     {appeal.img ? (
-                      <img src={appeal.img} alt="" className="w-12 h-12 rounded object-cover" />
+                      <img src={appeal.img} alt="" className="w-12 h-12 rounded-lg object-cover border border-gray-200" />
                     ) : (
-                      <div className="w-12 h-12 rounded bg-gray-100" />
+                      <div className="w-12 h-12 rounded-lg bg-gray-100" />
                     )}
                   </td>
                   <td className="px-4 py-3 font-medium text-gray-900">{appeal.title}</td>
                   <td className="px-4 py-3">
-                    <span className={appeal.is_active ? 'text-green-700' : 'text-gray-400'}>
-                      {appeal.is_active ? 'Yes' : 'No'}
+                    <span
+                      className={`inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                        appeal.is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-500'
+                      }`}
+                    >
+                      {appeal.is_active ? 'Active' : 'Inactive'}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right space-x-3">
-                    <button onClick={() => startEdit(appeal)} className="text-green-800 font-semibold">
+                    <button onClick={() => startEdit(appeal)} className="text-green-800 font-semibold hover:text-green-900">
                       Edit
                     </button>
-                    <button onClick={() => handleDelete(appeal)} className="text-red-600 font-semibold">
+                    <button onClick={() => handleDelete(appeal)} className="text-red-600 font-semibold hover:text-red-700">
                       Delete
                     </button>
                   </td>

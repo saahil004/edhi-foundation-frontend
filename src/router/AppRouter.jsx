@@ -10,14 +10,20 @@ import ServiceDetail from '../pages/ServiceDetail.jsx'
 import Appeals from '../pages/Appeals.jsx'
 import AppealDetail from '../pages/AppealDetail.jsx'
 import ComingSoon from '../pages/ComingSoon.jsx'
+import Login from '../pages/Login.jsx'
+import ForgotPassword from '../pages/ForgotPassword.jsx'
+import ResetPassword from '../pages/ResetPassword.jsx'
+import PaymentHistory from '../pages/PaymentHistory.jsx'
 import AdminLogin from '../pages/admin/AdminLogin.jsx'
 import AdminRoute from '../components/admin/AdminRoute.jsx'
 import AdminLayout from '../components/admin/AdminLayout.jsx'
+import AdminDashboard from '../pages/admin/AdminDashboard.jsx'
 import AdminServices from '../pages/admin/AdminServices.jsx'
 import AdminAppeals from '../pages/admin/AdminAppeals.jsx'
 import AdminPrograms from '../pages/admin/AdminPrograms.jsx'
 import AdminPriceOptions from '../pages/admin/AdminPriceOptions.jsx'
 import AdminDonations from '../pages/admin/AdminDonations.jsx'
+import AdminContactMessages from '../pages/admin/AdminContactMessages.jsx'
 import AdminSettings from '../pages/admin/AdminSettings.jsx'
 
 const router = createBrowserRouter([
@@ -30,6 +36,10 @@ const router = createBrowserRouter([
       { path: 'services', element: <Services /> },
       { path: 'contact', element: <ContactUs /> },
       { path: 'donation', element: <Donation /> },
+      { path: 'login', element: <Login /> },
+      { path: 'forgot-password', element: <ForgotPassword /> },
+      { path: 'reset-password', element: <ResetPassword /> },
+      { path: 'payment-history', element: <PaymentHistory /> },
       { path: 'media', element: <Media /> },
       { path: 'services/:slug', element: <ServiceDetail /> },
       { path: 'appeals', element: <Appeals /> },
@@ -40,6 +50,7 @@ const router = createBrowserRouter([
       { path: 'privacy', element: <ComingSoon title="Privacy Policy" /> },
       { path: 'donation-policy', element: <ComingSoon title="Donation Policy" /> },
       { path: 'disclaimer', element: <ComingSoon title="Disclaimer" /> },
+      { path: 'edhi-network', element: <ComingSoon title="Edhi Network" /> },
     ],
   },
   { path: 'admin/login', element: <AdminLogin /> },
@@ -50,12 +61,14 @@ const router = createBrowserRouter([
       {
         element: <AdminLayout />,
         children: [
-          { index: true, element: <Navigate to="services" replace /> },
+          { index: true, element: <Navigate to="dashboard" replace /> },
+          { path: 'dashboard', element: <AdminDashboard /> },
           { path: 'services', element: <AdminServices /> },
           { path: 'appeals', element: <AdminAppeals /> },
           { path: 'programs', element: <AdminPrograms /> },
           { path: 'price-options', element: <AdminPriceOptions /> },
           { path: 'donations', element: <AdminDonations /> },
+          { path: 'contact-messages', element: <AdminContactMessages /> },
           { path: 'settings', element: <AdminSettings /> },
         ],
       },

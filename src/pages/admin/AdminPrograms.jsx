@@ -110,16 +110,17 @@ const AdminPrograms = () => {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold text-gray-900">Programs</h1>
-
       {error && (
         <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl p-6 space-y-4">
-        <h2 className="font-bold text-gray-900">{editingId ? 'Edit Program' : 'Add Program'}</h2>
+      <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 space-y-4">
+        <h2 className="flex items-center gap-2 font-bold text-gray-900">
+          <span className="h-2 w-2 rounded-full bg-red-600" />
+          {editingId ? 'Edit Program' : 'Add Program'}
+        </h2>
 
         <div>
           <label className="block text-sm font-semibold text-gray-800 mb-1">Name *</label>
@@ -179,7 +180,7 @@ const AdminPrograms = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-bold px-6 py-2.5 rounded-lg"
+            className="bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white font-bold px-6 py-2.5 rounded-lg transition-colors"
           >
             {submitting ? 'Saving...' : editingId ? 'Update Program' : 'Add Program'}
           </button>
@@ -187,7 +188,7 @@ const AdminPrograms = () => {
             <button
               type="button"
               onClick={resetForm}
-              className="border border-gray-300 text-gray-700 font-bold px-6 py-2.5 rounded-lg"
+              className="border border-gray-300 text-gray-700 font-bold px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>
@@ -195,12 +196,12 @@ const AdminPrograms = () => {
         </div>
       </form>
 
-      <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
         {loading ? (
           <p className="p-6 text-gray-500">Loading...</p>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-gray-500">
+            <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
               <tr>
                 <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Belongs to</th>
@@ -210,18 +211,26 @@ const AdminPrograms = () => {
             </thead>
             <tbody>
               {programs.map((program) => (
-                <tr key={program.id} className="border-t border-gray-100">
+                <tr key={program.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3 font-medium text-gray-900">{program.name}</td>
                   <td className="px-4 py-3">
                     {parentName(program)}{' '}
                     <span className="text-xs text-gray-400">({program.service_id ? 'service' : 'appeal'})</span>
                   </td>
-                  <td className="px-4 py-3">{program.allow_optional_price ? 'Yes' : 'No'}</td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                        program.allow_optional_price ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-500'
+                      }`}
+                    >
+                      {program.allow_optional_price ? 'Yes' : 'No'}
+                    </span>
+                  </td>
                   <td className="px-4 py-3 text-right space-x-3">
-                    <button onClick={() => startEdit(program)} className="text-green-800 font-semibold">
+                    <button onClick={() => startEdit(program)} className="text-green-800 font-semibold hover:text-green-900">
                       Edit
                     </button>
-                    <button onClick={() => handleDelete(program)} className="text-red-600 font-semibold">
+                    <button onClick={() => handleDelete(program)} className="text-red-600 font-semibold hover:text-red-700">
                       Delete
                     </button>
                   </td>

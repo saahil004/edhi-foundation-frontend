@@ -78,6 +78,54 @@ const DonorInfoForm = ({ formData, onChange }) => {
         )}
       </div>
 
+      {/* Optional — none of these are needed to process the payment, so
+          asking for them isn't worth adding checkout friction over. */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div>
+          <label className="block text-sm font-semibold text-gray-800 mb-2">Gender</label>
+          <select
+            value={formData.gender}
+            onChange={handleChange('gender')}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-400"
+          >
+            <option value="">Prefer not to say</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-800 mb-2">City</label>
+          <input
+            type="text"
+            value={formData.city}
+            onChange={handleChange('city')}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-400"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-800 mb-2">Province / State</label>
+          <input
+            type="text"
+            value={formData.province}
+            onChange={handleChange('province')}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 font-medium text-gray-900 focus:outline-none focus:border-gray-400"
+          />
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <label className="block text-sm font-semibold text-gray-800 mb-2">Address</label>
+        <input
+          type="text"
+          value={formData.address}
+          onChange={handleChange('address')}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-gray-400"
+        />
+      </div>
+
       <div className="flex items-center gap-3">
         <div className="flex-1 h-px bg-red-500" />
         <Heart className="text-red-600" fill="#dc2626" size={20} />

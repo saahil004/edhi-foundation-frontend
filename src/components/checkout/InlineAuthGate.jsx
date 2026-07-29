@@ -111,6 +111,18 @@ const InlineAuthGate = ({ name, email, onAuthenticated, optional = false }) => {
         )}
 
         {mode === 'register' && (
+          <div className="rounded-lg bg-gray-50 border border-gray-200 px-4 py-3 text-sm">
+            <p className="text-gray-500">Registering as</p>
+            <p className="font-semibold text-gray-900">
+              {name || <span className="text-red-600 font-normal">Enter your name above first</span>}
+            </p>
+            <p className="text-gray-700">
+              {email || <span className="text-red-600">Enter your email above first</span>}
+            </p>
+          </div>
+        )}
+
+        {mode === 'register' && (
           <div>
             <label className="block text-sm font-semibold text-gray-800 mb-1">Country *</label>
             <input

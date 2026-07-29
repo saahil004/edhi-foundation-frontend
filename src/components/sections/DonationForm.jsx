@@ -50,11 +50,16 @@ const DonationForm = () => {
     email: '',
     countryCode: '+1',
     phone: '',
+    gender: '',
+    city: '',
+    province: '',
+    address: '',
   })
   const [consentGiven, setConsentGiven] = useState(false)
   const [clientSecret, setClientSecret] = useState(null)
   const [creatingCheckout, setCreatingCheckout] = useState(false)
   const [checkoutError, setCheckoutError] = useState('')
+  const [paymentReference, setPaymentReference] = useState(null)
 
   const currentService = services.find((s) => s.id === selectedService)
   const currentProgram =
@@ -191,6 +196,10 @@ const DonationForm = () => {
       donor_name: `${formData.firstName} ${formData.lastName}`.trim(),
       donor_email: formData.email,
       donor_phone: `${formData.countryCode}${formData.phone.replace(/\D/g, '')}`,
+      ...(formData.gender ? { donor_gender: formData.gender } : {}),
+      ...(formData.city ? { donor_city: formData.city } : {}),
+      ...(formData.province ? { donor_province: formData.province } : {}),
+      ...(formData.address ? { donor_address: formData.address } : {}),
     }
 
     try {
@@ -203,7 +212,10 @@ const DonationForm = () => {
     }
   }
 
-  const handlePaymentSuccess = () => goToStep(4)
+  const handlePaymentSuccess = (paymentIntent) => {
+    setPaymentReference(paymentIntent?.id ?? null)
+    goToStep(4)
+  }
   const handleBackFromPayment = () => setClientSecret(null)
 
   return (
@@ -262,7 +274,10 @@ const DonationForm = () => {
             />
           </motion.div>
 
-          <motion.div variants={itemVariants} className="flex justify-end">
+          <motion.div variants={itemVariants} className="flex flex-col items-end gap-2">
+            {!isStep1Valid && !servicesLoading && !serviceDetailLoading && finalAmount <= 0 && (
+              <p className="text-sm text-red-600">Please select or enter an amount to continue.</p>
+            )}
             <button
               onClick={handleNext}
               disabled={!isStep1Valid}
@@ -413,6 +428,9 @@ const DonationForm = () => {
             amount={finalAmount}
             frequency={frequency}
             serviceName={currentProgram?.name ?? currentService?.title}
+            donorName={`${formData.firstName} ${formData.lastName}`.trim()}
+            donorEmail={formData.email}
+            reference={paymentReference}
           />
         </motion.div>
       )}

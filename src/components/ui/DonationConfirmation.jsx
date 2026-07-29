@@ -1,11 +1,23 @@
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Download } from 'lucide-react'
+import { generateInvoicePdf } from '../../utils/generateInvoicePdf.js'
 
-const DonationConfirmation = ({ amount, frequency, serviceName }) => {
+const DonationConfirmation = ({ amount, frequency, serviceName, donorName, donorEmail, reference }) => {
   const frequencyLabels = {
     single: 'once',
     weekly: 'every week',
     monthly: 'every month',
     yearly: 'every year',
+  }
+
+  const handleDownload = () => {
+    generateInvoicePdf({
+      donorName,
+      donorEmail,
+      amount,
+      frequency,
+      programName: serviceName,
+      reference,
+    })
   }
 
   return (
@@ -22,6 +34,14 @@ const DonationConfirmation = ({ amount, frequency, serviceName }) => {
         {frequencyLabels[frequency] ?? ''} {serviceName ? <>to <span className="font-semibold text-gray-900">{serviceName}</span></> : ''}{' '}
         means a great deal to those we serve. A confirmation has been sent to your email.
       </p>
+
+      <button
+        onClick={handleDownload}
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-green-800 text-green-800 font-semibold hover:bg-green-50 transition-colors"
+      >
+        <Download size={18} />
+        Download Invoice (PDF)
+      </button>
     </div>
   )
 }
