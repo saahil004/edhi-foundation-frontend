@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  LayoutDashboard, LayoutGrid, Megaphone, ListTree, Tags, Receipt, MessageSquare, Mail, Settings as SettingsIcon, LogOut,
+  LayoutDashboard, LayoutGrid, Megaphone, ListTree, Tags, Receipt, MessageSquare, Mail, Users, Settings as SettingsIcon, LogOut,
   ExternalLink, Menu, X,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
@@ -18,6 +18,7 @@ const navItems = [
   { to: '/admin/donations', label: 'Donations', icon: Receipt },
   { to: '/admin/contact-messages', label: 'Contact Queries', icon: MessageSquare },
   { to: '/admin/newsletter-subscribers', label: 'Newsletter', icon: Mail },
+  { to: '/admin/users', label: 'Users', icon: Users },
   { to: '/admin/settings', label: 'Settings', icon: SettingsIcon },
 ]
 

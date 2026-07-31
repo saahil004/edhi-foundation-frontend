@@ -5,6 +5,7 @@ import ServiceHero from '../components/sections/ServiceHero.jsx'
 import ServiceAbout from '../components/sections/ServiceAbout.jsx'
 import DonationProgressCard from '../components/ui/DonationProgressCard.jsx'
 import RelatedServices from '../components/sections/RelatedServices.jsx'
+import Seo from '../components/ui/Seo.jsx'
 import { sampleRandom } from '../utils/random.js'
 
 const ServiceDetail = () => {
@@ -27,6 +28,7 @@ const ServiceDetail = () => {
   return (
     <>
       <main>
+        <Seo title={title} description={desc} image={image} />
         <div className="overflow-hidden"><ServiceHero image={image} title={title} desc={desc} Icon={Icon} />
         </div>
         <section className="w-full bg-white">

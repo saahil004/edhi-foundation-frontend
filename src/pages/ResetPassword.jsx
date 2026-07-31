@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { apiFetch } from '../lib/api.js'
+import Seo from '../components/ui/Seo.jsx'
 import loginBg from '../assets/images/login.png'
 
 const ResetPassword = () => {
@@ -34,6 +35,7 @@ const ResetPassword = () => {
   if (!token || !email) {
     return (
       <main className="relative z-0 min-h-screen flex items-center justify-center overflow-hidden bg-gray-50 px-6 py-24">
+        <Seo title="Reset Password" noindex />
         <img src={loginBg} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
 
         <div className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-xl p-8 text-center">
@@ -51,6 +53,7 @@ const ResetPassword = () => {
 
   return (
     <main className="relative z-0 min-h-screen flex items-center justify-center overflow-hidden bg-gray-50 px-6 py-24">
+      <Seo title="Reset Password" noindex />
       <img src={loginBg} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
 
       <div className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-xl p-8">

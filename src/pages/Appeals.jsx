@@ -6,6 +6,7 @@ import MobileAppealsGrid from "../components/sections/MobileAppealsGrid.jsx"
 import BenefitsSection from "../components/sections/BenefitsSection.jsx"
 import WhyChooseUsSection from "../components/sections/WhyChooseUsSection.jsx"
 import ServicesFAQ from "../components/sections/ServicesFAQ.jsx"
+import Seo from "../components/ui/Seo.jsx"
 
 const Appeals = () => {
   const marqueeItems = [
@@ -20,6 +21,10 @@ const Appeals = () => {
 
   return (
     <main>
+      <Seo
+        title="Appeals"
+        description="Support an active Edhi Foundation appeal — Sadaqah, Zakat, Aqeeqa, food banks, and emergency relief programs you can contribute to directly."
+      />
       <AppealBanner />
       <div className="overflow-hidden">
         <InfiniteMarquee items={marqueeItems} />

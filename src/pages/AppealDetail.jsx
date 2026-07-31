@@ -4,6 +4,7 @@ import ServiceHero from '../components/sections/ServiceHero.jsx'
 import ServiceAbout from '../components/sections/ServiceAbout.jsx'
 import DonateCard from '../components/ui/DonateCard.jsx'
 import RelatedServices from '../components/sections/RelatedServices.jsx'
+import Seo from '../components/ui/Seo.jsx'
 import { sampleRandom } from '../utils/random.js'
 
 const AppealDetail = () => {
@@ -24,6 +25,7 @@ const AppealDetail = () => {
 
   return (
     <>
+      <Seo title={title} description={desc} image={image} />
       <ServiceHero image={image} title={title} desc={desc} Icon={null} />
 
       <section className="w-full bg-white">

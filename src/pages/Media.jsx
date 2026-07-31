@@ -6,6 +6,7 @@ import EventGallery from '../components/sections/EventGallery.jsx'
 import MobileEventCarousel from '../components/sections/MobileEventGallery.jsx'
 import MobileEventGallery from '../components/sections/MobileEventGallery.jsx'
 import VideoFeedback from '../components/sections/VideoFeedback.jsx'
+import Seo from '../components/ui/Seo.jsx'
 
 const Media = () => {
 
@@ -22,6 +23,10 @@ const Media = () => {
 
   return (
     <main>
+      <Seo
+        title="Media"
+        description="Photos, videos, and stories from the field — see the Edhi Foundation's humanitarian work in action across Pakistan."
+      />
       <MediaBanner />
       <div className="overflow-hidden">
         <InfiniteMarquee />

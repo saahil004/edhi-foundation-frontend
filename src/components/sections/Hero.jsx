@@ -65,16 +65,24 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 1.03 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="relative w-full h-150 sm:h-160 md:h-170 lg:h-115 order-1 lg:order-2"
+          className="relative w-full h-[24rem] lg:h-115 overflow-hidden order-1 lg:order-2"
         >
+          {/* Mobile/tablet: CSS background (not <img>) so background-attachment
+              can be fixed, matching the parallax treatment other pages'
+              banners use — desktop keeps the plain <img> below untouched. */}
+          <div
+            className="absolute inset-0 bg-cover bg-center lg:hidden"
+            style={{ backgroundImage: `url(${hero.image})`, backgroundAttachment: 'fixed' }}
+          />
+
           <img
             src={hero.image}
             alt="Children supported by Edhi Foundation"
-            className="w-full h-full object-cover border-0 lg:rounded-2xl"
+            className="hidden lg:block w-full h-full object-cover border-0 lg:rounded-2xl"
           />
 
           <div className="hidden lg:block absolute inset-0 bg-linear-to-r from-white via-white/10 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-linear-to-r from-white via-white/70 to-transparent lg:hidden pointer-events-none" />
+          <div className="absolute inset-0 bg-black/45 lg:hidden pointer-events-none" />
 
           {/* Text content overlaid on the faded left area for mobile/tablet */}
           <motion.div
@@ -87,17 +95,17 @@ const Hero = () => {
               <HeartHandsIcon className="text-green-700" style={{ width: 22, height: 22 }} />
             </motion.div>
 
-            <motion.h1 variants={item} className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight max-w-[70%]">
+            <motion.h1 variants={item} className="text-3xl sm:text-4xl font-bold text-white leading-tight max-w-[70%]">
               {hero.headingLine1} <br />
               {hero.headingLine2} <br />
-              <span className="text-green-600">{hero.headingHighlight}</span>
+              <span className="text-green-400">{hero.headingHighlight}</span>
             </motion.h1>
 
             <motion.svg variants={item} width="48" height="4" viewBox="0 0 48 4" fill="none" xmlns="http://www.w3.org/2000/svg" className="my-4">
               <rect width="48" height="4" rx="2" fill="#16a34a" />
             </motion.svg>
 
-            <motion.p variants={item} className="text-gray-500 mt-5 max-w-[65%] sm:max-w-xs font-medium text-balance">
+            <motion.p variants={item} className="text-gray-200 mt-5 max-w-[65%] sm:max-w-xs font-medium text-balance">
               {hero.subtext}
             </motion.p>
           </motion.div>

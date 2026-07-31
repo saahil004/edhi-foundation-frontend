@@ -9,6 +9,7 @@ import PaymentDetailsModal from '../components/ui/PaymentDetailsModal.jsx'
 import { CountUpNumber } from '../components/ui/StatBadge.jsx'
 import BannerHeading from '../components/ui/BannerHeading.jsx'
 import InfiniteMarquee from '../components/ui/InfiniteMarquee.jsx'
+import Seo from '../components/ui/Seo.jsx'
 import bannerImage from '../assets/images/ph-banner.png'
 
 const marqueeItems = [
@@ -46,6 +47,7 @@ const PaymentHistory = () => {
 
   return (
     <main className="min-h-screen bg-white">
+      <Seo title="Payment History" noindex />
       <section className="relative w-full h-[24rem] md:h-[28rem] overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-cover bg-center"
@@ -74,7 +76,7 @@ const PaymentHistory = () => {
         <InfiniteMarquee items={marqueeItems} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-16 relative">
+      <div className="max-w-7xl mx-auto px-6 py-16 relative overflow-hidden">
         {/* Soft blurred backdrop shapes — with a plain white page there's
             nothing behind the cards' backdrop-blur to actually show through,
             so the glass effect reads as flat. These give it something. */}

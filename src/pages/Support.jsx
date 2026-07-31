@@ -4,6 +4,7 @@ import SupportBanner from '../components/sections/SupportBanner.jsx'
 import SupportQuickNav from '../components/sections/SupportQuickNav.jsx'
 import PolicySection from '../components/ui/PolicySection.jsx'
 import InfiniteMarquee from '../components/ui/InfiniteMarquee.jsx'
+import Seo from '../components/ui/Seo.jsx'
 import { supportSections } from '../data/supportData.js'
 
 const marqueeItems = [
@@ -62,6 +63,10 @@ const Support = () => {
 
   return (
     <main className="min-h-screen bg-white">
+      <Seo
+        title="Support & Policies"
+        description="Help Center, Terms & Conditions, Privacy Policy, Donation Policy, and Disclaimer for the Edhi Foundation website."
+      />
       <SupportBanner />
 
       <div className="overflow-hidden">

@@ -52,7 +52,7 @@ const PaymentDetailsModal = ({ payment, onClose }) => {
             exit={{ scale: 0.95, opacity: 0, y: 12 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-md bg-white rounded-2xl shadow-xl p-6 md:p-8"
+            className="relative w-full max-w-md max-h-[85vh] overflow-y-auto bg-white rounded-2xl shadow-xl p-6 md:p-8"
           >
             <button
               onClick={onClose}

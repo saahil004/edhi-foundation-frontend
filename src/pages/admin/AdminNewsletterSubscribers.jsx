@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Search, Send } from 'lucide-react'
+import { Search, Send, Trash2 } from 'lucide-react'
 import { apiFetch } from '../../lib/api.js'
 import ConfirmDialog from '../../components/ui/ConfirmDialog.jsx'
 
@@ -18,6 +18,9 @@ const AdminNewsletterSubscribers = () => {
   const [sending, setSending] = useState(false)
   const [sendResult, setSendResult] = useState(null)
   const [sendError, setSendError] = useState('')
+
+  const [removing, setRemoving] = useState(null)
+  const [deletingId, setDeletingId] = useState(null)
 
   useEffect(() => {
     const timeout = setTimeout(() => setDebouncedQ(q), 400)
@@ -45,6 +48,22 @@ const AdminNewsletterSubscribers = () => {
 
     load()
   }, [debouncedQ, page])
+
+  const handleRemove = async () => {
+    if (!removing) return
+    setDeletingId(removing.id)
+    try {
+      await apiFetch(`/admin/newsletter-subscribers/${removing.id}`, { method: 'DELETE' })
+      setSubscribers((prev) => prev.filter((s) => s.id !== removing.id))
+      setMeta((prev) => (prev ? { ...prev, total: prev.total - 1 } : prev))
+      setError('')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setDeletingId(null)
+      setRemoving(null)
+    }
+  }
 
   const totalSubscribers = meta?.total ?? 0
   const canSend = subject.trim().length > 0 && body.trim().length > 0 && totalSubscribers > 0
@@ -145,6 +164,7 @@ const AdminNewsletterSubscribers = () => {
                 <tr>
                   <th className="px-4 py-3 whitespace-nowrap">Email</th>
                   <th className="px-4 py-3 whitespace-nowrap">Subscribed On</th>
+                  <th className="px-4 py-3"></th>
                 </tr>
               </thead>
               <tbody>
@@ -153,6 +173,16 @@ const AdminNewsletterSubscribers = () => {
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{subscriber.email}</td>
                     <td className="px-4 py-3 text-gray-500 whitespace-nowrap">
                       {new Date(subscriber.created_at).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <button
+                        onClick={() => setRemoving(subscriber)}
+                        disabled={deletingId === subscriber.id}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-600 hover:text-red-700 disabled:opacity-50"
+                      >
+                        <Trash2 size={13} />
+                        Remove
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -189,6 +219,15 @@ const AdminNewsletterSubscribers = () => {
         confirmLabel="Send"
         onConfirm={handleSend}
         onCancel={() => setConfirming(false)}
+      />
+
+      <ConfirmDialog
+        open={!!removing}
+        title="Remove this subscriber?"
+        message={removing ? `${removing.email} will stop receiving newsletter emails.` : ''}
+        confirmLabel="Remove"
+        onConfirm={handleRemove}
+        onCancel={() => setRemoving(null)}
       />
     </div>
   )

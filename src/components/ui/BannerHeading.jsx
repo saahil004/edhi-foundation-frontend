@@ -21,7 +21,7 @@ const BannerHeading = ({ children, dark = false, align = 'center', delay = 0.35 
   return (
     <div className={`flex flex-col ${wrapper}`}>
       <motion.h1
-        className={`text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl ${
+        className={`text-4xl font-bold md:text-5xl lg:text-6xl ${
           dark ? 'text-green-950' : 'text-white drop-shadow-sm'
         }`}
         initial={{ opacity: 0, y: 24 }}

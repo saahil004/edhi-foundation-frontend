@@ -26,6 +26,7 @@ import AdminPriceOptions from '../pages/admin/AdminPriceOptions.jsx'
 import AdminDonations from '../pages/admin/AdminDonations.jsx'
 import AdminContactMessages from '../pages/admin/AdminContactMessages.jsx'
 import AdminNewsletterSubscribers from '../pages/admin/AdminNewsletterSubscribers.jsx'
+import AdminUsers from '../pages/admin/AdminUsers.jsx'
 import AdminSettings from '../pages/admin/AdminSettings.jsx'
 
 const router = createBrowserRouter([
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
           { path: 'donations', element: <AdminDonations /> },
           { path: 'contact-messages', element: <AdminContactMessages /> },
           { path: 'newsletter-subscribers', element: <AdminNewsletterSubscribers /> },
+          { path: 'users', element: <AdminUsers /> },
           { path: 'settings', element: <AdminSettings /> },
         ],
       },

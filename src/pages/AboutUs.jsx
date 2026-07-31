@@ -8,10 +8,15 @@ import OurCauses from "../components/sections/OurCauses.jsx";
 // import TeamSection from "../components/sections/TeamSection.jsx";
 import FAQ from "../components/sections/FAQ.jsx";
 import FounderSection from "../components/sections/FounderSection.jsx";
+import Seo from "../components/ui/Seo.jsx";
 
 const AboutUs = () => {
   return (
     <main className="overflow-hidden">
+      <Seo
+        title="About Us"
+        description="Learn about the Abdul Sattar Edhi Foundation's history, mission, and the humanitarian work we've carried out across Pakistan since 1951."
+      />
       <AboutBanner />
       <InfiniteMarquee />
 

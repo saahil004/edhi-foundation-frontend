@@ -6,6 +6,7 @@ import MobileServicesGrid from "../components/sections/MobileServicesGrid.jsx";
 import BenefitsSection from "../components/sections/BenefitsSection.jsx";
 import WhyChooseUsSection from "../components/sections/WhyChooseUsSection.jsx";
 import ServicesFAQ from "../components/sections/ServicesFAQ.jsx";
+import Seo from "../components/ui/Seo.jsx";
 
 const Services = () => {
 
@@ -37,6 +38,10 @@ const Services = () => {
     return (
         <>
         <main>
+          <Seo
+            title="Our Services"
+            description="Explore the Edhi Foundation's free services — hospitals, ambulances, orphan care, educational services, food distribution, and more, available to all regardless of background."
+          />
           <ServiceBanner />
           <div className="overflow-hidden">
           <InfiniteMarquee items={maruqueeItems}/>
