@@ -31,11 +31,11 @@ const TopBar = () => {
 
       {/* Social icons */}
       <div className="flex items-center gap-4 text-gray-500">
-        <a href="#" aria-label="Facebook" className="hover:text-black"><FaFacebookF size={14} /></a>
-        <a href="#" aria-label="Twitter" className="hover:text-black"><FaXTwitter size={14} /></a>
-        <a href="#" aria-label="Youtube" className="hover:text-black"><FaYoutube size={14} /></a>
-        <a href="#" aria-label="Instagram" className="hover:text-black"><FaInstagram size={14} /></a>
-        <a href="#" aria-label="LinkedIn" className="hover:text-black"><FaLinkedinIn size={14} /></a>
+        <a href="https://www.facebook.com/EdhiFoundationUK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-black"><FaFacebookF size={14} /></a>
+        <a href="https://twitter.com/edhiorg" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-black"><FaXTwitter size={14} /></a>
+        <a href="https://www.youtube.com/watch?v=sXuMy0WGit0" target="_blank" rel="noopener noreferrer" aria-label="Youtube" className="hover:text-black"><FaYoutube size={14} /></a>
+        <a href="https://www.instagram.com/edhi.foundation" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-black"><FaInstagram size={14} /></a>
+        <a href="https://www.linkedin.com/in/edhi-foundation-a11b9195/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-black"><FaLinkedinIn size={14} /></a>
       </div>
 
       {/* Right: buttons */}

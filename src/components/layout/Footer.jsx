@@ -101,11 +101,11 @@ const Footer = () => {
             We are dedicated to supporting and empowering lives by supporting communities through compassion, care and service.
           </p>
           <div className="flex gap-4 text-gray-400">
-            <a href="#" className="hover:text-white"><FaFacebookF /></a>
-            <a href="#" className="hover:text-white"><FaXTwitter /></a>
-            <a href="#" className="hover:text-white"><FaYoutube /></a>
-            <a href="#" className="hover:text-white"><FaInstagram /></a>
-            <a href="#" className="hover:text-white"><FaLinkedinIn /></a>
+            <a href="https://www.facebook.com/EdhiFoundationUK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white"><FaFacebookF /></a>
+            <a href="https://twitter.com/edhiorg" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-white"><FaXTwitter /></a>
+            <a href="https://www.youtube.com/watch?v=sXuMy0WGit0" target="_blank" rel="noopener noreferrer" aria-label="Youtube" className="hover:text-white"><FaYoutube /></a>
+            <a href="https://www.instagram.com/edhi.foundation" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white"><FaInstagram /></a>
+            <a href="https://www.linkedin.com/in/edhi-foundation-a11b9195/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-white"><FaLinkedinIn /></a>
           </div>
         </div>
 

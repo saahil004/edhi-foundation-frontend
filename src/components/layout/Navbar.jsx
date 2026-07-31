@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ChevronLeft, ChevronRight, Menu, X, User, LogOut } from 'lucide-react'
+import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import { navLinks } from '../../data/navLinks.js'
 import { useServices } from '../../hooks/useServices.js'
 import { useAppeals } from '../../hooks/useAppeals.js'
@@ -189,7 +190,11 @@ const Navbar = () => {
                 <div className="px-6 py-6 mt-auto border-t border-gray-100">
                   <p className="text-center text-sm font-medium text-gray-500 mb-3">Follow Us</p>
                   <div className="flex justify-center gap-4 text-gray-600">
-                    {/* Add your social icons here, e.g. FaFacebookF, FaXTwitter, etc. */}
+                    <a href="https://www.facebook.com/EdhiFoundationUK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-gray-900"><FaFacebookF /></a>
+                    <a href="https://twitter.com/edhiorg" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-gray-900"><FaXTwitter /></a>
+                    <a href="https://www.youtube.com/watch?v=sXuMy0WGit0" target="_blank" rel="noopener noreferrer" aria-label="Youtube" className="hover:text-gray-900"><FaYoutube /></a>
+                    <a href="https://www.instagram.com/edhi.foundation" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-gray-900"><FaInstagram /></a>
+                    <a href="https://www.linkedin.com/in/edhi-foundation-a11b9195/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-gray-900"><FaLinkedinIn /></a>
                   </div>
                 </div>
               </div>
