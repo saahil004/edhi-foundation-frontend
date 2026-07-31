@@ -53,7 +53,7 @@ const Honours = () => {
 
       <div
   ref={scrollRef}
-  className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide pt-10"
+  className="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory scrollbar-hide pt-10 pb-4"
 >
         {honours.map((award, i) => (
           <motion.div

@@ -14,6 +14,7 @@ import Login from '../pages/Login.jsx'
 import ForgotPassword from '../pages/ForgotPassword.jsx'
 import ResetPassword from '../pages/ResetPassword.jsx'
 import PaymentHistory from '../pages/PaymentHistory.jsx'
+import Support from '../pages/Support.jsx'
 import AdminLogin from '../pages/admin/AdminLogin.jsx'
 import AdminRoute from '../components/admin/AdminRoute.jsx'
 import AdminLayout from '../components/admin/AdminLayout.jsx'
@@ -24,6 +25,7 @@ import AdminPrograms from '../pages/admin/AdminPrograms.jsx'
 import AdminPriceOptions from '../pages/admin/AdminPriceOptions.jsx'
 import AdminDonations from '../pages/admin/AdminDonations.jsx'
 import AdminContactMessages from '../pages/admin/AdminContactMessages.jsx'
+import AdminNewsletterSubscribers from '../pages/admin/AdminNewsletterSubscribers.jsx'
 import AdminSettings from '../pages/admin/AdminSettings.jsx'
 
 const router = createBrowserRouter([
@@ -45,11 +47,7 @@ const router = createBrowserRouter([
       { path: 'appeals', element: <Appeals /> },
       { path: 'appeals/:slug', element: <AppealDetail /> },
       { path: 'blog', element: <ComingSoon title="Blog" /> },
-      { path: 'help-center', element: <ComingSoon title="Help Center" /> },
-      { path: 'terms', element: <ComingSoon title="Terms & Conditions" /> },
-      { path: 'privacy', element: <ComingSoon title="Privacy Policy" /> },
-      { path: 'donation-policy', element: <ComingSoon title="Donation Policy" /> },
-      { path: 'disclaimer', element: <ComingSoon title="Disclaimer" /> },
+      { path: 'support', element: <Support /> },
       { path: 'edhi-network', element: <ComingSoon title="Edhi Network" /> },
     ],
   },
@@ -69,6 +67,7 @@ const router = createBrowserRouter([
           { path: 'price-options', element: <AdminPriceOptions /> },
           { path: 'donations', element: <AdminDonations /> },
           { path: 'contact-messages', element: <AdminContactMessages /> },
+          { path: 'newsletter-subscribers', element: <AdminNewsletterSubscribers /> },
           { path: 'settings', element: <AdminSettings /> },
         ],
       },

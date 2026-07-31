@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Mail, Phone, User, LogOut } from 'lucide-react'
 import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import ConfirmDialog from '../ui/ConfirmDialog.jsx'
 
 const TopBar = () => {
   const { user, logout } = useAuth()
+  const navigate = useNavigate()
   const [confirmingLogout, setConfirmingLogout] = useState(false)
 
   return (
@@ -69,6 +70,7 @@ const TopBar = () => {
         onConfirm={() => {
           setConfirmingLogout(false)
           logout()
+          navigate('/')
         }}
         onCancel={() => setConfirmingLogout(false)}
       />

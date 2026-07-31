@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ChevronLeft, ChevronRight, Menu, X, User, LogOut } from 'lucide-react'
 import { navLinks } from '../../data/navLinks.js'
@@ -19,6 +19,7 @@ const Navbar = () => {
   const [mobileScreen, setMobileScreen] = useState('main')
   const [confirmingLogout, setConfirmingLogout] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
   const { user, logout } = useAuth()
 
   const { services } = useServices()
@@ -265,6 +266,7 @@ const Navbar = () => {
           setConfirmingLogout(false)
           logout()
           closeMobileMenu()
+          navigate('/')
         }}
         onCancel={() => setConfirmingLogout(false)}
       />

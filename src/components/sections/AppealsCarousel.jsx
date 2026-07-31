@@ -56,7 +56,7 @@ const AppealsCarousel = () => {
         </div>
 
         {/* Desktop: horizontal row, 4 visible, side-overlay cards */}
-        <div className="hidden lg:flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
+        <div className="hidden lg:flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory scrollbar-hide">
           {appeals.map((appeal, i) => (
             <AppealCard
               key={appeal.id}
@@ -73,7 +73,7 @@ const AppealsCarousel = () => {
         {/* Mobile/tablet: horizontal scroll, ~1.5 cards visible at a time */}
         <div
           ref={mobileScrollRef}
-          className="lg:hidden flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+          className="lg:hidden flex gap-4 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory scrollbar-hide"
         >
           {appeals.map((appeal, i) => (
             <AppealCard

@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaFacebookF, FaXTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'react-icons/fa6'
 import { Mail } from 'lucide-react'
+import { apiFetch } from '../../lib/api.js'
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const quickLinks = [
   { label: 'Home', path: '/' },
@@ -20,24 +23,38 @@ const ourServices = [
 ]
 
 const support = [
-  { label: 'Help Center', path: '/help-center' },
-  { label: 'Terms & Conditions', path: '/terms' },
-  { label: 'Privacy Policy', path: '/privacy' },
-  { label: 'Donation Policy', path: '/donation-policy' },
-  { label: 'Disclaimer', path: '/disclaimer' },
+  { label: 'Help Center', path: '/support#help-center' },
+  { label: 'Terms & Conditions', path: '/support#terms' },
+  { label: 'Privacy Policy', path: '/support#privacy' },
+  { label: 'Donation Policy', path: '/support#donation-policy' },
+  { label: 'Disclaimer', path: '/support#disclaimer' },
 ]
 
 const Footer = () => {
   const [email, setEmail] = useState('')
-  const [subscribed, setSubscribed] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [errorMessage, setErrorMessage] = useState('')
 
-  // TODO: no newsletter API exists yet — this just prevents the native
-  // form submit (which would full-page-reload this SPA) until a real
-  // subscribe endpoint is built.
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault()
-    setSubscribed(true)
-    setEmail('')
+
+    if (!EMAIL_PATTERN.test(email)) {
+      setStatus('error')
+      setErrorMessage('Please enter a valid email address.')
+      return
+    }
+
+    setStatus('submitting')
+    setErrorMessage('')
+
+    try {
+      await apiFetch('/newsletter-subscribers', { method: 'POST', body: { email } })
+      setStatus('success')
+      setEmail('')
+    } catch (err) {
+      setStatus('error')
+      setErrorMessage(err.errors?.email?.[0] ?? 'Something went wrong. Please try again.')
+    }
   }
 
   return (
@@ -52,19 +69,28 @@ const Footer = () => {
             <p className="text-sm text-gray-400">Stay updated with our latest news, events and stories of compassion.</p>
           </div>
         </div>
-        <form onSubmit={handleSubscribe} className="flex w-full md:w-auto">
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter Email Address"
-            className="px-4 py-2 rounded-l-md text-black w-full md:w-72 focus:outline-none bg-white"
-          />
-          <button className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-r-md text-white font-semibold transition-colors">
-            {subscribed ? 'Subscribed!' : 'Subscribe'}
-          </button>
-        </form>
+        <div className="w-full md:w-auto">
+          <form onSubmit={handleSubscribe} className="flex w-full md:w-auto">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                if (status === 'error') setStatus('idle')
+              }}
+              placeholder="Enter Email Address"
+              className="px-4 py-2 rounded-l-md text-black w-full md:w-72 focus:outline-none bg-white"
+            />
+            <button
+              disabled={status === 'submitting'}
+              className="bg-red-600 hover:bg-red-700 disabled:opacity-60 px-6 py-2 rounded-r-md text-white font-semibold transition-colors shrink-0"
+            >
+              {status === 'submitting' ? 'Subscribing...' : status === 'success' ? 'Subscribed!' : 'Subscribe'}
+            </button>
+          </form>
+          {status === 'error' && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+        </div>
       </div>
 
       {/* Link columns */}
