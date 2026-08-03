@@ -224,51 +224,53 @@ const AdminServices = () => {
         {loading ? (
           <p className="p-6 text-gray-500">Loading...</p>
         ) : (
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
-              <tr>
-                <th className="px-4 py-3">Image</th>
-                <th className="px-4 py-3">Title</th>
-                <th className="px-4 py-3">Goal</th>
-                <th className="px-4 py-3">Raised</th>
-                <th className="px-4 py-3">Active</th>
-                <th className="px-4 py-3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {services.map((service) => (
-                <tr key={service.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-3">
-                    {service.img ? (
-                      <img src={service.img} alt="" className="w-12 h-12 rounded-lg object-cover border border-gray-200" />
-                    ) : (
-                      <div className="w-12 h-12 rounded-lg bg-gray-100" />
-                    )}
-                  </td>
-                  <td className="px-4 py-3 font-medium text-gray-900">{service.title}</td>
-                  <td className="px-4 py-3">{service.goal_amount ? `$${service.goal_amount}` : '—'}</td>
-                  <td className="px-4 py-3">${service.raised_amount}</td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full ${
-                        service.is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-500'
-                      }`}
-                    >
-                      {service.is_active ? 'Active' : 'Inactive'}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-right space-x-3">
-                    <button onClick={() => startEdit(service)} className="text-green-800 font-semibold hover:text-green-900">
-                      Edit
-                    </button>
-                    <button onClick={() => handleDelete(service)} className="text-red-600 font-semibold hover:text-red-700">
-                      Delete
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                <tr>
+                  <th className="px-4 py-3 whitespace-nowrap">Image</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Title</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Goal</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Raised</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Active</th>
+                  <th className="px-4 py-3"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {services.map((service) => (
+                  <tr key={service.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
+                    <td className="px-4 py-3">
+                      {service.img ? (
+                        <img src={service.img} alt="" className="w-12 h-12 rounded-lg object-cover border border-gray-200" />
+                      ) : (
+                        <div className="w-12 h-12 rounded-lg bg-gray-100" />
+                      )}
+                    </td>
+                    <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{service.title}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{service.goal_amount ? `$${service.goal_amount}` : '—'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">${service.raised_amount}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <span
+                        className={`inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                          service.is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-500'
+                        }`}
+                      >
+                        {service.is_active ? 'Active' : 'Inactive'}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-right space-x-3 whitespace-nowrap">
+                      <button onClick={() => startEdit(service)} className="text-green-800 font-semibold hover:text-green-900">
+                        Edit
+                      </button>
+                      <button onClick={() => handleDelete(service)} className="text-red-600 font-semibold hover:text-red-700">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

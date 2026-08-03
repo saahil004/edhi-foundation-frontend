@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Search, Send, Trash2 } from 'lucide-react'
-import { apiFetch } from '../../lib/api.js'
+import { useEffect, useRef, useState } from 'react'
+import { Paperclip, Search, Send, Trash2, X } from 'lucide-react'
+import { apiFetch, apiFetchForm } from '../../lib/api.js'
 import ConfirmDialog from '../../components/ui/ConfirmDialog.jsx'
 
 const AdminNewsletterSubscribers = () => {
@@ -14,6 +14,8 @@ const AdminNewsletterSubscribers = () => {
 
   const [subject, setSubject] = useState('')
   const [body, setBody] = useState('')
+  const [attachment, setAttachment] = useState(null)
+  const fileInputRef = useRef(null)
   const [confirming, setConfirming] = useState(false)
   const [sending, setSending] = useState(false)
   const [sendResult, setSendResult] = useState(null)
@@ -74,13 +76,17 @@ const AdminNewsletterSubscribers = () => {
     setSendResult(null)
     setSendError('')
     try {
-      const res = await apiFetch('/admin/newsletter-subscribers/broadcast', {
-        method: 'POST',
-        body: { subject, body },
-      })
+      const formData = new FormData()
+      formData.append('subject', subject)
+      formData.append('body', body)
+      if (attachment) formData.append('document', attachment)
+
+      const res = await apiFetchForm('/admin/newsletter-subscribers/broadcast', formData)
       setSendResult(res.sent)
       setSubject('')
       setBody('')
+      setAttachment(null)
+      if (fileInputRef.current) fileInputRef.current.value = ''
     } catch (err) {
       setSendError(err.message)
     } finally {
@@ -114,6 +120,42 @@ const AdminNewsletterSubscribers = () => {
           rows={5}
           className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-gray-400 resize-y"
         />
+
+        <div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+            onChange={(e) => setAttachment(e.target.files?.[0] ?? null)}
+            className="hidden"
+            id="newsletter-attachment"
+          />
+          {attachment ? (
+            <div className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 w-full sm:w-fit">
+              <Paperclip size={14} className="shrink-0 text-gray-400" />
+              <span className="truncate">{attachment.name}</span>
+              <button
+                type="button"
+                onClick={() => {
+                  setAttachment(null)
+                  if (fileInputRef.current) fileInputRef.current.value = ''
+                }}
+                aria-label="Remove attachment"
+                className="ml-1 text-gray-400 hover:text-red-600 shrink-0"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          ) : (
+            <label
+              htmlFor="newsletter-attachment"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-700 cursor-pointer"
+            >
+              <Paperclip size={14} />
+              Attach a document (optional)
+            </label>
+          )}
+        </div>
 
         {sendResult !== null && (
           <div className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3">

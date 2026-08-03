@@ -114,8 +114,9 @@ const Footer = () => {
         <FooterColumn title="Support" items={support} />
       </div>
 
-      <div className="text-center text-sm text-gray-500 py-4 border-t border-gray-800">
-        © {new Date().getFullYear()} Abdul Sattar Edhi Foundation. All rights reserved.
+      <div className="text-center text-sm text-gray-500 py-4 border-t border-gray-800 space-y-1">
+        <p>© {new Date().getFullYear()} Abdul Sattar Edhi Foundation. All rights reserved.</p>
+        <p>Designed &amp; Developed By: LiveBits</p>
       </div>
     </footer>
   )

@@ -34,7 +34,7 @@ const PolicySection = ({ section, openFaqId, onToggleFaq }) => {
       className="scroll-mt-24 md:scroll-mt-36"
     >
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-11 h-11 rounded-full bg-green-800 flex items-center justify-center shrink-0">
+        <div className="w-11 h-11 rounded-full bg-red-600 flex items-center justify-center shrink-0">
           <Icon className="text-white" size={20} />
         </div>
         <h2 className="text-2xl font-bold text-gray-900">{section.title}</h2>

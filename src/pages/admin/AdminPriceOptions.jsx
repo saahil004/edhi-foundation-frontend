@@ -169,33 +169,35 @@ const AdminPriceOptions = () => {
         {loading ? (
           <p className="p-6 text-gray-500">Loading...</p>
         ) : (
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
-              <tr>
-                <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Price</th>
-                <th className="px-4 py-3">Program</th>
-                <th className="px-4 py-3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {priceOptions.map((priceOption) => (
-                <tr key={priceOption.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-3 font-medium text-gray-900">{priceOption.name}</td>
-                  <td className="px-4 py-3 font-semibold text-green-800">${priceOption.price}</td>
-                  <td className="px-4 py-3">{programName(priceOption.program_id)}</td>
-                  <td className="px-4 py-3 text-right space-x-3">
-                    <button onClick={() => startEdit(priceOption)} className="text-green-800 font-semibold hover:text-green-900">
-                      Edit
-                    </button>
-                    <button onClick={() => handleDelete(priceOption)} className="text-red-600 font-semibold hover:text-red-700">
-                      Delete
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                <tr>
+                  <th className="px-4 py-3 whitespace-nowrap">Name</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Price</th>
+                  <th className="px-4 py-3 whitespace-nowrap">Program</th>
+                  <th className="px-4 py-3"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {priceOptions.map((priceOption) => (
+                  <tr key={priceOption.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
+                    <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{priceOption.name}</td>
+                    <td className="px-4 py-3 font-semibold text-green-800 whitespace-nowrap">${priceOption.price}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{programName(priceOption.program_id)}</td>
+                    <td className="px-4 py-3 text-right space-x-3 whitespace-nowrap">
+                      <button onClick={() => startEdit(priceOption)} className="text-green-800 font-semibold hover:text-green-900">
+                        Edit
+                      </button>
+                      <button onClick={() => handleDelete(priceOption)} className="text-red-600 font-semibold hover:text-red-700">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

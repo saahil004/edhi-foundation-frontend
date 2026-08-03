@@ -3,6 +3,7 @@ import TopBar from './TopBar.jsx'
 import Navbar from './Navbar.jsx'
 import Footer from './Footer.jsx'
 import ScrollToHash from '../utils/ScrollToHash.jsx'
+import ChatWidget from '../chat/ChatWidget.jsx'
 
 function Layout() {
   return (
@@ -16,6 +17,7 @@ function Layout() {
       </main>
       <Footer />
       </main>
+      <ChatWidget />
     </>
   )
 }

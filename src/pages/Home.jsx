@@ -5,7 +5,6 @@ import ServicesCarousel from "../components/sections/ServicesCarousel.jsx";
 import StatsBar from "../components/sections/StatsBar.jsx";
 import FounderSection from "../components/sections/FounderSection.jsx";
 import DonationWidget from "../components/sections/DonationWidget.jsx";
-import FloatingDonateButton from "../components/ui/DonateNow.jsx";
 import Honours from "../components/sections/Honours.jsx";
 import TeamSection from "../components/sections/TeamSection.jsx";
 import InfiniteMarquee from "../components/ui/InfiniteMarquee.jsx";
@@ -61,7 +60,6 @@ const Home = () => {
       <TeamSection />
             {/* <DonationWidget /> */}
             <Honours />
-            <FloatingDonateButton/>
         </>
     )
 }
