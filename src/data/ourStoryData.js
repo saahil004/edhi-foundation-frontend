@@ -1,5 +1,5 @@
-import storyImage1 from '../assets/images/edhi-history1.png'
-import storyImage2 from '../assets/images/edhi-history2.png'
+import storyImage1 from '../assets/images/ourstory1.jpeg'
+import storyImage2 from '../assets/images/ourstory2.jpg'
 import storyImage3 from '../assets/images/edhi-history3.png'
 
 const ourStory = {

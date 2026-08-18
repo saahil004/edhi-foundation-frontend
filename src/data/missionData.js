@@ -1,7 +1,7 @@
 import { Globe2, Compass, HeartHandshake } from 'lucide-react'
-import missionBg1 from '../assets/images/mission-bg-1.png'
-import missionBg2 from '../assets/images/mission-bg-2.png'
-import missionBg3 from '../assets/images/mission-bg-3.png'
+import missionBg1 from '../assets/images/mission.jpeg'
+import missionBg2 from '../assets/images/mission2.jpg'
+import missionBg3 from '../assets/images/mission3.JPG'
 
 export const missionData = [
   {
