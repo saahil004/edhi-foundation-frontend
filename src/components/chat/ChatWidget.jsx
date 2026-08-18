@@ -106,12 +106,6 @@ const ChatWidget = () => {
     }
   }, [messages, sending, open])
 
-  // Focus the input the moment the panel opens, so typing a first question
-  // doesn't need an extra click.
-  useEffect(() => {
-    if (open) inputRef.current?.focus()
-  }, [open])
-
   const sendQuestion = async (question) => {
     if (!question || sending) return
 

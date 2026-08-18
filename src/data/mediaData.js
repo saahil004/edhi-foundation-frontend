@@ -1,10 +1,22 @@
 import bannerImage from '../assets/images/hero.png'
-import ramadanImage from '../assets/images/ramadan.png'
-import eidImage from '../assets/images/collage1.jpg'
 import muharramImage from '../assets/images/edhi-march.png'
 import winterImage from '../assets/images/edhi-relief-worker.png'
 import marriageImage from '../assets/images/collage2.jpg'
 import hospitalImage from '../assets/images/hospital-donation.png'
+import ramadanImage from '../assets/images/ramdan.png'
+import ramadan1 from '../assets/images/ramadan1.png'
+import ramadan2 from '../assets/images/ramadan2.png'
+import ramadan3 from '../assets/images/ramadan3.png'
+import ramadan4 from '../assets/images/ramadan4.png'
+import ramadan5 from '../assets/images/ramadan5.png'
+import ramadan6 from '../assets/images/ramadan6.png'
+import eidImage from '../assets/images/eid.jpg'
+import eid1 from '../assets/images/eid1.jpg'
+import eid2 from '../assets/images/eid2.jpg'
+import eid3 from '../assets/images/eid3.jpg'
+import eid4 from '../assets/images/eid4.jpg'
+import eid5 from '../assets/images/eid5.jpg'
+import eid6 from '../assets/images/eid6.jpg'
 
 export const mediaBannerData = {
   heading: 'Our Media Gallery',
@@ -21,7 +33,7 @@ export const ramadanSection = {
   image: ramadanImage,
   accent: '#0f766e',
   reverse: false,
-  gallery: [ramadanImage, eidImage, winterImage, hospitalImage, muharramImage, marriageImage], // TODO: replace with real Ramadan-specific photos
+  gallery: [ramadanImage, ramadan1, ramadan2, ramadan3, ramadan4, ramadan5, ramadan6], // TODO: replace with real Ramadan-specific photos
 }
 
 export const eidSection = {
@@ -32,7 +44,7 @@ export const eidSection = {
   image: eidImage,
   accent: '#b45309',
   reverse: true,
-  gallery: [eidImage, marriageImage, ramadanImage, winterImage, hospitalImage], // TODO: replace with real Eid-specific photos
+  gallery: [eidImage, eid1, eid2, eid3, eid4, eid5, eid6], // TODO: replace with real Eid-specific photos
 }
 
 export const muharramSection = {
