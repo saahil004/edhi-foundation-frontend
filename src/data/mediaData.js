@@ -1,8 +1,5 @@
 import bannerImage from '../assets/images/hero.png'
 import muharramImage from '../assets/images/edhi-march.png'
-import winterImage from '../assets/images/edhi-relief-worker.png'
-import marriageImage from '../assets/images/collage2.jpg'
-import hospitalImage from '../assets/images/hospital-donation.png'
 import ramadanImage from '../assets/images/ramadan.png'
 import ramadan1 from '../assets/images/ramadan1.png'
 import ramadan2 from '../assets/images/ramadan2.png'
@@ -17,6 +14,22 @@ import eid3 from '../assets/images/eid3.JPG'
 import eid4 from '../assets/images/eid4.JPG'
 import eid5 from '../assets/images/eid5.JPG'
 import eid6 from '../assets/images/eid6.JPG'
+import winterImage from '../assets/images/edhi-relief-worker.png'
+import marriageImage from '../assets/images/marriage.jpg'
+import marriage1 from '../assets/images/marriage1.jpg'
+import marriage2 from '../assets/images/marriage2.jpg'
+import marriage3 from '../assets/images/marriage3.jpg'
+import marriage4 from '../assets/images/marriage4.jpg'
+import marriage5 from '../assets/images/marriage5.jpg'
+import hospitalImage from '../assets/images/hospital.jpg'
+import hospital1 from '../assets/images/hospital1.jpg'
+import hospital2 from '../assets/images/hospital2.jpg'
+import hospital3 from '../assets/images/hospital3.jpg'
+import hospital4 from '../assets/images/hospital4.jpg'
+import hospital5 from '../assets/images/hospital5.jpg'
+import hospital6 from '../assets/images/hospital6.jpg'
+import hospital7 from '../assets/images/hospital7.jpg'
+import hospital8 from '../assets/images/hospital8.jpg'
 
 export const mediaBannerData = {
   heading: 'Our Media Gallery',
@@ -77,7 +90,7 @@ export const marriageSection = {
   image: marriageImage,
   accent: '#be185d',
   reverse: false,
-  gallery: [marriageImage, eidImage, hospitalImage, ramadanImage, winterImage], // TODO: replace with real Marriage-specific photos
+  gallery: [marriageImage, marriage1, marriage2, marriage3, marriage4, marriage5], // TODO: replace with real Marriage-specific photos
 }
 
 export const hospitalSection = {
@@ -88,7 +101,7 @@ export const hospitalSection = {
   image: hospitalImage,
   accent: '#047857',
   reverse: true,
-  gallery: [hospitalImage, muharramImage, eidImage, marriageImage, ramadanImage, winterImage], // TODO: replace with real Hospital-specific photos
+  gallery: [hospitalImage, hospital1, hospital2,hospital3,hospital4,hospital5,hospital6,hospital7,hospital8,], // TODO: replace with real Hospital-specific photos
 }
 
 // kept for backward compatibility if anything else still imports the array form

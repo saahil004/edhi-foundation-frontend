@@ -62,10 +62,10 @@ const Hero = () => {
 
         {/* Image + overlay wrapper */}
         <motion.div
-          initial={{ opacity: 0, scale: 1.03 }}
+          initial={{ opacity: 0, scale: 1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="relative w-full h-[24rem] lg:h-115 overflow-hidden order-1 lg:order-2"
+          className="relative w-full h-96 lg:h-115 overflow-hidden order-1 lg:order-2"
         >
           {/* Mobile/tablet: CSS background (not <img>) so background-attachment
               can be fixed, matching the parallax treatment other pages'
