@@ -1,5 +1,5 @@
-import volunteersImg from '../assets/images/edhi-volunteers.png'
-import marchImg from '../assets/images/edhi-march.png'
+import volunteersImg from '../assets/images/impact1.jpg'
+import marchImg from '../assets/images/impact2.jpg'
 import ambulanceTeamImg from '../assets/images/edhi-ambulance-team.png'
 import reliefWorkerImg from '../assets/images/edhi-relief-worker.png'
 

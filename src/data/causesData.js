@@ -1,7 +1,7 @@
 import { HandHeart, HeartPulse, GraduationCap, Sprout } from 'lucide-react'
-import cause1 from '../assets/images/cause1.png'
-import cause2 from '../assets/images/cause2.png'
-import cause3 from '../assets/images/cause3.png'
+import cause1 from '../assets/images/women.JPG'
+import cause2 from '../assets/images/healthcare.JPG'
+import cause3 from '../assets/images/education.JPG'
 import cause4 from '../assets/images/cause4.png'
 
 export const causesData = [

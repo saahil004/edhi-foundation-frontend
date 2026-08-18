@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { causesData } from '../../data/causesData.js'
 import CauseCard from '../ui/CauseCard.jsx'
-import causesImg from '../../assets/images/mission-bg-2.png'
+import causesImg from '../../assets/images/sea.JPG'
 
 const containerVariants = {
     hidden: {},
