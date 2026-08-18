@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, animate } from 'framer-motion'
 import { Users, MessageSquare, FileText, Trophy } from 'lucide-react'
 import { stats } from '../../data/statsData'
-import statsBarBg from '../../assets/images/statscardbg.png'
+import statsBarBg from '../../assets/images/statscardbg.JPG'
 
 const iconMap = {
   users: Users,

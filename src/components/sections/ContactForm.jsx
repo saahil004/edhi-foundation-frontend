@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Send } from 'lucide-react'
-import contactImg from '../../assets/images/contact-form.png'
+import contactImg from '../../assets/images/contact-form.JPG'
 import { apiFetch } from '../../lib/api.js'
 
 const ContactForm = () => {
