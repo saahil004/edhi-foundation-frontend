@@ -51,6 +51,7 @@ const StatsBar = () => {
         backgroundImage: `url(${statsBarBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
         marginLeft: 'calc(-50vw + 50%)',
         marginRight: 'calc(-50vw + 50%)',
         maxWidth: '100vw',

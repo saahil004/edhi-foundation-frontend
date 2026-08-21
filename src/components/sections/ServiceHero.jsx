@@ -5,9 +5,9 @@ import BannerHeading from '../ui/BannerHeading.jsx'
 
 const ServiceHero = ({ image, title, desc, Icon }) => {
   return (
-    <section className="relative w-full h-[26rem] md:h-[32rem] overflow-hidden">
+    <section className="relative w-full aspect-[4/5] sm:aspect-auto sm:h-96 md:h-[32rem] overflow-hidden">
       <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed"
+        className="absolute inset-0 bg-cover bg-top bg-scroll lg:bg-fixed"
         style={{ backgroundImage: `url(${image})` }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

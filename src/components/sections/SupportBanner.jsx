@@ -3,9 +3,9 @@ import BannerHeading from '../ui/BannerHeading.jsx'
 import bannerImage from '../../assets/images/support.PNG'
 
 const SupportBanner = () => (
-  <section className="relative w-full h-[24rem] md:h-[28rem] overflow-hidden">
+  <section className="relative w-full aspect-[4/5] sm:aspect-auto sm:h-96 md:h-[32rem] lg:h-[28rem] overflow-hidden">
     <motion.div
-      className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed"
+      className="absolute inset-0 bg-cover bg-top bg-scroll lg:bg-fixed"
       style={{ backgroundImage: `url(${bannerImage})` }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

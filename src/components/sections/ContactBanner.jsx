@@ -8,9 +8,9 @@ const ContactBanner = () => {
 
   return (
     <section
-  className="relative h-[24rem] w-full overflow-hidden bg-fixed bg-cover bg-center md:h-[28rem]"
-  style={{ backgroundImage: `url(${image})` }}
->
+      className="relative aspect-[4/5] w-full overflow-hidden bg-cover bg-top bg-fixed sm:aspect-auto sm:h-96 md:h-[32rem] lg:h-[28rem]"
+      style={{ backgroundImage: `url(${image})` }}
+    >
       {/* gradient overlay instead of flat black - keeps some photo detail visible */}
       <div className="absolute inset-0 bg-black/50" />
 

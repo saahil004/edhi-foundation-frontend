@@ -14,7 +14,7 @@ function Layout() {
       <ScrollToHash />
       <TopBar />
       <Navbar />
-      <main className="pt-18 md:pt-31">
+      <main className="pt-18 lg:pt-31">
         <Suspense fallback={<PageLoader />}>
           <Outlet />
         </Suspense>

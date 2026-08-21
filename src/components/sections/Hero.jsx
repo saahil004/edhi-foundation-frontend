@@ -58,43 +58,23 @@ const item = {
 const Hero = () => {
   return (
     <section className="w-full bg-white overflow-hidden h-fit">
-      <div className="max-w-7xl mx-auto lg:px-6 lg:py-12 grid grid-cols-1 lg:grid-cols-2 lg:gap-10 items-center">
-
-        {/* Image + overlay wrapper — plain div, not motion: this is the LCP
-            element, and Chrome won't count a fully-transparent element as
-            painted, so fading it in was adding real time to the LCP score. */}
-        <div className="relative w-full h-96 lg:h-115 overflow-hidden order-1 lg:order-2">
-          {/* Mobile/tablet: CSS background (not <img>) — desktop keeps the
-              plain <img> below untouched. No fixed attachment here: mobile
-              browsers render background-attachment: fixed through a
-              different (blurry) compositing path, so it's scroll-only. */}
+      {/* Mobile/tablet */}
+      <div className="lg:hidden">
+        <div className="relative w-full aspect-[4/5] sm:aspect-auto sm:h-96 md:h-[32rem] overflow-hidden">
+          {/* CSS background (not <img>) — bg-fixed here is a deliberate
+              choice despite some mobile browsers rendering fixed
+              backgrounds through a blurrier compositing path than desktop. */}
           <div
-            className="absolute inset-0 bg-cover bg-center lg:hidden"
-            style={{ backgroundImage: `url(${hero.imageWebp})` }}
+            className="absolute inset-0 bg-cover bg-top bg-fixed"
+            style={{ backgroundImage: `url(${hero.mobileImageWebp})` }}
           />
+          <div className="absolute inset-0 bg-black/45 pointer-events-none" />
 
-          <picture>
-            <source srcSet={hero.imageWebp} type="image/webp" />
-            <img
-              src={hero.image}
-              alt="Children supported by Edhi Foundation"
-              width={1200}
-              height={778}
-              fetchPriority="high"
-              decoding="async"
-              className="hidden lg:block w-full h-full object-cover border-0 lg:rounded-2xl"
-            />
-          </picture>
-
-          <div className="hidden lg:block absolute inset-0 bg-linear-to-r from-white via-white/10 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-black/45 lg:hidden pointer-events-none" />
-
-          {/* Text content overlaid on the faded left area for mobile/tablet */}
           <motion.div
             variants={container}
             initial="hidden"
             animate="show"
-            className="absolute inset-0 flex flex-col justify-start p-6 sm:p-8 lg:hidden"
+            className="absolute inset-0 flex flex-col justify-start p-6 sm:p-8"
           >
             <motion.div variants={item} className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-6">
               <HeartHandsIcon className="text-green-700" style={{ width: 22, height: 22 }} />
@@ -115,12 +95,11 @@ const Hero = () => {
             </motion.p>
           </motion.div>
 
-          {/* Buttons pinned to bottom-right of the image, mobile/tablet only */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5, ease: 'easeOut' }}
-            className="absolute bottom-6 right-6 flex flex-col sm:flex-row items-end sm:items-center gap-3 lg:hidden"
+            className="absolute bottom-6 right-6 flex flex-col sm:flex-row items-end sm:items-center gap-3"
           >
             <Link to='/donation' className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded transition-colors text-sm sm:text-base">
               Donate Now <HeartHandIcon style={{ width: 16, height: 16 }} />
@@ -130,19 +109,40 @@ const Hero = () => {
             </Link>
           </motion.div>
         </div>
+      </div>
 
-        {/* Desktop-only text content (now left column) */}
+      {/* Desktop / large screens: one full-bleed banner graphic (a photo
+          collage with its own blank left panel) with the text overlaid on
+          that blank panel. aspect-ratio is locked to the image's own native
+          ratio so object-cover never has anything to crop — no size/position
+          tuning needed, and none of the background-attachment quirks that
+          affect the other banner sections apply here since this is a plain
+          <img>, not a CSS background. This is the LCP element on desktop. */}
+      <div className="hidden lg:block relative w-full" style={{ aspectRatio: hero.desktopImageRatio }}>
+        <picture>
+          <source srcSet={hero.desktopImageWebp} type="image/webp" />
+          <img
+            src={hero.desktopImage}
+            alt="Children supported by Edhi Foundation"
+            width={1983}
+            height={793}
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+        </picture>
+
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="relative z-10 order-2 lg:order-1 hidden lg:block"
+          className="absolute inset-y-0 left-0 flex w-[38%] flex-col justify-center pl-10 xl:pl-16 2xl:pl-20"
         >
           <motion.div variants={item} className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-6">
             <HeartHandsIcon className="text-green-700" style={{ width: 22, height: 22 }} />
           </motion.div>
 
-          <motion.h1 variants={item} className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+          <motion.h1 variants={item} className="text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
             {hero.headingLine1} <br />
             {hero.headingLine2} <br />
             <span className="text-green-600">{hero.headingHighlight}</span>

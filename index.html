@@ -10,8 +10,12 @@
          bundle has downloaded, parsed, and mounted React. Preloading it
          here lets the fetch start in parallel with the JS bundle instead
          of after it. Loaded on every route since index.html is shared,
-         but at ~80KB the cost on non-home pages is small. -->
-    <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" type="image/webp" />
+         but at under 100KB the cost on non-home pages is small.
+         Mobile and desktop show different hero images (the `lg` breakpoint
+         is 1024px), so each is preloaded only for its matching width via
+         `media` — the browser fetches just the one it'll actually use. -->
+    <link rel="preload" as="image" href="/hero-mobile.webp" fetchpriority="high" type="image/webp" media="(max-width: 1023px)" />
+    <link rel="preload" as="image" href="/hero-desktop.webp" fetchpriority="high" type="image/webp" media="(min-width: 1024px)" />
 
     <title>Edhi Foundation — Serving Humanity Since 1951</title>
     <meta

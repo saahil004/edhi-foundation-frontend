@@ -4,17 +4,25 @@ import DonationIcon from '../../assets/icons/DonationIcon.jsx'
 import BannerHeading from '../ui/BannerHeading.jsx'
 
 const DonationBanner = () => {
-  const { image, heading, subtext } = donationBanner
+  const { image, mobileImage, heading, subtext } = donationBanner
 
   return (
-    <section className="relative w-full h-[24rem] md:h-[28rem] overflow-hidden">
+    <section className="relative w-full aspect-[4/5] sm:aspect-auto sm:h-96 md:h-[32rem] lg:h-[28rem] overflow-hidden">
       <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed"
-        style={{ backgroundImage: `url(${image})` }}
+        className="absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-      />
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-top bg-fixed lg:hidden"
+          style={{ backgroundImage: `url(${mobileImage})` }}
+        />
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed hidden lg:block"
+          style={{ backgroundImage: `url(${image})` }}
+        />
+      </motion.div>
 
       <div className="absolute inset-0 bg-black/50" />
 

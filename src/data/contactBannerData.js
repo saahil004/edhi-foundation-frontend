@@ -1,4 +1,4 @@
-import contactBannerImage from '../assets/images/contact-banner.png' // adjust to your actual asset
+import contactBannerImage from '../assets/images/banner-contact.jpg'
 
 const contactBanner = {
   image: contactBannerImage,

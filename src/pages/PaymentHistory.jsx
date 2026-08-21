@@ -10,7 +10,8 @@ import { CountUpNumber } from '../components/ui/StatBadge.jsx'
 import BannerHeading from '../components/ui/BannerHeading.jsx'
 import InfiniteMarquee from '../components/ui/InfiniteMarquee.jsx'
 import Seo from '../components/ui/Seo.jsx'
-import bannerImage from '../assets/images/ph-banner.png'
+import bannerImage from '../assets/images/ph-banner.jpeg'
+import bannerMobileImage from '../assets/images/mobile-paymenthistory.jpg'
 
 const marqueeItems = [
   'Every Rupee Counts',
@@ -48,14 +49,22 @@ const PaymentHistory = () => {
   return (
     <main className="min-h-screen bg-white">
       <Seo title="Payment History" noindex />
-      <section className="relative w-full h-[24rem] md:h-[28rem] overflow-hidden">
+      <section className="relative w-full aspect-[4/5] sm:aspect-auto sm:h-96 md:h-[32rem] lg:h-[28rem] overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed"
-          style={{ backgroundImage: `url(${bannerImage})` }}
+          className="absolute inset-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-        />
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-top bg-fixed lg:hidden"
+            style={{ backgroundImage: `url(${bannerMobileImage})` }}
+          />
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed hidden lg:block"
+            style={{ backgroundImage: `url(${bannerImage})` }}
+          />
+        </motion.div>
 
         <div className="absolute inset-0 bg-black/50" />
 
