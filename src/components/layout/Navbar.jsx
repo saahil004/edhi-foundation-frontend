@@ -72,7 +72,7 @@ const Navbar = () => {
               <li
                 key={link.label}
                 className="relative"
-                onMouseEnter={() => link.dropdown && setOpenDropdown(link.label)}
+                onMouseEnter={() => setOpenDropdown(link.dropdown ? link.label : null)}
               >
                 <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.15 }}>
                   <Link
@@ -245,6 +245,8 @@ const Navbar = () => {
                     <img
                       src={activeMobileLink.image}
                       alt=""
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-40 object-cover rounded-xl mb-4"
                     />
                     <Link

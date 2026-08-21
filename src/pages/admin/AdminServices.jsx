@@ -241,7 +241,7 @@ const AdminServices = () => {
                   <tr key={service.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-3">
                       {service.img ? (
-                        <img src={service.img} alt="" className="w-12 h-12 rounded-lg object-cover border border-gray-200" />
+                        <img src={service.img} alt="" loading="lazy" decoding="async" className="w-12 h-12 rounded-lg object-cover border border-gray-200" />
                       ) : (
                         <div className="w-12 h-12 rounded-lg bg-gray-100" />
                       )}

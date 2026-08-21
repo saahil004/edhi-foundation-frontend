@@ -73,7 +73,7 @@ const ServiceInfoCard = ({ slug, title, desc, image, icon }) => {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0"
             >
-              <img src={image} alt="" className="h-full w-full object-cover" />
+              <img src={image} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-green-950/90 via-green-950/70 to-green-950/50" />
             </motion.div>
           )}

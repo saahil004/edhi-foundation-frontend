@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { founder, teamMembers } from '../../data/founderData'
+import { teamMembers } from '../../data/founderData'
+import FounderStoryDrawer from '../ui/FounderStoryDrawer.jsx'
 
 const FounderSection = () => {
   const scrollRef = useRef(null)
   const [activeMember, setActiveMember] = useState(teamMembers[0])
+  const [storyOpen, setStoryOpen] = useState(false)
 
   const changeMember = (direction) => {
     const currentIndex = teamMembers.findIndex((m) => m.id === activeMember.id)
@@ -48,6 +49,8 @@ const FounderSection = () => {
                 key={activeMember.id}
                 src={activeMember.image}
                 alt={activeMember.name}
+                loading="lazy"
+                decoding="async"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -85,9 +88,12 @@ const FounderSection = () => {
                   </p>
                 ))}
 
-                <Link to="/about#our-story" className="w-fit flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-2.5 rounded transition-colors">
+                <button
+                  onClick={() => setStoryOpen(true)}
+                  className="w-fit flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-2.5 rounded transition-colors"
+                >
                   Read Full Story <ArrowRight size={16} />
-                </Link>
+                </button>
               </motion.div>
             </AnimatePresence>
           </motion.div>
@@ -129,6 +135,8 @@ const FounderSection = () => {
                   <img
                     src={member.image}
                     alt={member.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-14 h-14 md:w-10 md:h-10 rounded-full object-cover"
                   />
                   <div className="hidden md:block">
@@ -149,6 +157,8 @@ const FounderSection = () => {
           </button>
         </motion.div>
       </div>
+
+      <FounderStoryDrawer member={storyOpen ? activeMember : null} onClose={() => setStoryOpen(false)} />
     </section>
   )
 }

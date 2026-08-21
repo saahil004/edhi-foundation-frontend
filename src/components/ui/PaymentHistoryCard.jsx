@@ -58,7 +58,7 @@ const PaymentHistoryCard = ({ payment, onClick }) => {
           card just keeps its plain glass look. */}
       {image && (
         <div className="absolute inset-0 z-0 opacity-100 md:opacity-0 scale-100 md:group-hover:opacity-100 md:group-hover:scale-110 transition-all duration-500 ease-out">
-          <img src={image} alt="" className="w-full h-full object-cover" />
+          <img src={image} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/60" />
         </div>
       )}

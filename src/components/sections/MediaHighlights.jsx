@@ -1,7 +1,10 @@
 import RamadanSection from './RamadanSection.jsx'
 import EidSection from './EidSection.jsx'
-import MuharramSection from './MuharramSection.jsx'
-import WinterSection from './WinterSection.jsx'
+import AirAmbulanceSection from './AirAmbulanceSection.jsx'
+import AnimalShelterSection from './AnimalShelterSection.jsx'
+import GraveyardSection from './GraveyardSection.jsx'
+import SeaRescueSection from './SeaRescueSection.jsx'
+import VillageServiceSection from './VillageServiceSection.jsx'
 import MarriageSection from './MarriageSection.jsx'
 import HospitalSection from './HospitalSection.jsx'
 
@@ -11,8 +14,11 @@ const MediaHighlights = () => {
       <div className="mx-auto max-w-7xl space-y-20 px-6 py-16 md:space-y-28 md:py-20">
         <RamadanSection />
         <EidSection />
-        <MuharramSection />
-        <WinterSection />
+        <AirAmbulanceSection />
+        <AnimalShelterSection />
+        <GraveyardSection />
+        <SeaRescueSection />
+        <VillageServiceSection />
         <MarriageSection />
         <HospitalSection />
       </div>

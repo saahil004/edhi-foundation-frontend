@@ -69,7 +69,7 @@ const DropdownMenu = ({ columns, image, label, path, basePath = '/services' }) =
 
         {dropdownImage && (
           <div className="flex flex-col items-center gap-2">
-            <img src={dropdownImage} alt="" className="rounded-2xl w-full h-40 object-cover border" />
+            <img src={dropdownImage} alt="" loading="lazy" decoding="async" className="rounded-2xl w-full h-40 object-cover border" />
             <Link
               to={path}
               className="bg-green-800 hover:bg-green-900 text-white font-semibold px-5 py-1.5 rounded-md transition-colors text-sm text-center"

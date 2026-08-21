@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 const VISIBLE_COUNT = 3
 const SWIPE_THRESHOLD = 50
+const DESCRIPTION_COLLAPSED_HEIGHT = 130 // ~5 lines at leading-relaxed/text-base, matches the old line-clamp-5
 
 const SectionMedia = ({ item }) => {
     const ref = useRef(null)
@@ -93,6 +94,8 @@ const SectionMedia = ({ item }) => {
                     <motion.img
                         src={item.image}
                         alt={item.title}
+                        loading="lazy"
+                        decoding="async"
                         style={{ y }}
                         className="h-[130%] w-full object-cover"
                     />
@@ -115,17 +118,30 @@ const SectionMedia = ({ item }) => {
                         {item.title}
                     </span>
 
-                    <p className={`leading-relaxed text-gray-600 ${expanded ? '' : 'line-clamp-5'}`}>
-                        {item.description}
-                    </p>
+                    <motion.div
+                        initial={false}
+                        animate={{ height: expanded ? 'auto' : DESCRIPTION_COLLAPSED_HEIGHT }}
+                        transition={{ duration: 0.4, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                    >
+                        <p className="leading-relaxed text-gray-600">{item.description}</p>
+                    </motion.div>
 
-                    <button
+                    <motion.button
                         onClick={() => setExpanded((v) => !v)}
-                        className="mt-3 text-sm font-semibold transition-opacity hover:opacity-70"
+                        whileTap={{ scale: 0.95 }}
+                        className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold transition-all hover:gap-2.5 hover:opacity-70"
                         style={{ color: item.accent }}
                     >
                         {expanded ? 'Show less' : 'Read more'}
-                    </button>
+                        <motion.span
+                            animate={{ rotate: expanded ? 180 : 0 }}
+                            transition={{ duration: 0.3, ease: 'easeOut' }}
+                            className="inline-flex"
+                        >
+                            <ChevronDown className="h-4 w-4" />
+                        </motion.span>
+                    </motion.button>
                 </motion.div>
             </div>
 
@@ -158,7 +174,7 @@ const SectionMedia = ({ item }) => {
                                     className="h-[220px] w-[calc(33.333%-11px)] shrink-0 snap-start cursor-pointer overflow-hidden rounded-2xl border-2 transition-opacity hover:opacity-90"
                                     style={{ borderColor: item.accent }}
                                 >
-                                    <img src={img} alt="" className="h-full w-full object-cover" />
+                                    <img src={img} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
                                 </motion.div>
                             ))}
                         </div>
@@ -222,7 +238,7 @@ const SectionMedia = ({ item }) => {
                                         className="absolute h-[260px] w-[190px] shrink-0 cursor-pointer overflow-hidden rounded-2xl shadow-xl"
                                         style={{ transformStyle: 'preserve-3d' }}
                                     >
-                                        <img src={img} alt="" className="h-full w-full object-cover" draggable={false} />
+                                        <img src={img} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" draggable={false} />
                                     </motion.div>
                                 )
                             })}
@@ -274,6 +290,8 @@ const SectionMedia = ({ item }) => {
                             <img
                                 src={lightboxImage}
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                                 className="max-h-[85vh] w-auto rounded-2xl object-contain"
                             />
                         </motion.div>

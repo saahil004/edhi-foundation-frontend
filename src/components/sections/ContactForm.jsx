@@ -54,6 +54,8 @@ const ContactForm = () => {
           <img
             src={contactImg}
             alt="Community rally"
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover"
           />
         </div>

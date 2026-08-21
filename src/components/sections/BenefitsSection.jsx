@@ -82,7 +82,7 @@ const BenefitsSection = () => {
 
         {/* Image card */}
         <motion.div variants={cardVariants} className="rounded-2xl overflow-hidden min-h-[320px]">
-          <img src={image} alt="Community program" className="w-full h-full object-cover" />
+          <img src={image} alt="Community program" loading="lazy" decoding="async" className="w-full h-full object-cover" />
         </motion.div>
 
         {/* Impact card */}
@@ -90,7 +90,7 @@ const BenefitsSection = () => {
           <div className="flex -space-x-4 mb-5">
             {impactCard.collageImages.map((img, i) => (
               <div key={i} className="w-16 h-16 rounded-full overflow-hidden border-4 border-green-950">
-                <img src={img} alt="" className="w-full h-full object-cover" />
+                <img src={img} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
@@ -120,7 +120,7 @@ const BenefitsSection = () => {
         className="flex items-center justify-center gap-3 mt-10 text-sm text-gray-300"
       >
         <div className="flex items-center -space-x-2">
-          <img src={closingAvatar} alt="" className="w-7 h-7 rounded-full border-2 border-green-950 object-cover" />
+          <img src={closingAvatar} alt="" loading="lazy" decoding="async" className="w-7 h-7 rounded-full border-2 border-green-950 object-cover" />
           <div className="w-7 h-7 rounded-full bg-red-600 border-2 border-green-950 flex items-center justify-center">
             <Phone size={12} className="text-white" />
           </div>

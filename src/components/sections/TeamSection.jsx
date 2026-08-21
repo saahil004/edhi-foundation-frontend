@@ -61,13 +61,15 @@ const TeamSection = () => {
     transition={{ duration: 0.8, ease: 'easeOut' }}
     src={member.image}
     alt={member.name}
+    loading="lazy"
+    decoding="async"
     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
   />
   <div className="absolute inset-0 bg-gradient-to-t from-green-950/90 via-green-950/10 to-transparent" />
 
   <div className="absolute bottom-0 left-0 p-5">
-    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-yellow-400">
-      <span className="h-1.5 w-1.5 rounded-full bg-green-800" />
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-200">
+      <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
       {member.title}
     </span>
     <h3 className="mt-1 text-xl font-bold text-white">

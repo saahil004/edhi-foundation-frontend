@@ -39,7 +39,7 @@ const WhatWeDoSection = () => {
               variants={imageVariants}
               className="relative h-64 sm:h-80 w-full overflow-hidden rounded-2xl"
             >
-              <img src={whatWeDoImages.volunteers} alt="Edhi volunteers" className="h-full w-full object-cover" />
+              <img src={whatWeDoImages.volunteers} alt="Edhi volunteers" loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </motion.div>
 
             <motion.div
@@ -49,7 +49,7 @@ const WhatWeDoSection = () => {
               variants={imageVariants}
               className="relative h-48 sm:h-64 w-full overflow-hidden rounded-2xl"
             >
-              <img src={whatWeDoImages.march} alt="Edhi rally" className="h-full w-full object-cover" />
+              <img src={whatWeDoImages.march} alt="Edhi rally" loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </motion.div>
 
             <div className="flex gap-4 justify-center pt-2">
@@ -79,7 +79,7 @@ const WhatWeDoSection = () => {
               variants={imageVariants}
               className="group absolute top-24 left-0 w-[75%] h-[420px] overflow-hidden rounded-2xl z-10"
             >
-              <img src={whatWeDoImages.volunteers} alt="Edhi volunteers" className="h-full w-full object-cover" />
+              <img src={whatWeDoImages.volunteers} alt="Edhi volunteers" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               <div className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
             </motion.div>
 
@@ -90,7 +90,7 @@ const WhatWeDoSection = () => {
               variants={imageVariants}
               className="group absolute bottom-0 right-0 w-[55%] h-[300px] overflow-hidden rounded-2xl border-8 border-green-950 shadow-xl z-20"
             >
-              <img src={whatWeDoImages.march} alt="Edhi rally" className="h-full w-full object-cover" />
+              <img src={whatWeDoImages.march} alt="Edhi rally" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               <div className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
             </motion.div>
 

@@ -50,8 +50,8 @@ const PaymentHistory = () => {
       <Seo title="Payment History" noindex />
       <section className="relative w-full h-[24rem] md:h-[28rem] overflow-hidden">
         <motion.div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bannerImage})`, backgroundAttachment: 'fixed' }}
+          className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed"
+          style={{ backgroundImage: `url(${bannerImage})` }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}

@@ -18,6 +18,8 @@ const CauseCard = ({ icon: Icon, title, description, image, id }) => {
         <img
           src={image}
           alt=""
+          loading="lazy"
+          decoding="async"
           className="h-full w-full scale-100 object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />
         <div
@@ -41,6 +43,8 @@ const CauseCard = ({ icon: Icon, title, description, image, id }) => {
               <img
                 src={image}
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
               <div

@@ -60,26 +60,31 @@ const Hero = () => {
     <section className="w-full bg-white overflow-hidden h-fit">
       <div className="max-w-7xl mx-auto lg:px-6 lg:py-12 grid grid-cols-1 lg:grid-cols-2 lg:gap-10 items-center">
 
-        {/* Image + overlay wrapper */}
-        <motion.div
-          initial={{ opacity: 0, scale: 1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="relative w-full h-96 lg:h-115 overflow-hidden order-1 lg:order-2"
-        >
-          {/* Mobile/tablet: CSS background (not <img>) so background-attachment
-              can be fixed, matching the parallax treatment other pages'
-              banners use — desktop keeps the plain <img> below untouched. */}
+        {/* Image + overlay wrapper — plain div, not motion: this is the LCP
+            element, and Chrome won't count a fully-transparent element as
+            painted, so fading it in was adding real time to the LCP score. */}
+        <div className="relative w-full h-96 lg:h-115 overflow-hidden order-1 lg:order-2">
+          {/* Mobile/tablet: CSS background (not <img>) — desktop keeps the
+              plain <img> below untouched. No fixed attachment here: mobile
+              browsers render background-attachment: fixed through a
+              different (blurry) compositing path, so it's scroll-only. */}
           <div
             className="absolute inset-0 bg-cover bg-center lg:hidden"
-            style={{ backgroundImage: `url(${hero.image})`, backgroundAttachment: 'fixed' }}
+            style={{ backgroundImage: `url(${hero.imageWebp})` }}
           />
 
-          <img
-            src={hero.image}
-            alt="Children supported by Edhi Foundation"
-            className="hidden lg:block w-full h-full object-cover border-0 lg:rounded-2xl"
-          />
+          <picture>
+            <source srcSet={hero.imageWebp} type="image/webp" />
+            <img
+              src={hero.image}
+              alt="Children supported by Edhi Foundation"
+              width={1200}
+              height={778}
+              fetchPriority="high"
+              decoding="async"
+              className="hidden lg:block w-full h-full object-cover border-0 lg:rounded-2xl"
+            />
+          </picture>
 
           <div className="hidden lg:block absolute inset-0 bg-linear-to-r from-white via-white/10 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-black/45 lg:hidden pointer-events-none" />
@@ -124,7 +129,7 @@ const Hero = () => {
               Our Impact <ArrowRight size={16} />
             </Link>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Desktop-only text content (now left column) */}
         <motion.div

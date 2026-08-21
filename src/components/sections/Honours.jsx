@@ -1,19 +1,50 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, ArrowRight as ArrowRightIcon } from 'lucide-react'
+import { ArrowRight as ArrowRightIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { honours } from '../../data/honoursData.js'
 
 const Honours = () => {
   const scrollRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [pageCount, setPageCount] = useState(1)
 
-  const scroll = (direction) => {
-    if (!scrollRef.current) return
-    const amount = 280
-    scrollRef.current.scrollBy({
-      left: direction === 'right' ? amount : -amount,
-      behavior: 'smooth',
-    })
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+
+    // Dots represent scroll "pages", not individual cards — on wide screens
+    // several cards are visible at once, so a dot per card would leave most
+    // of them doing nothing when clicked.
+    const updatePageCount = () => {
+      const { scrollWidth, clientWidth } = container
+      const overflow = scrollWidth - clientWidth
+      // Desktop only overflows by about one card's width (~23%), which
+      // Math.round was collapsing back down to 1 page and hiding the dots
+      // entirely — ceil so any real overflow still counts as a 2nd page.
+      setPageCount(overflow > 8 && clientWidth > 0 ? Math.ceil(scrollWidth / clientWidth) : 1)
+    }
+
+    updatePageCount()
+    window.addEventListener('resize', updatePageCount)
+    return () => window.removeEventListener('resize', updatePageCount)
+  }, [])
+
+  const handleScroll = () => {
+    const container = scrollRef.current
+    if (!container) return
+    const maxScroll = container.scrollWidth - container.clientWidth
+    if (maxScroll <= 0) return
+    const progress = container.scrollLeft / maxScroll
+    setActiveIndex(Math.round(progress * (pageCount - 1)))
+  }
+
+  const goToPage = (index) => {
+    const container = scrollRef.current
+    if (!container) return
+    const maxScroll = container.scrollWidth - container.clientWidth
+    const target = pageCount > 1 ? (maxScroll * index) / (pageCount - 1) : 0
+    container.scrollTo({ left: target, behavior: 'smooth' })
   }
 
   return (
@@ -34,25 +65,9 @@ const Honours = () => {
         </p>
       </motion.div>
 
-      <div className="flex justify-end gap-3 mb-6">
-        <button
-          onClick={() => scroll('left')}
-          className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
-          aria-label="Scroll left"
-        >
-          <ArrowLeft size={18} />
-        </button>
-        <button
-          onClick={() => scroll('right')}
-          className="w-10 h-10 rounded-full bg-green-700 text-white flex items-center justify-center hover:bg-green-800 transition-colors"
-          aria-label="Scroll right"
-        >
-          <ArrowRight size={18} />
-        </button>
-      </div>
-
       <div
   ref={scrollRef}
+  onScroll={handleScroll}
   className="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory scrollbar-hide pt-10 pb-4"
 >
         {honours.map((award, i) => (
@@ -68,6 +83,8 @@ const Honours = () => {
     <img
       src={award.image}
       alt={award.title}
+      loading="lazy"
+      decoding="async"
       className="w-full h-full object-cover"
     />
   </div>
@@ -77,6 +94,22 @@ const Honours = () => {
 </motion.div>
         ))}
       </div>
+
+      {pageCount > 1 && (
+        <div className="flex justify-center gap-2">
+          {Array.from({ length: pageCount }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToPage(i)}
+              aria-label={`Go to page ${i + 1}`}
+              aria-current={activeIndex === i}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                activeIndex === i ? 'w-6 bg-green-700' : 'w-2 bg-gray-300 hover:bg-gray-400'
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="flex justify-center mt-10">
         <Link

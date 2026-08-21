@@ -44,6 +44,8 @@ const FundraiserProgress = () => {
               <img
                 src={image}
                 alt={badge}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover opacity-20"
               />
             ) : (

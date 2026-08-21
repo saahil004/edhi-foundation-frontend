@@ -29,6 +29,8 @@ const OurCauses = () => {
                 <img
                     src={causesImg}
                     alt="Edhi Foundation volunteers"
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-green-950/0 transition-colors duration-500 group-hover:bg-green-950/20" />

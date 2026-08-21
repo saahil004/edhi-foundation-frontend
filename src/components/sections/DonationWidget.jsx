@@ -32,6 +32,8 @@ const DonationWidget = () => {
           <img
             src={leftimg}
             alt="Food donation box with groceries and warm clothing"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </div>
@@ -40,6 +42,8 @@ const DonationWidget = () => {
           <img
             src={rightimg}
             alt="Hand placing a heart into a donation box"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </div>

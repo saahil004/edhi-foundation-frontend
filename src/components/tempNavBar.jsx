@@ -162,6 +162,8 @@ const Navbar = () => {
                   <img
                     src={activeMobileLink.image}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-40 object-cover rounded-xl mb-4"
                   />
                   <Link

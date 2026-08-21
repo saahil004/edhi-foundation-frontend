@@ -7,8 +7,8 @@ const ServiceHero = ({ image, title, desc, Icon }) => {
   return (
     <section className="relative w-full h-[26rem] md:h-[32rem] overflow-hidden">
       <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${image})`, backgroundAttachment: 'fixed' }}
+        className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed"
+        style={{ backgroundImage: `url(${image})` }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}

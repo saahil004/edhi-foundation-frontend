@@ -49,7 +49,7 @@ const EventGallery = () => {
               transition={{ duration: 0.3, ease: 'easeOut' }}
               className="h-[320px] overflow-hidden rounded-2xl border-4 border-green-600"
             >
-              <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
+              <img src={img.src} alt={img.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </motion.div>
           ))}
         </div>
@@ -76,7 +76,7 @@ const EventGallery = () => {
                 : 'border-transparent opacity-60 hover:opacity-100'
             }`}
           >
-            <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
+            <img src={img.src} alt={img.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </button>
         ))}
       </div>

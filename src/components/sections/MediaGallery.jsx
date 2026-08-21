@@ -85,6 +85,8 @@ const MediaGallery = () => {
               <img
                 src={item.src}
                 alt={item.caption}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-green-950/70 via-green-950/0 to-transparent" />

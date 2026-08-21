@@ -23,6 +23,8 @@ const MissionCard = ({ icon: Icon, title, description, point, image, id }) => {
         <img
           src={image}
           alt=""
+          loading="lazy"
+          decoding="async"
           className="h-full w-full scale-100 object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />
         <div className={`absolute inset-0 ${isEven ? 'bg-red-950/70' : 'bg-green-950/70'}`} />
@@ -39,7 +41,7 @@ const MissionCard = ({ icon: Icon, title, description, point, image, id }) => {
               transition={{ duration: 0.4, ease: 'easeOut' }}
               className="absolute inset-0"
             >
-              <img src={image} alt="" className="h-full w-full object-cover" />
+              <img src={image} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               <div className={`absolute inset-0 ${isEven ? 'bg-red-950/70' : 'bg-green-950/70'}`} />
             </motion.div>
           )}

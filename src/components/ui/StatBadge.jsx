@@ -36,7 +36,7 @@ const StatBadge = ({ icon: IconCmp, value, suffix, label, avatars }) => (
     {avatars && (
       <div className="flex -space-x-2">
         {avatars.map((avatar, i) => (
-          <img key={i} src={avatar} alt="" className="h-5 w-5 rounded-full border-2 border-white object-cover" />
+          <img key={i} src={avatar} alt="" loading="lazy" decoding="async" className="h-5 w-5 rounded-full border-2 border-white object-cover" />
         ))}
       </div>
     )}

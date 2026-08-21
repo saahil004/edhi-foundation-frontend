@@ -1,33 +1,43 @@
+// This file exports a router config, not a component, so react-refresh's
+// Fast Refresh heuristic doesn't apply to the lazy() declarations below.
+/* eslint-disable react-refresh/only-export-components */
+import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
 import Home from '../pages/Home.jsx'
-import AboutUs from '../pages/AboutUs'
-import Services from '../pages/Services'
-import ContactUs from '../pages/ContactUs'
-import Donation from '../pages/Donation.jsx'
-import Media from '../pages/Media.jsx'
-import ServiceDetail from '../pages/ServiceDetail.jsx'
-import Appeals from '../pages/Appeals.jsx'
-import AppealDetail from '../pages/AppealDetail.jsx'
-import ComingSoon from '../pages/ComingSoon.jsx'
-import Login from '../pages/Login.jsx'
-import ForgotPassword from '../pages/ForgotPassword.jsx'
-import ResetPassword from '../pages/ResetPassword.jsx'
-import PaymentHistory from '../pages/PaymentHistory.jsx'
-import Support from '../pages/Support.jsx'
-import AdminLogin from '../pages/admin/AdminLogin.jsx'
 import AdminRoute from '../components/admin/AdminRoute.jsx'
 import AdminLayout from '../components/admin/AdminLayout.jsx'
-import AdminDashboard from '../pages/admin/AdminDashboard.jsx'
-import AdminServices from '../pages/admin/AdminServices.jsx'
-import AdminAppeals from '../pages/admin/AdminAppeals.jsx'
-import AdminPrograms from '../pages/admin/AdminPrograms.jsx'
-import AdminPriceOptions from '../pages/admin/AdminPriceOptions.jsx'
-import AdminDonations from '../pages/admin/AdminDonations.jsx'
-import AdminContactMessages from '../pages/admin/AdminContactMessages.jsx'
-import AdminNewsletterSubscribers from '../pages/admin/AdminNewsletterSubscribers.jsx'
-import AdminUsers from '../pages/admin/AdminUsers.jsx'
-import AdminSettings from '../pages/admin/AdminSettings.jsx'
+import PageLoader from '../components/ui/PageLoader.jsx'
+
+// Everything below is only ever needed after the initial route resolves —
+// splitting it out keeps the homepage's first-load bundle from also
+// shipping Stripe checkout, jsPDF/html2canvas, and the entire admin panel.
+const AboutUs = lazy(() => import('../pages/AboutUs'))
+const Services = lazy(() => import('../pages/Services'))
+const ContactUs = lazy(() => import('../pages/ContactUs'))
+const Donation = lazy(() => import('../pages/Donation.jsx'))
+const Media = lazy(() => import('../pages/Media.jsx'))
+const ServiceDetail = lazy(() => import('../pages/ServiceDetail.jsx'))
+const Appeals = lazy(() => import('../pages/Appeals.jsx'))
+const AppealDetail = lazy(() => import('../pages/AppealDetail.jsx'))
+const ComingSoon = lazy(() => import('../pages/ComingSoon.jsx'))
+const Login = lazy(() => import('../pages/Login.jsx'))
+const ForgotPassword = lazy(() => import('../pages/ForgotPassword.jsx'))
+const ResetPassword = lazy(() => import('../pages/ResetPassword.jsx'))
+const PaymentHistory = lazy(() => import('../pages/PaymentHistory.jsx'))
+const Support = lazy(() => import('../pages/Support.jsx'))
+
+const AdminLogin = lazy(() => import('../pages/admin/AdminLogin.jsx'))
+const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard.jsx'))
+const AdminServices = lazy(() => import('../pages/admin/AdminServices.jsx'))
+const AdminAppeals = lazy(() => import('../pages/admin/AdminAppeals.jsx'))
+const AdminPrograms = lazy(() => import('../pages/admin/AdminPrograms.jsx'))
+const AdminPriceOptions = lazy(() => import('../pages/admin/AdminPriceOptions.jsx'))
+const AdminDonations = lazy(() => import('../pages/admin/AdminDonations.jsx'))
+const AdminContactMessages = lazy(() => import('../pages/admin/AdminContactMessages.jsx'))
+const AdminNewsletterSubscribers = lazy(() => import('../pages/admin/AdminNewsletterSubscribers.jsx'))
+const AdminUsers = lazy(() => import('../pages/admin/AdminUsers.jsx'))
+const AdminSettings = lazy(() => import('../pages/admin/AdminSettings.jsx'))
 
 const router = createBrowserRouter([
   {
@@ -52,7 +62,14 @@ const router = createBrowserRouter([
       { path: 'edhi-network', element: <ComingSoon title="Edhi Network" /> },
     ],
   },
-  { path: 'admin/login', element: <AdminLogin /> },
+  {
+    path: 'admin/login',
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <AdminLogin />
+      </Suspense>
+    ),
+  },
   {
     path: 'admin',
     element: <AdminRoute />,

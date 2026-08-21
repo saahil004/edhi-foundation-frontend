@@ -25,11 +25,11 @@ const OurStory = () => {
           <span className="absolute -top-2 left-0 w-3 h-3 rounded-full bg-green-800" />
 
           <div className="absolute top-8 left-0 w-[70%] h-[70%] rounded-full overflow-hidden shadow-lg">
-            <img src={mainImage} alt="Edhi Foundation history" className="w-full h-full object-cover" />
+            <img src={mainImage} alt="Edhi Foundation history" loading="lazy" decoding="async" className="w-full h-full object-cover" />
           </div>
 
           <div className="absolute bottom-0 right-0 w-[62%] h-[62%] rounded-full overflow-hidden shadow-lg border-4 border-gray-50">
-            <img src={secondaryImage} alt="Edhi Foundation service" className="w-full h-full object-cover" />
+            <img src={secondaryImage} alt="Edhi Foundation service" loading="lazy" decoding="async" className="w-full h-full object-cover" />
           </div>
 
           <motion.div
@@ -39,7 +39,7 @@ const OurStory = () => {
   transition={{ duration: 0.5, delay: 0.5, type: 'spring', stiffness: 200 }}
   className="absolute bottom-6 left-[20%] bg-green-800 rounded-2xl px-7 py-5 text-center shadow-xl border-4 border-white"
 >
-  <p className="text-3xl font-extrabold text-yellow-400 leading-none mb-1">
+  <p className="text-3xl font-extrabold text-white leading-none mb-1">
     {yearsExperience}
   </p>
   <p className="text-xs font-semibold text-white uppercase tracking-wide leading-tight">

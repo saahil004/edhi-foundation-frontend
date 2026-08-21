@@ -5,6 +5,14 @@
     <link rel="icon" type="image/png" href="/ef_logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- This is a client-rendered SPA, so without this the browser can't
+         discover the homepage hero image (the LCP element) until the JS
+         bundle has downloaded, parsed, and mounted React. Preloading it
+         here lets the fetch start in parallel with the JS bundle instead
+         of after it. Loaded on every route since index.html is shared,
+         but at ~80KB the cost on non-home pages is small. -->
+    <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" type="image/webp" />
+
     <title>Edhi Foundation — Serving Humanity Since 1951</title>
     <meta
       name="description"

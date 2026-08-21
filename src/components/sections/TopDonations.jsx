@@ -97,6 +97,8 @@ const TopDonations = () => {
             <img
               src={donationImpactImage}
               alt="A simple donation, a lasting impact"
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />

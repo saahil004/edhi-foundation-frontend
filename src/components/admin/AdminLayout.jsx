@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
 import ConfirmDialog from '../ui/ConfirmDialog.jsx'
+import PageLoader from '../ui/PageLoader.jsx'
 import logo from '../../assets/icons/ef_logo.png'
 
 const navItems = [
@@ -150,7 +151,9 @@ const AdminLayout = () => {
         </header>
 
         <main className="flex-1 p-4 lg:p-8 overflow-y-auto">
-          <Outlet />
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
         </main>
       </div>
 
