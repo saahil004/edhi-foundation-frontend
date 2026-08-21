@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Plus } from 'lucide-react'
 import { apiFetch } from '../../lib/api.js'
 
 const emptyForm = { name: '', price: '', program_id: '' }
@@ -12,6 +13,7 @@ const AdminPriceOptions = () => {
   const [form, setForm] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
   const [submitting, setSubmitting] = useState(false)
+  const formRef = useRef(null)
 
   const loadAll = async () => {
     setLoading(true)
@@ -34,10 +36,19 @@ const AdminPriceOptions = () => {
     loadAll()
   }, [])
 
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   const resetForm = () => {
     setForm(emptyForm)
     setEditingId(null)
     setFieldErrors({})
+  }
+
+  const startCreate = () => {
+    resetForm()
+    scrollToForm()
   }
 
   const startEdit = (priceOption) => {
@@ -48,6 +59,7 @@ const AdminPriceOptions = () => {
     })
     setEditingId(priceOption.id)
     setFieldErrors({})
+    scrollToForm()
   }
 
   const programName = (programId) => programs.find((p) => p.id === programId)?.name ?? `Program #${programId}`
@@ -95,13 +107,13 @@ const AdminPriceOptions = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 space-y-4">
+      <form ref={formRef} onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-6 space-y-4 scroll-mt-4">
         <h2 className="flex items-center gap-2 font-bold text-gray-900">
           <span className="h-2 w-2 rounded-full bg-red-600" />
           {editingId ? 'Edit Price Option' : 'Add Price Option'}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-semibold text-gray-800 mb-1">Name *</label>
             <input
@@ -166,38 +178,76 @@ const AdminPriceOptions = () => {
       </form>
 
       <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-100">
+          <h3 className="font-bold text-gray-900">All Price Options</h3>
+          <button
+            type="button"
+            onClick={startCreate}
+            className="inline-flex items-center gap-1.5 bg-green-800 hover:bg-green-900 text-white text-sm font-semibold px-3.5 py-2 rounded-lg transition-colors"
+          >
+            <Plus size={16} />
+            Add New
+          </button>
+        </div>
+
         {loading ? (
           <p className="p-6 text-gray-500">Loading...</p>
+        ) : priceOptions.length === 0 ? (
+          <p className="p-6 text-gray-500">No price options yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
-                <tr>
-                  <th className="px-4 py-3 whitespace-nowrap">Name</th>
-                  <th className="px-4 py-3 whitespace-nowrap">Price</th>
-                  <th className="px-4 py-3 whitespace-nowrap">Program</th>
-                  <th className="px-4 py-3"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {priceOptions.map((priceOption) => (
-                  <tr key={priceOption.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
-                    <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{priceOption.name}</td>
-                    <td className="px-4 py-3 font-semibold text-green-800 whitespace-nowrap">${priceOption.price}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{programName(priceOption.program_id)}</td>
-                    <td className="px-4 py-3 text-right space-x-3 whitespace-nowrap">
-                      <button onClick={() => startEdit(priceOption)} className="text-green-800 font-semibold hover:text-green-900">
-                        Edit
-                      </button>
-                      <button onClick={() => handleDelete(priceOption)} className="text-red-600 font-semibold hover:text-red-700">
-                        Delete
-                      </button>
-                    </td>
+          <>
+            {/* Mobile: stacked cards */}
+            <div className="md:hidden divide-y divide-gray-100">
+              {priceOptions.map((priceOption) => (
+                <div key={priceOption.id} className="p-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="font-semibold text-gray-900">{priceOption.name}</p>
+                    <p className="shrink-0 font-semibold text-green-800">${priceOption.price}</p>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-0.5">{programName(priceOption.program_id)}</p>
+                  <div className="flex gap-4 mt-2">
+                    <button onClick={() => startEdit(priceOption)} className="text-sm text-green-800 font-semibold hover:text-green-900">
+                      Edit
+                    </button>
+                    <button onClick={() => handleDelete(priceOption)} className="text-sm text-red-600 font-semibold hover:text-red-700">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: table */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                  <tr>
+                    <th className="px-4 py-3 whitespace-nowrap">Name</th>
+                    <th className="px-4 py-3 whitespace-nowrap">Price</th>
+                    <th className="px-4 py-3 whitespace-nowrap">Program</th>
+                    <th className="px-4 py-3"></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {priceOptions.map((priceOption) => (
+                    <tr key={priceOption.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
+                      <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{priceOption.name}</td>
+                      <td className="px-4 py-3 font-semibold text-green-800 whitespace-nowrap">${priceOption.price}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{programName(priceOption.program_id)}</td>
+                      <td className="px-4 py-3 text-right space-x-3 whitespace-nowrap">
+                        <button onClick={() => startEdit(priceOption)} className="text-green-800 font-semibold hover:text-green-900">
+                          Edit
+                        </button>
+                        <button onClick={() => handleDelete(priceOption)} className="text-red-600 font-semibold hover:text-red-700">
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
     </div>
