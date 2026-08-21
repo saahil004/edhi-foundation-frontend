@@ -106,7 +106,7 @@ const SectionMedia = ({ item }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
-                    className={`relative -mt-10 rounded-2xl bg-white p-8 shadow-xl lg:-mt-0 ${
+                    className={`relative z-10 -mt-10 rounded-2xl bg-white p-8 shadow-xl lg:-mt-0 ${
                         item.reverse ? 'lg:-mr-10' : 'lg:-ml-10'
                     } mx-4 lg:mx-0`}
                 >

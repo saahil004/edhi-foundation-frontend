@@ -26,6 +26,7 @@ const ForgotPassword = lazy(() => import('../pages/ForgotPassword.jsx'))
 const ResetPassword = lazy(() => import('../pages/ResetPassword.jsx'))
 const PaymentHistory = lazy(() => import('../pages/PaymentHistory.jsx'))
 const Support = lazy(() => import('../pages/Support.jsx'))
+const NotFound = lazy(() => import('../pages/NotFound.jsx'))
 
 const AdminLogin = lazy(() => import('../pages/admin/AdminLogin.jsx'))
 const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard.jsx'))
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
       { path: 'blog', element: <ComingSoon title="Blog" /> },
       { path: 'support', element: <Support /> },
       { path: 'edhi-network', element: <ComingSoon title="Edhi Network" /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
   {

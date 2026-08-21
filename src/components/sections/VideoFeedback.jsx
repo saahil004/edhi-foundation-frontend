@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { mediaVideos } from '../../data/mediaVideosData'
 import VideoModal from '../ui/VideoModal'
@@ -27,6 +27,11 @@ const VideoFeedback = () => {
   const [activeVideo, setActiveVideo] = useState(null)
   const containerRef = useRef(null)
   const [containerWidth, setContainerWidth] = useState(1200)
+  // Card positions are recalculated (and would otherwise spring-animate) as
+  // soon as the ResizeObserver below reports the real container width right
+  // on mount — before the carousel has ever scrolled into view. Snapping
+  // instantly until then means the spring only plays once it's actually visible.
+  const isInView = useInView(containerRef, { once: true, amount: 0.3 })
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -145,12 +150,16 @@ const VideoFeedback = () => {
                   className="absolute cursor-pointer select-none"
                   style={{ zIndex: 100 - abs }}
                   animate={{
-                    x: offset * X_STEP,
+                    // Held at center (x: 0) until the carousel scrolls into
+                    // view, so the cards visibly spring outward to their
+                    // left/right positions the first time you see them,
+                    // instead of already being spread out and static.
+                    x: isInView ? offset * X_STEP : 0,
                     width,
                     height,
                     opacity: abs > maxOffset ? 0 : 1,
                   }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 30 }}
+                  transition={isInView ? { type: 'spring', stiffness: 260, damping: 30 } : { duration: 0 }}
                   onClick={() => (isActive ? setActiveVideo(video) : goTo(i))}
                 >
                   <div className="relative h-full w-full overflow-hidden rounded-2xl border-4 border-white shadow-xl">
