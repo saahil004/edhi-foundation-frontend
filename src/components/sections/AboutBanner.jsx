@@ -14,7 +14,7 @@ const AboutBanner = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
         <div
-          className="absolute inset-0 bg-cover bg-top bg-fixed lg:hidden"
+          className="absolute inset-0 bg-cover bg-top bg-scroll lg:hidden"
           style={{ backgroundImage: `url(${mobileImage})` }}
         />
         <div

@@ -46,12 +46,11 @@ const CountUpNumber = ({ value }) => {
 const StatsBar = () => {
   return (
     <section
-      className="relative overflow-x-hidden"
+      className="relative overflow-x-hidden bg-scroll lg:bg-fixed"
       style={{
         backgroundImage: `url(${statsBarBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
         marginLeft: 'calc(-50vw + 50%)',
         marginRight: 'calc(-50vw + 50%)',
         maxWidth: '100vw',

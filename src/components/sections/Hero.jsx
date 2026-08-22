@@ -61,11 +61,12 @@ const Hero = () => {
       {/* Mobile/tablet */}
       <div className="lg:hidden">
         <div className="relative w-full aspect-[4/5] sm:aspect-auto sm:h-96 md:h-[32rem] overflow-hidden">
-          {/* CSS background (not <img>) — bg-fixed here is a deliberate
-              choice despite some mobile browsers rendering fixed
-              backgrounds through a blurrier compositing path than desktop. */}
+          {/* CSS background (not <img>) — scroll attachment, not fixed:
+              mobile browsers render fixed backgrounds through a blurrier
+              compositing path than desktop, confirmed visibly blurry on a
+              real iPhone. */}
           <div
-            className="absolute inset-0 bg-cover bg-top bg-fixed"
+            className="absolute inset-0 bg-cover bg-top bg-scroll"
             style={{ backgroundImage: `url(${hero.mobileImageWebp})` }}
           />
           <div className="absolute inset-0 bg-black/45 pointer-events-none" />
